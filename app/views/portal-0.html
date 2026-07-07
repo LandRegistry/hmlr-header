@@ -1,0 +1,433 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  GOV.UK page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block header %}
+
+<style>
+  .hmlr-logo {
+    height: 30px;
+    margin-right: 3px;
+  }
+ 
+  .govuk-generic-header {
+    border-bottom: none
+  }
+ 
+  .govuk-generic-header__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    margin-left: 30px;
+    margin-right: 30px;
+    padding: 0;
+  }
+ 
+  .govuk-generic-header__logo {
+    display: flex;
+    align-items: center;
+  }
+
+ 
+  /* ---- Right-aligned nav (from second design) ---- */
+  .navbar-menu--right {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+ 
+  .parent {
+    display: block;
+    position: relative;
+    float: left;
+    line-height: 60px;
+    font-weight: bold;
+  }
+ 
+  .parentIconDown {
+    background-image: url("/public/images/icon_govuk_chevrondownWhite.svg");
+    background-size: 25px;
+    background-repeat: no-repeat;
+    background-position-x: 85px;
+    background-position-y: center;
+  }
+ 
+  .parentIconDown2 {
+    background-image: url("/public/images/icon_govuk_chevrondownWhite.svg");
+    background-size: 25px;
+    background-repeat: no-repeat;
+    background-position-x: 112px;
+    background-position-y: center;
+  }
+ 
+  .parent a {
+    margin: 20px;
+    color: #ffffff;
+    text-decoration: none;
+  }
+ 
+  .parent-2 a {
+    margin: 20px;
+    color: #ffffff;
+    text-decoration: none;
+  }
+ 
+  .parent:hover > ul {
+    display: block;
+    position: absolute;
+  }
+ 
+  .parent-2:hover > ul {
+    display: block;
+    position: absolute;
+  }
+ 
+  .child {
+    display: none;
+    box-shadow: 0px 8px 18px 0px rgba(0, 0, 0, 0.1);
+    z-index: 99999;
+    background: #ffffff;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    padding-right: 20px;
+  }
+ 
+  .child li {
+    background-color: #ffffff;
+    line-height: 16px;
+    margin: 0px;
+    border-right: #ccc 0px solid;
+    width: 100%;
+  }
+ 
+  .child li a {
+    color: #1d70b8;
+    font-size: 15px;
+  }
+ 
+  .child-2 {
+    display: none;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.1);
+    z-index: 99999;
+    background: #ffffff;
+    margin-left: 265px;
+    margin-top: -21px;
+  }
+ 
+  .child-2 li {
+    background-color: #ffffff;
+    line-height: 16px;
+    margin: 0px;
+    border-right: #ccc 0px solid;
+    width: 100%;
+  }
+ 
+  .child-2 li a {
+    color: #1d70b8;
+    font-size: 15px;
+  }
+ 
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0px;
+    min-width: 10em;
+  }
+ 
+  .parent:hover {
+    background-color: #ffffff;
+    color: #1d70b8;
+  }
+ 
+  .parent:hover > a {
+    color: #1d70b8;
+    text-decoration: underline;
+  }
+ 
+  .parent-2:hover {
+    background-color: #ffffff;
+    color: #1d70b8;
+  }
+ 
+  .parent-2:hover > a {
+    color: #1d70b8;
+    text-decoration: underline;
+  }
+ 
+  .nav-list {
+    max-width: 280px;
+    padding: 3px 0px 8px 20px;
+  }
+ 
+  .nav-list-2 {
+    max-width: 280px;
+    padding: 3px 5px 8px 20px;
+  }
+ 
+  .nav-list:hover {
+    background-color: #f3f2f1;
+  }
+ 
+  .nav-list-2:hover {
+    background-color: #f3f2f1;
+  }
+ 
+  .nav-chevron--tight {
+    width: 12px;
+    margin-left: 4px;
+  }
+ 
+  .servicesContent {
+    width: 265px;
+    background: #ffffff;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+  }
+ 
+  .infoservicesContent {
+    width: 300px;
+    background: #ffffff;
+    padding-bottom: 0px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
+ 
+  .myAccountContent {
+    width: 200px;
+    padding: 25px;
+    background: #ffffff;
+  }
+ 
+  .myAccountContent a {
+    padding: 0px;
+  }
+ 
+  .myAccountTitle {
+    font-size: 16px;
+    font-weight: 700;
+    padding-bottom: 3px;
+  }
+ 
+  .myAccount2ndLine {
+    font-size: 14px;
+    font-weight: 400;
+    width: 100%;
+    padding-bottom: 0px;
+  }
+
+</style>
+<div class="govuk-generic-header">
+  <div class="govuk-generic-header__container">
+ 
+    <div class="govuk-generic-header__logo">
+      <a href="#" class="govuk-generic-header__homepage-link">
+        <img class="hmlr-logo" src="/public/images/colour-logo-image.png" alt="HM Land Registry logo">
+        HM Land Registry
+      </a><a class="govuk-generic-header__homepage-link">|</a>
+      <a href="#" class="govuk-generic-header__homepage-link">Portal</a>
+    </div>
+ 
+    <ul class="navbar-menu--right">
+ 
+      <li class="parent parentIconDown" style="padding-right: 15px;"><a href="#">Services</a>
+        <ul class="child">
+          <div class="govuk-body servicesContent">
+            <li class="nav-list"><a href="#">Portal homepage</a></li>
+            <li class="nav-list"><a href="#">View applications</a></li>
+            <li class="parent-2 nav-list"><a href="#">Information services
+                <img src="/public/images/icon_govuk_chevronright-blue.svg" class="nav-chevron nav-chevron--tight"></a>
+              <ul class="child-2">
+                <div class="govuk-body infoservicesContent">
+                  <li class="nav-list-2"><a href="#">Request official copies</a></li>
+                  <li class="nav-list-2"><a href="#">Official search of whole with priority</a></li>
+                  <li class="nav-list-2"><a href="#">Official search of part with priority</a></li>
+                  <li class="nav-list-2"><a href="#">Withdraw official search with priority</a></li>
+                  <li class="nav-list-2"><a href="#">Official search of whole without priority</a></li>
+                  <li class="nav-list-2"><a href="#">Local land charges search</a></li>
+                  <li class="nav-list-2"><a href="#">MapSearch</a></li>
+                  <li class="nav-list-2"><a href="#">Application enquiry</a></li>
+                  <li class="nav-list-2"><a href="#">Search of the index map</a></li>
+                  <li class="nav-list-2"><a href="#">Home rights search</a></li>
+                  <li class="nav-list-2"><a href="#">Search of the index of relating franchises and manors</a></li>
+                  <li class="nav-list-2"><a href="#">Enquiry by property description - title view</a></li>
+                  <li class="nav-list-2"><a href="#">Register view - pdf</a></li>
+                  <li class="nav-list-2"><a href="#">Register view - html</a></li>
+                  <li class="nav-list-2"><a href="#">Title plan view</a></li>
+                  <li class="nav-list-2"><a href="#">Document view</a></li>
+                  <li class="nav-list-2"><a href="#">Request historical copies</a></li>
+                </div>
+              </ul>
+            </li>
+            <li class="parent-2 nav-list"><a href="#">Land charges Services
+                <img src="/public/images/icon_govuk_chevronright-blue.svg" class="nav-chevron nav-chevron--tight"></a>
+              <ul class="child-2">
+                <div class="govuk-body infoservicesContent">
+                  <li class="nav-list-2"><a href="#">Bankruptcy search</a></li>
+                  <li class="nav-list-2"><a href="#">Full search</a></li>
+                  <li class="nav-list-2"><a href="#">Office copy</a></li>
+                  <li class="nav-list-2"><a href="#">Registration view</a></li>
+                </div>
+              </ul>
+            </li>
+            <li class="nav-list"><a href="#">Digital registration service</a></li>
+            <li class="nav-list"><a href="#">Reply to Requisition</a></li>
+            <li class="parent-2 nav-list"><a href="#">Network Services
+                <img src="/public/images/icon_govuk_chevronright-blue.svg" class="nav-chevron nav-chevron--tight"></a>
+              <ul class="child-2">
+                <div class="govuk-body infoservicesContent">
+                  <li class="nav-list-2"><a href="#">e-AN1 Agreed notice</a></li>
+                  <li class="nav-list-2"><a href="#">e-CCD Cancel caution against dealings</a></li>
+                  <li class="nav-list-2"><a href="#">e-CN1 Cancel notice</a></li>
+                  <li class="nav-list-2"><a href="#">e-COA Change address</a></li>
+                  <li class="nav-list-2"><a href="#">e-CON Change name</a></li>
+                  <li class="nav-list-2"><a href="#">e-CPD Change property description</a></li>
+                  <li class="nav-list-2"><a href="#">e-CST Statutory charge</a></li>
+                  <li class="nav-list-2"><a href="#">e-DJP Death of joint proprietor</a></li>
+                  <li class="nav-list-2"><a href="#">e-HR1 Notice of home rights</a></li>
+                  <li class="nav-list-2"><a href="#">e-HR4 Cancel notice of home rights</a></li>
+                  <li class="nav-list-2"><a href="#">e-RX1 Restriction</a></li>
+                  <li class="nav-list-2"><a href="#">e-RX3 Cancel restriction</a></li>
+                  <li class="nav-list-2"><a href="#">e-RX4 Withdraw restriction</a></li>
+                  <li class="nav-list-2"><a href="#">e-UN1 Unilateral notice</a></li>
+                  <li class="nav-list-2"><a href="#">e-UN2 Remove unilateral notice</a></li>
+                  <li class="nav-list-2"><a href="#">e-UN4 Cancel unilateral notice</a></li>
+                  <li class="nav-list-2"><a href="#">e-WCT Create electronic withrawal of caution</a></li>
+                </div>
+              </ul>
+            </li>
+            <li class="nav-list"><a href="#">Reply to Requisition</a></li>
+            <li class="parent-2 nav-list"><a href="#">General Facilities
+                <img src="/public/images/icon_govuk_chevronright-blue.svg" class="nav-chevron nav-chevron--tight"></a>
+              <ul class="child-2">
+                <div class="govuk-body infoservicesContent">
+                  <li class="nav-list-2"><a href="#">Message area</a></li>
+                  <li class="nav-list-2"><a href="#">Services requested</a></li>
+                  <li class="nav-list-2"><a href="#">PDF downloads</a></li>
+                  <li class="nav-list-2"><a href="#">Notifications</a></li>
+                </div>
+              </ul>
+            </li>
+            <li class="parent-2 nav-list"><a href="#">Administrative Services
+                <img src="/public/images/icon_govuk_chevronright-blue.svg" class="nav-chevron nav-chevron--tight"></a>
+              <ul class="child-2">
+                <div class="govuk-body infoservicesContent">
+                  <li class="nav-list-2"><a href="#">Alternative despatch address</a></li>
+                  <li class="nav-list-2"><a href="#">Personal details</a></li>
+                  <li class="nav-list-2"><a href="#">Change password</a></li>
+                </div>
+              </ul>
+            </li>
+          </div>
+        </ul>
+      </li>
+ 
+      <li class="parent"><a href="#">Reply to Requisition</a></li>
+ 
+      <li class="parent"><a href="#">Contact us</a></li>
+ 
+      <li class="parent parentIconDown2" style="padding-right: 20px;"><a href="#">John James</a>
+        <ul class="child">
+          <div class="govuk-body myAccountContent">
+            <div>
+              <div class="myAccountTitle">Signed in as:</div>
+              <div class="myAccount2ndLine" style="padding-bottom:15px;">Administrator</div>
+              <div class="myAccountTitle">User ID:</div>
+              <div class="myAccount2ndLine" style="padding-bottom:15px;">xxxxxxxxxxxxxx</div>
+              <div class="myAccountTitle">You last logged in on</div>
+              <div class="myAccount2ndLine" style="padding-bottom:15px;">15 July 2022 10:19:23 BST</div>
+              <div class="myAccount2ndLine" style="padding-bottom:15px;">If these details are incorrect, please log out and contact us.</div>
+            </div>
+            <hr>
+            <div class="myAccountTitle" style="padding-top:15px;"><b>Primary Business Unit Administrator (BUA):</b></div>
+            <div class="myAccount2ndLine">John Taylor</div>
+          </div>
+        </ul>
+      </li>
+ 
+      <li class="parent"><a href="#">Sign out</a></li>
+ 
+    </ul>
+ 
+  </div>
+</div>
+
+<div class="govuk-body govuk-width-container">
+<div class="govuk-phase-banner">
+  <p class="govuk-phase-banner__content">
+    <strong class="govuk-tag govuk-phase-banner__content__tag">
+      Beta
+    </strong>
+    <span class="govuk-phase-banner__text">
+      This is a new design. Help us improve it and <a class="govuk-link" href="#">give your feedback (opens in new tab)</a>.
+    </span>
+  </p>
+</div>
+</div>
+{% endblock %}
+
+{% block content %}
+
+
+{% endblock %}
+
+{% block footer %}
+<div class="govuk-footer" style="background-color: #f3f2f1;border-top-color: #0b0c0c">
+  <div class="govuk-width-container">
+    <div class="govuk-footer__meta">
+      <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
+    <div class="govuk-footer__meta">
+      <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
+        <h2 class="govuk-visually-hidden">Support links</h2>
+        <ul class="govuk-footer__inline-list">
+          <li class="govuk-footer__inline-list-item">
+            <a class="govuk-footer__link" href="#">
+              Item 1
+            </a>
+          </li>
+          <li class="govuk-footer__inline-list-item">
+            <a class="govuk-footer__link" href="#">
+              Item 2
+            </a>
+          </li>
+          <li class="govuk-footer__inline-list-item">
+            <a class="govuk-footer__link" href="#">
+              Item 3
+            </a>
+          </li>
+        </ul>
+        <svg
+          aria-hidden="true"
+          focusable="false"
+          class="govuk-footer__licence-logo"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 483.2 195.7"
+          height="17"
+          width="41">
+          <path
+            fill="currentColor"
+            d="M421.5 142.8V.1l-50.7 32.3v161.1h112.4v-50.7zm-122.3-9.6A47.12 47.12 0 0 1 221 97.8c0-26 21.1-47.1 47.1-47.1 16.7 0 31.4 8.7 39.7 21.8l42.7-27.2A97.63 97.63 0 0 0 268.1 0c-36.5 0-68.3 20.1-85.1 49.7A98 98 0 0 0 97.8 0C43.9 0 0 43.9 0 97.8s43.9 97.8 97.8 97.8c36.5 0 68.3-20.1 85.1-49.7a97.76 97.76 0 0 0 149.6 25.4l19.4 22.2h3v-87.8h-80l24.3 27.5zM97.8 145c-26 0-47.1-21.1-47.1-47.1s21.1-47.1 47.1-47.1 47.2 21 47.2 47S123.8 145 97.8 145" />
+        </svg>
+        <span class="govuk-footer__licence-description">
+          All content is available under the
+          <a
+            class="govuk-footer__link"
+            href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+            rel="license">Open Government Licence v3.0</a>, except where otherwise stated
+        </span>
+      </div>
+      <div class="govuk-footer__meta-item">
+        <a
+          class="govuk-footer__link govuk-footer__copyright-logo"
+          href="https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/">
+          © Crown copyright
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
