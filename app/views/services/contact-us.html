@@ -7,50 +7,90 @@
 {% block header %}
 
 <style>
-  .hmlr-logo {
-    height: 30px;
-    margin-right: 3px;
-  }
-  .govuk-generic-header__homepage-link{
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  }
+.hmlr-logo {
+  height: 30px;
+  margin-right: 3px;
+}
+
+.govuk-generic-header__homepage-link,
+.govuk-footer__link,
+.govuk-footer__licence-description,
+.govuk-body,
+.govuk-list,
+.govuk-heading-xl,
+.govuk-heading-l,
+.govuk-heading-m,
+.govuk-heading-s,
+.govuk-body-m,
+.govuk-body-s,
+.govuk-body-xl,
+.govuk-body-l,
+p {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
 </style>
 <div class="govuk-generic-header">
   <div class="govuk-generic-header__container govuk-width-container">
     <div class="govuk-generic-header__logo">
-      <a href="./index.html" class="govuk-generic-header__homepage-link">
+      <a href="https://www.gov.uk/government/organisations/land-registry" class="govuk-generic-header__homepage-link">
         <img class="hmlr-logo" src="/public/images/colour-logo-image.png" alt="HM Land Registry logo">
          HM Land Registry
       </a>
     </div>
   </div>
 </div>
+
+<section aria-label="Service information" class="govuk-service-navigation"
+  data-module="govuk-service-navigation" style="background-color: #f3f2f1; border-bottom-color:#cecece">
+  <div class="govuk-width-container">
+    <div class="govuk-service-navigation__container" >
+      <span class="govuk-service-navigation__service-name">
+        <a href="#" class="govuk-service-navigation__link">
+          Contact us
+        </a>
+      </span>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block containerStart %}
+  {{ govukBackLink({
+    href: "#",
+    text: "Back"
+  }) }}
 {% endblock %}
 
 {% block content %}
 
-<h1 class="govuk-heading-xl">HMLR Header and footer re-design</h1>
+<h1 class="govuk-heading-l">Introduction</h1>
+<p>
+  To get your question to the right person to help you, please answer the following questions. We will need some information from you so we can send you a response by email.
+</p>
+<p>In what capacity are you contacting HM Land Registry?</p>
 
-<h2 class="govuk-heading-m">Templates and documentation</h2>
-<ul class="govuk-list">
-  <li><a href="./templates/header-footer.html">Header and footer</a></li>
-  <li><a href="./templates/navigation.html">Service navigation</a></li>
-  <li><a href="./templates/account-links-1.html">Account links for a single service</a></li>
-  <li><a href="./templates/account-links-2.html">Account links for multiple services</a></li>
-</ul>
-
-<h2 class="govuk-heading-m">Service specific</h2>
-<ul class="govuk-list">
-  <li><a href="./services/portal-homepage-1.html">Portal homepage</a></li>
-  <li><a href="./services/va-1.html">View applications</a></li>
-  <li><a href="./services/drs-1.html">DRS</a></li>
-  <li><a href="colour-logo.html">MapSearch</a></li>
-  <li><a href="./services/contractual-controls.html">Contractual controls</a></li>
-  <li><a href="./services/developer-pack.html">Dev Pack</a></li>
-  <li><a href="./services/contact-us.html">Contact Us</a></li>
-  <li><a href="colour-logo.html">Sorry server</a></li>
-</ul>
-
+<div class="govuk-form-group">
+  <fieldset class="govuk-fieldset">
+    <div class="govuk-radios" data-module="govuk-radios">
+      <div class="govuk-radios__item">
+        <input class="govuk-radios__input" id="whereDoYouLive" name="whereDoYouLive" type="radio" value="england">
+        <label class="govuk-label govuk-radios__label" for="whereDoYouLive">
+          Business Customer
+        </label>
+      </div>
+      <div class="govuk-radios__item">
+        <input class="govuk-radios__input" id="whereDoYouLive-2" name="whereDoYouLive" type="radio" value="scotland">
+        <label class="govuk-label govuk-radios__label" for="whereDoYouLive-2">
+          Member of Public
+        </label>
+      </div>
+    </div>
+  </fieldset>
+</div>
+<button type="submit" class="govuk-button" data-module="govuk-button">
+  Next
+</button>
 
 {% endblock %}
 
@@ -65,17 +105,32 @@
         <ul class="govuk-footer__inline-list">
           <li class="govuk-footer__inline-list-item">
             <a class="govuk-footer__link" href="#">
-              Item 1
+              Personal Information charter
             </a>
           </li>
           <li class="govuk-footer__inline-list-item">
             <a class="govuk-footer__link" href="#">
-              Item 2
+              Cookies
             </a>
           </li>
           <li class="govuk-footer__inline-list-item">
             <a class="govuk-footer__link" href="#">
-              Item 3
+              Service standards
+            </a>
+          </li>
+                    <li class="govuk-footer__inline-list-item">
+            <a class="govuk-footer__link" href="#">
+              Accessibility statements
+            </a>
+          </li>
+                    <li class="govuk-footer__inline-list-item">
+            <a class="govuk-footer__link" href="#">
+              Built by HM Land Registry
+            </a>
+          </li>
+                    <li class="govuk-footer__inline-list-item">
+            <a class="govuk-footer__link" href="#">
+              Contact Us
             </a>
           </li>
         </ul>

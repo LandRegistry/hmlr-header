@@ -1,0 +1,228 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  GOV.UK page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block header %}
+
+<style>
+  .hmlr-logo {
+    height: 30px;
+    margin-right: 3px;
+  }
+ 
+  .govuk-generic-header {
+    border-bottom: none
+  }
+ 
+  .govuk-generic-header__homepage-link{
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+  
+  .govuk-generic-header__container {
+    display: flex;
+    align-items: center;
+    margin:auto;
+    justify-content: space-between;
+    width: 965px;
+    padding: 0;
+  }
+ 
+  .govuk-generic-header__logo {
+    display: flex;
+    align-items: center;
+  }
+
+.govuk-generic-header__homepage-link,
+.parent a,
+.govuk-footer__link,
+.govuk-footer__licence-description,
+.govuk-body,
+.govuk-list,
+.govuk-heading-xl,
+.govuk-heading-l,
+.govuk-heading-m,
+.govuk-heading-s,
+.govuk-body-m,
+.govuk-body-s,
+.govuk-body-xl,
+.govuk-body-l,
+p {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.navbar-menu--right {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+  .parent {
+    display: block;
+    position: relative;
+    float: left;
+    line-height: 60px;
+    font-weight: bold;
+  }
+  .parent a {
+    margin: 20px;
+    color: #ffffff;
+    text-decoration: none;
+
+  }
+</style>
+<div class="govuk-generic-header">
+  <div class="govuk-generic-header__container">
+ 
+    <div class="govuk-generic-header__logo">
+      <a href="../index.html" class="govuk-generic-header__homepage-link">
+        <img class="hmlr-logo" src="/public/images/colour-logo-image.png" alt="HM Land Registry logo">
+        HM Land Registry
+      </a>
+
+    </div>
+ 
+    <ul class="navbar-menu--right">
+      <li class="parent"><a href="#">Your account</a></li>
+      <li class="parent"><a href="#">Sign out</a></li>
+    </ul>
+ 
+  </div>
+</div>
+
+<section aria-label="Service information" class="govuk-service-navigation"
+  data-module="govuk-service-navigation" style="background-color: #f3f2f1; border-bottom-color:#cecece">
+  <div class="govuk-width-container">
+    <div class="govuk-service-navigation__container" >
+      <nav aria-label="Menu" class="govuk-service-navigation__wrapper">
+        <button type="button" class="govuk-service-navigation__toggle govuk-js-service-navigation-toggle" aria-controls="navigation" hidden aria-hidden="true">
+          Menu
+        </button>
+        <ul class="govuk-service-navigation__list" id="navigation">
+          <li class="govuk-service-navigation__item">
+            <a class="govuk-service-navigation__link" href="#">
+              Navigation item 1
+            </a>
+          </li>
+          <li class="govuk-service-navigation__item govuk-service-navigation__item--active">
+            <a class="govuk-service-navigation__link" href="#" aria-current="true">
+              <strong class="govuk-service-navigation__active-fallback">Navigation item 2</strong>
+            </a>
+          </li>
+          <li class="govuk-service-navigation__item">
+            <a class="govuk-service-navigation__link" href="#">
+              Navigation item 3
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block content %}
+
+<h1 class="govuk-heading-l">Header with account links, servivce navigation and footer</h1>
+<p>
+  This template is for a collection or services that use a single account.
+</p>
+<h2 class="govuk-heading-m">Header</h2>
+<p>
+ The header uses the <a href="https://design-system.service.gov.uk/components/generic-header/">GOV.UK generic header component</a>. It contains:
+</p>
+<ul class="govuk-list govuk-list--bullet">
+  <li>our picture logo, placed in accordance to the generic header</a> guidance</li>
+  <li>our organisation's name, following the <a href="https://frontend.design-system.service.gov.uk/using-govuk-frontend-without-govuk-branding/">guidance for which font to use</a> when you can't use GOV.UK's Transport font. This is font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;</li>
+  <li>a black background that matches the generic header. Other brand colours can be used across government however black was most suitable for our organisation's logo</li>
+</ul>
+<p>This header also contains account links such as 'Your account' or 'sign in'. This placement aligns with GOV.UK One Login where one account gives access to multiple services.</p>
+<p>
+  The design ensures our header aligns as closely as possible to the generic header and therefore what other departments will also implement for their services not hosted on GOV.UK.
+</p>
+
+<h2 class="govuk-heading-m">Service navigation</h2>
+<p>
+  The <a href="https://design-system.service.gov.uk/components/service-navigation/">service navigation component</a> can contain:
+</p>
+<ul class="govuk-list govuk-list--bullet">
+  <li>the service name which links users back to the start page of the service</li>
+  <li>navigation links</li>
+</ul>
+
+<h2 class="govuk-heading-m">Footer</h2>
+<p>
+  There is not yet a generic footer component however we have adapted the <a href="https://design-system.service.gov.uk/components/footer/">GOV.UK footer</a> to comply with the rules for using GOV.UK's Frontend without GOV.UK branding. We have also adapted the GOV.UK footer to comply with the rules for using GOV.UK's Frontend without GOV.UK branding.
+</p>
+<p>The footer contains:</p>
+<ul class="govuk-list govuk-list--bullet">
+  <li>navigational links if required</li>
+  <li>the 'Open Government Licence' logo and statement, if applicable for your service</li>
+  <li>the 'Crown copyright' which should always be present/li>
+  <li>the crest which should always be present</li>
+    <li>a black top border that matches the chosen black brand colour</li>
+  <li>a tint of the black for the background that ties into our chosen brand colour of black</li>
+</ul>
+<p>
+Using GOV.UK components for the header and footer with minimal to no customisations ensures consistency across government and reduces future maintenance.
+</p>
+
+{% endblock %}
+
+{% block footer %}
+<div class="govuk-footer" style="background-color: #f3f2f1;border-top-color: #0b0c0c">
+  <div class="govuk-width-container">
+    <div class="govuk-footer__meta">
+      <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
+    <div class="govuk-footer__meta">
+      <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
+        <h2 class="govuk-visually-hidden">Support links</h2>
+        <ul class="govuk-footer__inline-list">
+          <li class="govuk-footer__inline-list-item">
+            <a class="govuk-footer__link" href="#">
+              Item 1
+            </a>
+          </li>
+          <li class="govuk-footer__inline-list-item">
+            <a class="govuk-footer__link" href="#">
+              Item 2
+            </a>
+          </li>
+          <li class="govuk-footer__inline-list-item">
+            <a class="govuk-footer__link" href="#">
+              Item 3
+            </a>
+          </li>
+        </ul>
+        <svg
+          aria-hidden="true"
+          focusable="false"
+          class="govuk-footer__licence-logo"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 483.2 195.7"
+          height="17"
+          width="41">
+          <path
+            fill="currentColor"
+            d="M421.5 142.8V.1l-50.7 32.3v161.1h112.4v-50.7zm-122.3-9.6A47.12 47.12 0 0 1 221 97.8c0-26 21.1-47.1 47.1-47.1 16.7 0 31.4 8.7 39.7 21.8l42.7-27.2A97.63 97.63 0 0 0 268.1 0c-36.5 0-68.3 20.1-85.1 49.7A98 98 0 0 0 97.8 0C43.9 0 0 43.9 0 97.8s43.9 97.8 97.8 97.8c36.5 0 68.3-20.1 85.1-49.7a97.76 97.76 0 0 0 149.6 25.4l19.4 22.2h3v-87.8h-80l24.3 27.5zM97.8 145c-26 0-47.1-21.1-47.1-47.1s21.1-47.1 47.1-47.1 47.2 21 47.2 47S123.8 145 97.8 145" />
+        </svg>
+        <span class="govuk-footer__licence-description">
+          All content is available under the
+          <a
+            class="govuk-footer__link"
+            href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+            rel="license">Open Government Licence v3.0</a>, except where otherwise stated
+        </span>
+      </div>
+      <div class="govuk-footer__meta-item">
+        <a
+          class="govuk-footer__link govuk-footer__copyright-logo"
+          href="https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/">
+          © Crown copyright
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

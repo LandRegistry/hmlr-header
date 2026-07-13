@@ -1,0 +1,195 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  GOV.UK page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block header %}
+
+<style>
+.hmlr-logo {
+  height: 30px;
+  margin-right: 3px;
+}
+
+.govuk-generic-header__homepage-link,
+.govuk-footer__link,
+.govuk-footer__licence-description,
+.govuk-body,
+.govuk-list,
+.govuk-heading-xl,
+.govuk-heading-l,
+.govuk-heading-m,
+.govuk-heading-s,
+.govuk-body-m,
+.govuk-body-s,
+.govuk-body-xl,
+.govuk-body-l,
+p {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.govuk-generic-header__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.hmlr-header-search {
+  display: flex;
+  flex: 0 1 300px;
+  max-width: 300px;
+}
+
+.hmlr-header-search__input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 40px;
+  padding: 5px 10px;
+  border: 2px solid #ffffff;
+  border-right: 0;
+  border-radius: 0;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+}
+
+.hmlr-header-search__input:focus {
+  outline: 3px solid #ffdd00;
+  outline-offset: 0;
+}
+
+.hmlr-header-search__submit {
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 2px solid #ffffff;
+  background-color: #ffffff;
+  color: #0b0c0c;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hmlr-header-search__submit:hover {
+  background-color: #f3f2f1;
+}
+
+.hmlr-header-search__submit:focus {
+  outline: 3px solid #ffdd00;
+  outline-offset: 0;
+}
+
+.hmlr-header-search__icon {
+  width: 20px;
+  height: 20px;
+}
+</style>
+<div class="govuk-generic-header">
+  <div class="govuk-generic-header__container govuk-width-container">
+    <div class="govuk-generic-header__logo">
+      <a href="https://www.gov.uk/government/organisations/land-registry" class="govuk-generic-header__homepage-link">
+        <img class="hmlr-logo" src="/public/images/colour-logo-image.png" alt="HM Land Registry logo">
+         HM Land Registry Developer Pack
+      </a>
+    </div>
+
+    <form class="hmlr-header-search" action="/search" method="get" role="search">
+      <label for="hmlr-header-search-input" class="govuk-visually-hidden">Search developer pack</label>
+      <input
+        class="hmlr-header-search__input"
+        id="hmlr-header-search-input"
+        name="q"
+        type="search"
+        autocomplete="off"
+        placeholder="Search"
+      >
+      <button class="hmlr-header-search__submit" type="submit">
+        <svg class="hmlr-header-search__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z"/>
+        </svg>
+        <span class="govuk-visually-hidden">Search</span>
+      </button>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
+
+
+{% block content %}
+
+<h1 class="govuk-heading-xl">Create web services using Business Gateway API's</h1>
+
+<p>Use HM Land Registry's developer pack to explore API's review documentation and check endpoints.</p>
+
+<button type="submit" class="govuk-button" data-module="govuk-button">
+  Find an API
+</button>
+
+{% endblock %}
+
+{% block footer %}
+<div class="govuk-footer" style="background-color: #f3f2f1;border-top-color: #0b0c0c">
+  <div class="govuk-width-container">
+    <div class="govuk-footer__meta">
+      <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
+    <div class="govuk-footer__meta">
+      <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
+        <h2 class="govuk-visually-hidden">Support links</h2>
+        <p>The following links open in a new tab.</p>
+        <ul class="govuk-footer__inline-list">
+          <li class="govuk-footer__inline-list-item">
+            <a class="govuk-footer__link" href="#">
+              Terms and conditions
+            </a>
+          </li>
+          <li class="govuk-footer__inline-list-item">
+            <a class="govuk-footer__link" href="#">
+              Accessibility statement
+            </a>
+          </li>
+          <li class="govuk-footer__inline-list-item">
+            <a class="govuk-footer__link" href="#">
+              Cookies
+            </a>
+          </li>
+          <li class="govuk-footer__inline-list-item">
+            <a class="govuk-footer__link" href="#">
+              Freedom of information
+            </a>
+          </li>
+        </ul>
+        <svg
+          aria-hidden="true"
+          focusable="false"
+          class="govuk-footer__licence-logo"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 483.2 195.7"
+          height="17"
+          width="41">
+          <path
+            fill="currentColor"
+            d="M421.5 142.8V.1l-50.7 32.3v161.1h112.4v-50.7zm-122.3-9.6A47.12 47.12 0 0 1 221 97.8c0-26 21.1-47.1 47.1-47.1 16.7 0 31.4 8.7 39.7 21.8l42.7-27.2A97.63 97.63 0 0 0 268.1 0c-36.5 0-68.3 20.1-85.1 49.7A98 98 0 0 0 97.8 0C43.9 0 0 43.9 0 97.8s43.9 97.8 97.8 97.8c36.5 0 68.3-20.1 85.1-49.7a97.76 97.76 0 0 0 149.6 25.4l19.4 22.2h3v-87.8h-80l24.3 27.5zM97.8 145c-26 0-47.1-21.1-47.1-47.1s21.1-47.1 47.1-47.1 47.2 21 47.2 47S123.8 145 97.8 145" />
+        </svg>
+        <span class="govuk-footer__licence-description">
+          All content is available under the
+          <a
+            class="govuk-footer__link"
+            href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+            rel="license">Open Government Licence v3.0</a>, except where otherwise stated
+        </span>
+      </div>
+      <div class="govuk-footer__meta-item">
+        <a
+          class="govuk-footer__link govuk-footer__copyright-logo"
+          href="https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/">
+          © Crown copyright
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

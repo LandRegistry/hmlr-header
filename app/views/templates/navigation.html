@@ -7,20 +7,34 @@
 {% block header %}
 
 <style>
-  .hmlr-logo {
-    height: 30px;
-    margin-right: 3px;
-  }
-    .govuk-generic-header__homepage-link{
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  }
+.hmlr-logo {
+  height: 30px;
+  margin-right: 3px;
+}
+
+.govuk-generic-header__homepage-link,
+.govuk-footer__link,
+.govuk-footer__licence-description,
+.govuk-body,
+.govuk-list,
+.govuk-heading-xl,
+.govuk-heading-l,
+.govuk-heading-m,
+.govuk-heading-s,
+.govuk-body-m,
+.govuk-body-s,
+.govuk-body-xl,
+.govuk-body-l,
+p {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
 </style>
 <div class="govuk-generic-header">
   <div class="govuk-generic-header__container govuk-width-container">
     <div class="govuk-generic-header__logo">
-      <a href="./portal-homepage-1.html" class="govuk-generic-header__homepage-link">
+      <a href="#" class="govuk-generic-header__homepage-link">
         <img class="hmlr-logo" src="/public/images/colour-logo-image.png" alt="HM Land Registry logo">
-         HM Land Registry portal
+         HM Land Registry
       </a>
     </div>
   </div>
@@ -31,7 +45,9 @@
   <div class="govuk-width-container">
     <div class="govuk-service-navigation__container" >
       <span class="govuk-service-navigation__service-name">
-        Digital registation service
+        <a href="#" class="govuk-service-navigation__link">
+          Service name
+        </a>
       </span>
       <nav aria-label="Menu" class="govuk-service-navigation__wrapper">
         <button type="button" class="govuk-service-navigation__toggle govuk-js-service-navigation-toggle" aria-controls="navigation" hidden aria-hidden="true">
@@ -40,17 +56,17 @@
         <ul class="govuk-service-navigation__list" id="navigation">
           <li class="govuk-service-navigation__item">
             <a class="govuk-service-navigation__link" href="#">
-        
+              Navigation item 1
             </a>
           </li>
           <li class="govuk-service-navigation__item govuk-service-navigation__item--active">
             <a class="govuk-service-navigation__link" href="#" aria-current="true">
-              <strong class="govuk-service-navigation__active-fallback"></strong>
+              <strong class="govuk-service-navigation__active-fallback">Navigation item 2</strong>
             </a>
           </li>
           <li class="govuk-service-navigation__item">
             <a class="govuk-service-navigation__link" href="#">
-           
+              Navigation item 3
             </a>
           </li>
         </ul>
@@ -62,6 +78,48 @@
 
 {% block content %}
 
+<h1 class="govuk-heading-l">Header, service navigation and footer</h1>
+<p>
+  This template is for services that have navigation links and/or a service name.
+</p>
+<h2 class="govuk-heading-m">Header</h2>
+<p>
+ The header uses the <a href="https://design-system.service.gov.uk/components/generic-header/">GOV.UK generic header component</a>. It contains:
+</p>
+<ul class="govuk-list govuk-list--bullet">
+  <li>our picture logo, placed in accordance to the generic header</a> guidance</li>
+  <li>our organisation's name, following the <a href="https://frontend.design-system.service.gov.uk/using-govuk-frontend-without-govuk-branding/">guidance for which font to use</a> when you can't use GOV.UK's Transport font. This is font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;</li>
+  <li>a black background that matches the generic header. Other brand colours can be used across government however black was most suitable for our organisation's logo</li>
+</ul>
+<p>
+  The design ensures our header aligns as closely as possible to the generic header and therefore what other departments will also implement for their services not hosted on GOV.UK.
+</p>
+
+<h2 class="govuk-heading-m">Service navigation</h2>
+<p>
+  The <a href="https://design-system.service.gov.uk/components/service-navigation/">service navigation component</a> can contain:
+</p>
+<ul class="govuk-list govuk-list--bullet">
+  <li>the service name which links users back to the start page of the service</li>
+  <li>navigation links</li>
+</ul>
+
+<h2 class="govuk-heading-m">Footer</h2>
+<p>
+  There is not yet a generic footer component however we have adapted the <a href="https://design-system.service.gov.uk/components/footer/">GOV.UK footer</a> to comply with the rules for using GOV.UK's Frontend without GOV.UK branding. We have also adapted the GOV.UK footer to comply with the rules for using GOV.UK's Frontend without GOV.UK branding.
+</p>
+<p>The footer contains:</p>
+<ul class="govuk-list govuk-list--bullet">
+  <li>navigational links if required</li>
+  <li>the 'Open Government Licence' logo and statement, if applicable for your service</li>
+  <li>the 'Crown copyright' which should always be present/li>
+  <li>the crest which should always be present</li>
+    <li>a black top border that matches the chosen black brand colour</li>
+  <li>a tint of the black for the background that ties into our chosen brand colour of black</li>
+</ul>
+<p>
+Using GOV.UK components for the header and footer with minimal to no customisations ensures consistency across government and reduces future maintenance.
+</p>
 
 {% endblock %}
 
@@ -73,26 +131,20 @@
     <div class="govuk-footer__meta">
       <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
         <h2 class="govuk-visually-hidden">Support links</h2>
-        <p>The following links open in a new tab.</p>
         <ul class="govuk-footer__inline-list">
           <li class="govuk-footer__inline-list-item">
             <a class="govuk-footer__link" href="#">
-              Terms and conditions
+              Item 1
             </a>
           </li>
           <li class="govuk-footer__inline-list-item">
             <a class="govuk-footer__link" href="#">
-              Accessibility statement
+              Item 2
             </a>
           </li>
           <li class="govuk-footer__inline-list-item">
             <a class="govuk-footer__link" href="#">
-              Cookies
-            </a>
-          </li>
-          <li class="govuk-footer__inline-list-item">
-            <a class="govuk-footer__link" href="#">
-              Freedom of information
+              Item 3
             </a>
           </li>
         </ul>

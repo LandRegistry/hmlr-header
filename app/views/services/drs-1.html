@@ -1,0 +1,163 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  GOV.UK page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block header %}
+
+<style>
+  .hmlr-logo {
+    height: 30px;
+    margin-right: 3px;
+  }
+    .govuk-generic-header__homepage-link{
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+</style>
+<div class="govuk-generic-header">
+  <div class="govuk-generic-header__container govuk-width-container">
+    <div class="govuk-generic-header__logo">
+      <a href="./portal-homepage-1.html" class="govuk-generic-header__homepage-link">
+        <img class="hmlr-logo" src="/public/images/colour-logo-image.png" alt="HM Land Registry logo">
+         HM Land Registry portal
+      </a>
+    </div>
+  </div>
+</div>
+
+<section aria-label="Service information" class="govuk-service-navigation"
+  data-module="govuk-service-navigation" style="background-color: #f3f2f1; border-bottom-color:#cecece">
+  <div class="govuk-width-container">
+    <div class="govuk-service-navigation__container" >
+      <span class="govuk-service-navigation__service-name">
+        <a href="#" class="govuk-service-navigation__link">
+        Digital registation service
+        </a>
+      </span>
+      <nav aria-label="Menu" class="govuk-service-navigation__wrapper">
+        <button type="button" class="govuk-service-navigation__toggle govuk-js-service-navigation-toggle" aria-controls="navigation" hidden aria-hidden="true">
+          Menu
+        </button>
+        <ul class="govuk-service-navigation__list" id="navigation">
+          <li class="govuk-service-navigation__item">
+            <a class="govuk-service-navigation__link" href="#">
+        
+            </a>
+          </li>
+          <li class="govuk-service-navigation__item govuk-service-navigation__item--active">
+            <a class="govuk-service-navigation__link" href="#" aria-current="true">
+              <strong class="govuk-service-navigation__active-fallback"></strong>
+            </a>
+          </li>
+          <li class="govuk-service-navigation__item">
+            <a class="govuk-service-navigation__link" href="#">
+           
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l">Apply to register or update titles</h1>
+    <p>Use this service to:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>update registered titles</li>
+      <li>register new titles (including transfers of part and new leases)</li>
+      <li>register lease extensions (close an old lease and register a new lease of the same property to the same tenant)</li>
+      <li>close leasehold titles (including merger applications)</li>
+      <li>remove default Form A restrictions</li>
+    </ul>
+    <div class="govuk-inset-text">
+      You can only use this service for applications with <b>up to 25 titles</b>.
+    </div>
+    <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+      Go to saved applications
+    </button><br>
+    {{ govukButton({
+      text: "Start new application",
+      href: "#",
+      isStartButton: true
+    }) }}
+    <h2 class="govuk-heading-m">When to use a different service</h2>
+    <p>You cannot transfer portfolios (TR5) using this service yet. You can submit these applications using the<a href="#">document registration service</a>.</p>
+    <p>For first registrations, you should submit applications by post.</p>
+    <p>If your application has more than:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>25 titles, you should use the <a href="#">document registration service</a></li>
+      <li>50 titles, contact the <a href="#">bulk application team</a></li>
+    </ul>
+  </div>
+</div>
+
+
+{% endblock %}
+
+{% block footer %}
+<div class="govuk-footer" style="background-color: #f3f2f1;border-top-color: #0b0c0c">
+  <div class="govuk-width-container">
+    <div class="govuk-footer__meta">
+      <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
+    <div class="govuk-footer__meta">
+      <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
+        <h2 class="govuk-visually-hidden">Support links</h2>
+        <p>The following links open in a new tab.</p>
+        <ul class="govuk-footer__inline-list">
+          <li class="govuk-footer__inline-list-item">
+            <a class="govuk-footer__link" href="#">
+              Terms and conditions
+            </a>
+          </li>
+          <li class="govuk-footer__inline-list-item">
+            <a class="govuk-footer__link" href="#">
+              Accessibility statement
+            </a>
+          </li>
+          <li class="govuk-footer__inline-list-item">
+            <a class="govuk-footer__link" href="#">
+              Cookies
+            </a>
+          </li>
+          <li class="govuk-footer__inline-list-item">
+            <a class="govuk-footer__link" href="#">
+              Freedom of information
+            </a>
+          </li>
+        </ul>
+        <svg
+          aria-hidden="true"
+          focusable="false"
+          class="govuk-footer__licence-logo"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 483.2 195.7"
+          height="17"
+          width="41">
+          <path
+            fill="currentColor"
+            d="M421.5 142.8V.1l-50.7 32.3v161.1h112.4v-50.7zm-122.3-9.6A47.12 47.12 0 0 1 221 97.8c0-26 21.1-47.1 47.1-47.1 16.7 0 31.4 8.7 39.7 21.8l42.7-27.2A97.63 97.63 0 0 0 268.1 0c-36.5 0-68.3 20.1-85.1 49.7A98 98 0 0 0 97.8 0C43.9 0 0 43.9 0 97.8s43.9 97.8 97.8 97.8c36.5 0 68.3-20.1 85.1-49.7a97.76 97.76 0 0 0 149.6 25.4l19.4 22.2h3v-87.8h-80l24.3 27.5zM97.8 145c-26 0-47.1-21.1-47.1-47.1s21.1-47.1 47.1-47.1 47.2 21 47.2 47S123.8 145 97.8 145" />
+        </svg>
+        <span class="govuk-footer__licence-description">
+          All content is available under the
+          <a
+            class="govuk-footer__link"
+            href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+            rel="license">Open Government Licence v3.0</a>, except where otherwise stated
+        </span>
+      </div>
+      <div class="govuk-footer__meta-item">
+        <a
+          class="govuk-footer__link govuk-footer__copyright-logo"
+          href="https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/">
+          © Crown copyright
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -8,48 +8,73 @@
 
 <style>
   .hmlr-logo {
-    height: 30px;
-    margin-right: 3px;
-  }
-  .govuk-generic-header__homepage-link{
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  }
+  height: 30px;
+  margin-right: 3px;
+}
+
+.govuk-generic-header__homepage-link,
+.govuk-footer__link,
+.govuk-footer__licence-description,
+.govuk-body,
+.govuk-list,
+.govuk-heading-xl,
+.govuk-heading-l,
+.govuk-heading-m,
+.govuk-heading-s,
+.govuk-body-m,
+.govuk-body-s,
+.govuk-body-xl,
+.govuk-body-l,
+p {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
 </style>
 <div class="govuk-generic-header">
   <div class="govuk-generic-header__container govuk-width-container">
     <div class="govuk-generic-header__logo">
-      <a href="./index.html" class="govuk-generic-header__homepage-link">
+      <a href="../index.html" class="govuk-generic-header__homepage-link">
         <img class="hmlr-logo" src="/public/images/colour-logo-image.png" alt="HM Land Registry logo">
          HM Land Registry
       </a>
     </div>
   </div>
 </div>
+
 {% endblock %}
 
 {% block content %}
-
-<h1 class="govuk-heading-xl">HMLR Header and footer re-design</h1>
-
-<h2 class="govuk-heading-m">Templates and documentation</h2>
-<ul class="govuk-list">
-  <li><a href="./templates/header-footer.html">Header and footer</a></li>
-  <li><a href="./templates/navigation.html">Service navigation</a></li>
-  <li><a href="./templates/account-links-1.html">Account links for a single service</a></li>
-  <li><a href="./templates/account-links-2.html">Account links for multiple services</a></li>
+<h1 class="govuk-heading-l">Header and footer</h1>
+<p>
+  This template is for pages that have no navigation or service name.
+</p>
+<h2 class="govuk-heading-m">Header</h2>
+<p>
+  The header uses the <a href="https://design-system.service.gov.uk/components/generic-header/">GOV.UK generic header component</a>. It contains:
+</p>
+<ul class="govuk-list govuk-list--bullet">
+  <li>our picture logo, placed in accordance to the generic header guidance</li>
+  <li>our organisation's name, following the <a href="https://frontend.design-system.service.gov.uk/using-govuk-frontend-without-govuk-branding/">guidance for which font to use</a> when you can't use GOV.UK's Transport font. This is font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;</li>
+  <li>a black background that matches the generic header. Other brand colours can be used across government however black was most suitable for our organisation's logo</li>
 </ul>
-
-<h2 class="govuk-heading-m">Service specific</h2>
-<ul class="govuk-list">
-  <li><a href="./services/portal-homepage-1.html">Portal homepage</a></li>
-  <li><a href="./services/va-1.html">View applications</a></li>
-  <li><a href="./services/drs-1.html">DRS</a></li>
-  <li><a href="colour-logo.html">MapSearch</a></li>
-  <li><a href="./services/contractual-controls.html">Contractual controls</a></li>
-  <li><a href="./services/developer-pack.html">Dev Pack</a></li>
-  <li><a href="./services/contact-us.html">Contact Us</a></li>
-  <li><a href="colour-logo.html">Sorry server</a></li>
+<p>
+  The design ensures our header aligns as closely as possible to the generic header and therefore what other departments will also implement for their services not hosted on GOV.UK.
+</p>
+<h2 class="govuk-heading-m">Footer</h2>
+<p>
+  There is not yet a generic footer component however we have adapted the <a href="https://design-system.service.gov.uk/components/footer/">GOV.UK footer</a> to comply with the rules for using GOV.UK's Frontend without GOV.UK branding.
+</p>
+<p>The footer contains:</p>
+<ul class="govuk-list govuk-list--bullet">
+  <li>navigational links if required</li>
+  <li>the 'Open Government Licence' logo and statement, if applicable for your service</li>
+  <li>the 'Crown copyright' which should always be present/li>
+  <li>the crest which should always be present</li>
+  <li>a black top border that matches the chosen black brand colour</li>
+  <li>a tint of the black for the background that ties into our chosen brand colour of black</li>
 </ul>
+<p>
+Using GOV.UK components for the header and footer with minimal to no customisations ensures consistency across government and reduces future maintenance.
+</p>
 
 
 {% endblock %}
