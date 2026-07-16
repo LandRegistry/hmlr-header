@@ -67,23 +67,29 @@
     background-position-x: 112px;
     background-position-y: center;
   }
- 
+
+
+.account-name {
+  display: inline-block;
+}
+
   .parent a {
-    margin: 20px;
     color: #ffffff;
     text-decoration: none;
 
   }
 
   .parent a:hover {
-    margin: 20px;
     color: #ffffff;
     text-decoration: underline;
   }
     .parent a:focus {
-    margin: 20px;
     color: #0b0c0c;
     text-decoration: underline;
+  }
+
+  a:focus, .govuk-link:focus {
+    box-shadow: none;
   }
  
   .parent-2 a {
@@ -98,15 +104,30 @@
   }
 
   /* Make the <a> fill the entire <li> so the whole area is clickable */
-  .parent.account-parent > a.account-toggle {
-    display: block;
-    margin: 0;
-    padding-left: 20px;
-    margin-right: 20px;
-    height: 100%;
-    border-bottom-style: none;
-    width:100%
-  }
+.parent.account-parent > a.account-toggle {
+  display: inline-flex;
+  align-items: center;
+  width: auto;              /* was 100% */
+  position: relative;
+  padding-left: 20px;
+  padding-right: 45px;      /* space for the icon */
+  margin-right: 0px;
+  height: 60px;
+  border-bottom-style: none;
+
+  background-image: url("/public/images/icon_govuk_chevrondownWhite.svg");
+  background-size: 15px;
+  background-repeat: no-repeat;
+  background-position: right 15px center;  /* replaces the old fixed 112px offset */
+}
+
+.parent.account-parent > a.account-toggle:focus {
+
+  background-image: url("/public/images/icon_govuk_chevrondownBlack.svg");
+
+}
+
+
 
   .parent.account-parent > .child {
     display: none;
@@ -124,12 +145,29 @@
   .parent.account-parent.is-open {
     background-color: #ffffff;
     color: #1d70b8;
+
   }
 
   .parent.account-parent.is-open > a.account-toggle {
     color: #1d70b8;
+    text-decoration: none;
+    background-image: url("/public/images/icon_govuk_chevronupBlue.svg");
+  }
+
+    .parent.account-parent.is-open > a.account-toggle:hover {
+    color: #1d70b8;
     text-decoration: underline;
   }
+
+  .parent.account-parent.is-open > a.account-toggle::after {
+  content: "";
+  position: absolute;
+  left: 20px;                 /* match padding-left so it starts under the text */
+  right: 20px;                 /* match the icon's right inset so it ends under the arrow */
+  bottom: 0px;
+  height: 4px;
+  background-color: #1d70b8;
+}
 
   /* Keep the old hover behaviour for any parent that is NOT account-parent */
   .parent:not(.account-parent):hover > ul {
@@ -286,16 +324,39 @@
     align-items: center;
   }
 
-  .service-nav-chevron {
-    width: 0;
-    height: 0;
-    margin-left: 6px;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 5px solid #1d70b8;
-    display: inline-block;
-  }
 
+/* Style + rotate the actual chevron icon */
+.service-nav-chevron-icon {
+  width: 15px;
+  height: 25px;
+  margin-left: 8px;
+  flex-shrink: 0;
+  margin-top:2px;
+}
+
+.service-nav-parent.is-open .service-nav-chevron-icon {
+  transform: rotate(180deg);
+}
+
+/* Blue underline, matching width of "Services" text + arrow */
+.service-nav-toggle {
+  position: relative;
+}
+
+
+.service-nav-parent {
+  position: relative;
+}
+
+.service-nav-parent.is-open::after {
+  content: "";
+  position: absolute;
+  left: 15px;
+  right: 15px;
+  bottom: 0;
+  height: 4px;
+  background-color: #1d70b8;
+}
   .service-nav-parent.is-open {
     background-color: #ffffff;
   }
@@ -307,6 +368,11 @@
   .service-nav-parent.is-open .service-nav-chevron {
     transform: rotate(180deg);
   }
+
+  .service-nav-toggle:focus .service-nav-chevron-icon {
+  filter: brightness(0) saturate(100%);
+}
+
 
   .service-dropdown {
     display: none;
@@ -328,7 +394,7 @@
 
   }
 
-  .govuk-service-navigation__item, .govuk-service-navigation__service-name {
+  .service-nav-parent {
     padding-left: 15px;
     padding-right: 15px;
   }
@@ -361,6 +427,10 @@
     width: 20px;
     margin-left: 8px;
     flex-shrink: 0;
+    position:absolute;
+    top:10px;
+    right:12px;
+
   }
 
   .service-submenu {
@@ -376,11 +446,23 @@
     z-index: 999999;
     padding: 5px 0;
   }
+.service-submenu {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  width: 300px;
+  max-height: 70vh;
+  overflow-y: auto;
+  background: #ffffff;
+  border: 1px solid #cecece;
+  z-index: 999999;
+  padding: 5px 0;
+}
 
-  .service-has-submenu:hover > .service-submenu,
-  .service-has-submenu:focus-within > .service-submenu {
-    display: block;
-  }
+.service-has-submenu.is-open > .service-submenu {
+  display: block;
+}
 
 </style>
 <div class="govuk-generic-header">
@@ -396,8 +478,10 @@
  
     <ul class="navbar-menu--right">
  
-      <li class="parent account-parent parentIconDown2" style="padding-right: 20px;">
-        <a href="#" class="account-toggle" aria-haspopup="true" aria-expanded="false">John James</a>
+      <li class="parent account-parent" style="margin-right: 20px;">
+        <a href="#" class="account-toggle" aria-haspopup="true" aria-expanded="false">
+          <span class="account-name">John James</span>
+        </a>
         <ul class="child">
           <div class="govuk-body myAccountContent">
             <div>
@@ -437,7 +521,7 @@
           <li class="govuk-service-navigation__item service-nav-parent">
             <a class="govuk-service-navigation__link service-nav-toggle" href="#" aria-haspopup="true" aria-expanded="false">
               Services
-              <img src="/public/images/icon_govuk_chevrondown-blue.svg" alt="">
+              <img src="/public/images/icon_govuk_chevrondownBlue.svg" class="service-nav-chevron-icon" alt="">
             </a>
 
             <ul class="service-dropdown">
@@ -622,6 +706,63 @@
     });
 
   })();
+
+  (function () {
+    var submenuParents = document.querySelectorAll('.service-has-submenu');
+
+    submenuParents.forEach(function (parent) {
+      var trigger = parent.querySelector(':scope > a');
+
+      trigger.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        var isOpen = parent.classList.contains('is-open');
+
+        // close any other open submenus first
+        submenuParents.forEach(function (p) {
+          p.classList.remove('is-open');
+        });
+
+        if (!isOpen) {
+          parent.classList.add('is-open');
+        }
+      });
+    });
+
+    // close submenus when clicking anywhere else
+    document.addEventListener('click', function (e) {
+      var clickedInsideSubmenu = e.target.closest('.service-has-submenu');
+      if (!clickedInsideSubmenu) {
+        submenuParents.forEach(function (p) {
+          p.classList.remove('is-open');
+        });
+      }
+    });
+
+    // close on Escape
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        submenuParents.forEach(function (p) {
+          p.classList.remove('is-open');
+        });
+      }
+    });
+  })();
+
+if (!isOpen) {
+  document.querySelectorAll('.service-has-submenu.is-open').forEach(function (p) {
+    p.classList.remove('is-open');
+  });
+}
+
+// in the existing outside-click handler, alongside the serviceParent check:
+if (serviceParent && !serviceParent.contains(e.target)) {
+  document.querySelectorAll('.service-has-submenu.is-open').forEach(function (p) {
+    p.classList.remove('is-open');
+  });
+}
+
 </script>
 
 <div class="govuk-body govuk-width-container">
