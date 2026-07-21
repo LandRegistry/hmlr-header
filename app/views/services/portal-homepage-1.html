@@ -168,11 +168,21 @@
   .parent a:hover::after {
     content: "";
     position: absolute;
-    left: 0px;                 /* match padding-left so it starts under the text */
-    right: 0px;                 /* match the icon's right inset so it ends under the arrow */
+    left: 20px;                 /* match padding-left so it starts under the text */
+    right: 20px;                 /* match the icon's right inset so it ends under the arrow */
     bottom: 1px;
     height: 4px;
     background-color: #fff;
+  }
+
+  .parent a:focus::after {
+    content: "";
+    position: absolute;
+    left: 20px;                 /* match padding-left so it starts under the text */
+    right: 20px;                 /* match the icon's right inset so it ends under the arrow */
+    bottom: 1px;
+    height: 4px;
+    background-color: #0b0c0c;
   }
 
   .parent.account-parent a:hover::after  {
@@ -196,7 +206,13 @@
   }
 
     .parent.account-parent> a.account-toggle:focus::after  {
-  content: none;
+    content: "";
+  position: absolute;
+  left: 20px;                 /* match padding-left so it starts under the text */
+  right: 20px;                 /* match the icon's right inset so it ends under the arrow */
+  bottom: 1px;
+  height: 4px;
+  background-color: #0b0c0c;
 
   }
 
@@ -210,11 +226,17 @@
   background-color: #1d70b8;
 }
 
-  /* Keep the old hover behaviour for any parent that is NOT account-parent */
-  .parent:not(.account-parent):hover > ul {
-    display: block;
-    position: absolute;
-  }
+.parent.sign-out > a {
+display: inline-flex;
+padding-left:20px;
+Padding-right:20px;
+height:60px;
+}
+.parent a:focus {
+  color: #0b0c0c;
+  text-decoration: none;
+
+}
  
   .parent-2:hover > ul {
     display: block;
@@ -353,18 +375,43 @@
   }
 
   .service-nav-parent > .govuk-service-navigation__link {
-    display: flex;
+    display: inline-flex;
     align-items: center;
+    height: 18px;
+  }
+
+  .service-nav-toggle:hover{
+    border-bottom: 3px solid #0f385c;
+  }
+
+  .service-nav-toggle:focus{
+    border-bottom: none;
   }
 
 
 /* Style + rotate the actual chevron icon */
 .service-nav-chevron-icon {
+  display: inline-block;
   width: 15px;
   height: 25px;
   margin-left: 8px;
+  margin-top: 2px;
   flex-shrink: 0;
-  margin-top:2px;
+
+  background-color: #1d70b8; /* current default blue */
+
+  -webkit-mask-image: url("/public/images/icon_govuk_chevrondownBlue.svg");
+  mask-image: url("/public/images/icon_govuk_chevrondownBlue.svg");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+.service-nav-toggle:hover .service-nav-chevron-icon {
+  background-color: #0f385c;
 }
 
 .service-nav-parent.is-open .service-nav-chevron-icon {
@@ -374,6 +421,7 @@
 /* Blue underline, matching width of "Services" text + arrow */
 .service-nav-toggle {
   position: relative;
+  text-decoration: none;
 }
 
 
@@ -434,7 +482,7 @@
 
   .service-dropdown li > a {
     display: block;
-    padding: 10px 20px;
+    padding: 5px 15px;
     color: #1d70b8;
     font-size: 16px;
     text-decoration: none;
@@ -456,15 +504,35 @@
     align-items: center;
   }
 
-  .service-submenu-chevron {
-    width: 20px;
-    margin-left: 8px;
-    flex-shrink: 0;
-    position:absolute;
-    top:10px;
-    right:12px;
+.service-submenu-chevron {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-left: 8px;
+  flex-shrink: 0;
+  position: absolute;
+  top: 5.5px;
+  right: 7px;
 
-  }
+  background-color: #1d70b8; /* current default blue */
+
+  -webkit-mask-image: url("/public/images/icon_govuk_chevronright-blue.svg");
+  mask-image: url("/public/images/icon_govuk_chevronright-blue.svg");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+.service-has-submenu > a:hover .service-submenu-chevron {
+  background-color: #0f385c;
+}
+
+.service-has-submenu > a:focus .service-submenu-chevron {
+  background-color: #0b0c0c;
+}
 
   .service-submenu {
     display: none;
@@ -497,6 +565,18 @@
   display: block;
 }
 
+.service-dropdown li > a:hover {
+  color: #0f385c;
+  text-decoration: underline;
+}
+
+.service-dropdown li > a:focus {
+  color: #0b0c0c;
+  text-decoration: 2px underline;
+}
+
+
+
 </style>
 <div class="govuk-generic-header">
   <div class="govuk-generic-header__container">
@@ -511,7 +591,7 @@
  
     <ul class="navbar-menu--right">
  
-      <li class="parent account-parent" style="margin-right: 20px;">
+      <li class="parent account-parent" >
 <a href="#" class="account-toggle" aria-haspopup="true" aria-expanded="false">
   <span class="account-name">John James</span>
   <img src="/public/images/icon_govuk_chevrondownWhite.svg" class="account-chevron-icon" alt="">
@@ -555,7 +635,7 @@
           <li class="govuk-service-navigation__item service-nav-parent">
             <a class="govuk-service-navigation__link service-nav-toggle" href="#" aria-haspopup="true" aria-expanded="false">
               Services
-              <img src="/public/images/icon_govuk_chevrondownBlue.svg" class="service-nav-chevron-icon" alt="">
+              <span class="service-nav-chevron-icon" aria-hidden="true"></span>
             </a>
 
             <ul class="service-dropdown">
@@ -565,7 +645,7 @@
               <li class="service-has-submenu">
                 <a href="#">
                   Information services
-                  <img src="/public/images/icon_govuk_chevronright-blue.svg" class="service-submenu-chevron" alt="">
+                  <span class="service-submenu-chevron" aria-hidden="true"></span>
                 </a>
                 <ul class="service-submenu">
                   <li><a href="#">Request official copies</a></li>
@@ -591,7 +671,7 @@
               <li class="service-has-submenu">
                 <a href="#">
                   Land charges Services
-                  <img src="/public/images/icon_govuk_chevronright-blue.svg" class="service-submenu-chevron" alt="">
+                  <span class="service-submenu-chevron" aria-hidden="true"></span>
                 </a>
                 <ul class="service-submenu">
                   <li><a href="#">Bankruptcy search</a></li>
@@ -607,7 +687,7 @@
               <li class="service-has-submenu">
                 <a href="#">
                   Network Services
-                  <img src="/public/images/icon_govuk_chevronright-blue.svg" class="service-submenu-chevron" alt="">
+                  <span class="service-submenu-chevron" aria-hidden="true"></span>
                 </a>
                 <ul class="service-submenu">
                   <li><a href="#">e-AN1 Agreed notice</a></li>
@@ -635,7 +715,7 @@
               <li class="service-has-submenu">
                 <a href="#">
                   General Facilities
-                  <img src="/public/images/icon_govuk_chevronright-blue.svg" class="service-submenu-chevron" alt="">
+                  <span class="service-submenu-chevron" aria-hidden="true"></span>
                 </a>
                 <ul class="service-submenu">
                   <li><a href="#">Message area</a></li>
@@ -648,7 +728,7 @@
               <li class="service-has-submenu">
                 <a href="#">
                   Administrative Services
-                  <img src="/public/images/icon_govuk_chevronright-blue.svg" class="service-submenu-chevron" alt="">
+                  <span class="service-submenu-chevron" aria-hidden="true"></span>
                 </a>
                 <ul class="service-submenu">
                   <li><a href="#">Alternative despatch address</a></li>
