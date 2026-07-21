@@ -48,7 +48,7 @@
     display: block;
     position: relative;
     float: left;
-
+    line-height: 58px;
     font-weight: bold;
   }
  
@@ -76,26 +76,18 @@
   .parent a {
     color: #ffffff;
     text-decoration: none;
+  }
+
+    .parent.account-parent.is-open > a.account-toggle {
+    color: #1d70b8;
 
   }
 
-    .parent a:hover {
+  .parent a:hover {
     color: #ffffff;
-    text-decoration: 2px solid underline #ffffff;
+    text-decoration: none;
   }
 
-   .sign-out:hover {
-    color: #ffffff;
-    text-decoration: 2px solid underline #ffffff;
-    text-underline-offset: .1578em;
-  }
-
- 
-  
-    .parent a:focus {
-    color: #0b0c0c;
-    text-decoration: underline;
-  }
 
   a:focus, .govuk-link:focus {
     box-shadow: none;
@@ -112,26 +104,21 @@
     cursor: pointer;
   }
 
-
   /* Make the <a> fill the entire <li> so the whole area is clickable */
-.account-parent {
-  padding-left: 20px;
-  padding-right: 20px;
-  margin-right: 0px;;
-  line-height:60px;
-}
-a.account-toggle {
+.parent.account-parent > a.account-toggle {
   display: inline-flex;
   align-items: center;
   width: auto;
   position: relative;
-  line-height:10px;
-
+  padding-left: 20px;
+  padding-right: 15px;
+  margin-right: 0px;
+  height: 60px;
   border-bottom-style: none;
 }
 
 .account-chevron-icon{
-    width: 15px;
+    width: 25px;
   height: 25px;
   margin-left: 8px;
   flex-shrink: 0;
@@ -150,10 +137,7 @@ a.account-toggle {
 .parent.account-parent > a.account-toggle:focus .account-name {
   background-color: #ffdd00;
   color: #0b0c0c;
-  padding:0;
-  margin-bottom:-3px;
-  text-decoration: 3px solid underline;
-  
+  text-decoration: none;
 }
 
 
@@ -174,23 +158,54 @@ a.account-toggle {
   .parent.account-parent.is-open {
     background-color: #ffffff;
     color: #1d70b8;
-  }
-
-  .parent.account-parent.is-open > a.account-toggle {
-    color: #1d70b8;
 
   }
-    .parent.account-parent.is-open > a.account-toggle:hover {
-    color: #0f385c;
-    text-decoration: 2px solid underline;
+
+  .parent a:hover  {
+    text-decoration: none;
+  }
+
+  .parent a:hover::after {
+    content: "";
+    position: absolute;
+    left: 0px;                 /* match padding-left so it starts under the text */
+    right: 0px;                 /* match the icon's right inset so it ends under the arrow */
+    bottom: 1px;
+    height: 4px;
+    background-color: #fff;
+  }
+
+  .parent.account-parent a:hover::after  {
+  content: "";
+  position: absolute;
+  left: 20px;                 /* match padding-left so it starts under the text */
+  right: 20px;                 /* match the icon's right inset so it ends under the arrow */
+  bottom: 1px;
+  height: 4px;
+  background-color: #fff;
+  }
+
+  .parent.account-parent.is-open > a.account-toggle:focus::after  {
+  content: "";
+  position: absolute;
+  left: 20px;                 /* match padding-left so it starts under the text */
+  right: 20px;                 /* match the icon's right inset so it ends under the arrow */
+  bottom: 1px;
+  height: 4px;
+  background-color: #0b0c0c;
+  }
+
+    .parent.account-parent> a.account-toggle:focus::after  {
+  content: none;
+
   }
 
   .parent.account-parent.is-open > a.account-toggle::after {
   content: "";
   position: absolute;
-  left: 0px;                 /* match padding-left so it starts under the text */
-  right: 0px;                 /* match the icon's right inset so it ends under the arrow */
-  bottom: -17px;
+  left: 20px;                 /* match padding-left so it starts under the text */
+  right: 20px;                 /* match the icon's right inset so it ends under the arrow */
+  bottom: 0px;
   height: 4px;
   background-color: #1d70b8;
 }
@@ -230,12 +245,15 @@ a.account-toggle {
     color: #1d70b8;
     font-size: 15px;
   }
-
-    .service-dropdown li > a:hover {
-    color: #0f385c;
-    text-decoration: 2px solid underline;
-  }
  
+  .child-2 {
+    display: none;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.1);
+    z-index: 99999;
+    background: #ffffff;
+    margin-left: 265px;
+    margin-top: -21px;
+  }
  
   .child-2 li {
     background-color: #ffffff;
@@ -261,20 +279,12 @@ a.account-toggle {
     color: #1d70b8;
   }
  
-  .parent:not(.account-parent):hover > a {
-    color: #fff;
-    text-decoration: underline;
-  }
  
   .parent-2:hover {
     background-color: #ffffff;
     color: #1d70b8;
   }
  
-  .parent-2:hover > a {
-    color: #1d70b8;
-    text-decoration: underline;
-  }
  
   .nav-list {
     max-width: 280px;
@@ -502,7 +512,7 @@ a.account-toggle {
     <ul class="navbar-menu--right">
  
       <li class="parent account-parent" style="margin-right: 20px;">
-<a href="#" class="account-toggle account-name" aria-haspopup="true" aria-expanded="false">
+<a href="#" class="account-toggle" aria-haspopup="true" aria-expanded="false">
   <span class="account-name">John James</span>
   <img src="/public/images/icon_govuk_chevrondownWhite.svg" class="account-chevron-icon" alt="">
 </a>
