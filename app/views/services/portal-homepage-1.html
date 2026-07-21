@@ -48,7 +48,7 @@
     display: block;
     position: relative;
     float: left;
-    line-height: 58px;
+
     font-weight: bold;
   }
  
@@ -79,10 +79,19 @@
 
   }
 
-  .parent a:hover {
+    .parent a:hover {
     color: #ffffff;
-    text-decoration: underline;
+    text-decoration: 2px solid underline #ffffff;
   }
+
+   .sign-out:hover {
+    color: #ffffff;
+    text-decoration: 2px solid underline #ffffff;
+    text-underline-offset: .1578em;
+  }
+
+ 
+  
     .parent a:focus {
     color: #0b0c0c;
     text-decoration: underline;
@@ -103,28 +112,48 @@
     cursor: pointer;
   }
 
+
   /* Make the <a> fill the entire <li> so the whole area is clickable */
-.parent.account-parent > a.account-toggle {
+.account-parent {
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-right: 0px;;
+  line-height:60px;
+}
+a.account-toggle {
   display: inline-flex;
   align-items: center;
-  width: auto;              /* was 100% */
+  width: auto;
   position: relative;
-  padding-left: 20px;
-  padding-right: 45px;      /* space for the icon */
-  margin-right: 0px;
-  height: 60px;
-  border-bottom-style: none;
+  line-height:10px;
 
-  background-image: url("/public/images/icon_govuk_chevrondownWhite.svg");
-  background-size: 15px;
-  background-repeat: no-repeat;
-  background-position: right 15px center;  /* replaces the old fixed 112px offset */
+  border-bottom-style: none;
 }
 
-.parent.account-parent > a.account-toggle:focus {
+.account-chevron-icon{
+    width: 15px;
+  height: 25px;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
 
-  background-image: url("/public/images/icon_govuk_chevrondownBlack.svg");
+.parent.account-parent.is-open > a.account-toggle .account-chevron-icon {
+  transform: rotate(180deg);
+  filter: brightness(0) saturate(100%) invert(29%) sepia(60%) saturate(1583%) hue-rotate(180deg); /* turns it #1d70b8 blue, matching Services' open-state blue */
+}
 
+.parent.account-parent > a.account-toggle:focus .account-chevron-icon {
+  filter: brightness(0) saturate(100%); /* matches Services' focus rule exactly */
+}
+
+
+.parent.account-parent > a.account-toggle:focus .account-name {
+  background-color: #ffdd00;
+  color: #0b0c0c;
+  padding:0;
+  margin-bottom:-3px;
+  text-decoration: 3px solid underline;
+  
 }
 
 
@@ -145,26 +174,23 @@
   .parent.account-parent.is-open {
     background-color: #ffffff;
     color: #1d70b8;
-
   }
 
   .parent.account-parent.is-open > a.account-toggle {
     color: #1d70b8;
-    text-decoration: none;
-    background-image: url("/public/images/icon_govuk_chevronupBlue.svg");
-  }
 
+  }
     .parent.account-parent.is-open > a.account-toggle:hover {
-    color: #1d70b8;
-    text-decoration: underline;
+    color: #0f385c;
+    text-decoration: 2px solid underline;
   }
 
   .parent.account-parent.is-open > a.account-toggle::after {
   content: "";
   position: absolute;
-  left: 20px;                 /* match padding-left so it starts under the text */
-  right: 20px;                 /* match the icon's right inset so it ends under the arrow */
-  bottom: 0px;
+  left: 0px;                 /* match padding-left so it starts under the text */
+  right: 0px;                 /* match the icon's right inset so it ends under the arrow */
+  bottom: -17px;
   height: 4px;
   background-color: #1d70b8;
 }
@@ -204,15 +230,12 @@
     color: #1d70b8;
     font-size: 15px;
   }
- 
-  .child-2 {
-    display: none;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.1);
-    z-index: 99999;
-    background: #ffffff;
-    margin-left: 265px;
-    margin-top: -21px;
+
+    .service-dropdown li > a:hover {
+    color: #0f385c;
+    text-decoration: 2px solid underline;
   }
+ 
  
   .child-2 li {
     background-color: #ffffff;
@@ -479,9 +502,10 @@
     <ul class="navbar-menu--right">
  
       <li class="parent account-parent" style="margin-right: 20px;">
-        <a href="#" class="account-toggle" aria-haspopup="true" aria-expanded="false">
-          <span class="account-name">John James</span>
-        </a>
+<a href="#" class="account-toggle account-name" aria-haspopup="true" aria-expanded="false">
+  <span class="account-name">John James</span>
+  <img src="/public/images/icon_govuk_chevrondownWhite.svg" class="account-chevron-icon" alt="">
+</a>
         <ul class="child">
           <div class="govuk-body myAccountContent">
             <div>
@@ -500,7 +524,7 @@
         </ul>
       </li>
  
-      <li class="parent"><a href="#">Sign out</a></li>
+      <li class="parent sign-out"><a href="#">Sign out</a></li>
  
     </ul>
  
