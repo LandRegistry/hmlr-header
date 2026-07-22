@@ -7,35 +7,36 @@
 {% block header %}
 
 <style>
+  /* -------------------------------------------------------------
+     1. Generic header bar (HMLR logo + top-right account/sign out nav)
+     ------------------------------------------------------------- */
   .hmlr-logo {
     height: 30px;
     margin-right: 3px;
   }
- 
+
   .govuk-generic-header {
     border-bottom: none
   }
-  
-  .govuk-generic-header__homepage-link{
+
+  .govuk-generic-header__homepage-link {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
   .govuk-generic-header__container {
     display: flex;
     align-items: center;
-    margin:auto;
+    margin: auto;
     justify-content: space-between;
     width: 965px;
     padding: 0;
   }
- 
+
   .govuk-generic-header__logo {
     display: flex;
     align-items: center;
   }
 
- 
-  /* ---- Right-aligned nav ---- */
   .navbar-menu--right {
     display: flex;
     align-items: center;
@@ -43,7 +44,7 @@
     margin: 0;
     padding: 0;
   }
- 
+
   .parent {
     display: block;
     position: relative;
@@ -51,36 +52,10 @@
     line-height: 58px;
     font-weight: bold;
   }
- 
-  .parentIconDown {
-    background-image: url("/public/images/icon_govuk_chevrondownWhite.svg");
-    background-size: 25px;
-    background-repeat: no-repeat;
-    background-position-x: 85px;
-    background-position-y: center;
-  }
- 
-  .parentIconDown2 {
-    background-image: url("/public/images/icon_govuk_chevrondownWhite.svg");
-    background-size: 25px;
-    background-repeat: no-repeat;
-    background-position-x: 112px;
-    background-position-y: center;
-  }
-
-
-.account-name {
-  display: inline-block;
-}
 
   .parent a {
     color: #ffffff;
     text-decoration: none;
-  }
-
-    .parent.account-parent.is-open > a.account-toggle {
-    color: #1d70b8;
-
   }
 
   .parent a:hover {
@@ -88,59 +63,143 @@
     text-decoration: none;
   }
 
+  .parent a:focus {
+    color: #0b0c0c;
+    text-decoration: none;
+  }
+
+  .parent:not(.account-parent):hover {
+    color: #1d70b8;
+  }
+
+  .parent.sign-out > a {
+    display: inline-flex;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 60px;
+  }
 
   a:focus, .govuk-link:focus {
     box-shadow: none;
   }
- 
-  .parent-2 a {
-    margin: 20px;
-    color: #ffffff;
-    text-decoration: none;
+
+  /* Blue/white/dark underline states shown under nav links on hover & focus */
+  .parent a:hover::after {
+    content: "";
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: 1px;
+    height: 4px;
+    background-color: #fff;
   }
 
-  /* Account dropdown: hidden by default, shown on .is-open */
+  .parent a:focus::after {
+    content: "";
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: 1px;
+    height: 4px;
+    background-color: #0b0c0c;
+  }
+
+  .parent.account-parent a:hover::after {
+    content: "";
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: 1px;
+    height: 4px;
+    background-color: #fff;
+  }
+
+  .parent.account-parent > a.account-toggle:focus::after {
+    content: "";
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: 1px;
+    height: 4px;
+    background-color: #0b0c0c;
+  }
+
+  .parent.account-parent.is-open > a.account-toggle:focus::after {
+    content: "";
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: 1px;
+    height: 4px;
+    background-color: #0b0c0c;
+  }
+
+  .parent.account-parent.is-open > a.account-toggle::after {
+    content: "";
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: 0px;
+    height: 4px;
+    background-color: #1d70b8;
+  }
+
+  /* -------------------------------------------------------------
+     2. "My account" dropdown panel (John James / sign-in details)
+     ------------------------------------------------------------- */
   .parent.account-parent {
     cursor: pointer;
   }
 
-  /* Make the <a> fill the entire <li> so the whole area is clickable */
-.parent.account-parent > a.account-toggle {
-  display: inline-flex;
-  align-items: center;
-  width: auto;
-  position: relative;
-  padding-left: 20px;
-  padding-right: 15px;
-  margin-right: 0px;
-  height: 60px;
-  border-bottom-style: none;
-}
+  .parent.account-parent.is-open > a.account-toggle {
+    color: #1d70b8;
+  }
 
-.account-chevron-icon{
+  .parent.account-parent.is-open {
+    background-color: #ffffff;
+    color: #1d70b8;
+  }
+
+  /* Make the whole toggle area (text + chevron) clickable */
+  .parent.account-parent > a.account-toggle {
+    display: inline-flex;
+    align-items: center;
+    width: auto;
+    position: relative;
+    padding-left: 20px;
+    padding-right: 15px;
+    margin-right: 0px;
+    height: 60px;
+    border-bottom-style: none;
+  }
+
+  .account-name {
+    display: inline-block;
+  }
+
+  .account-chevron-icon {
     width: 25px;
-  height: 25px;
-  margin-left: 8px;
-  flex-shrink: 0;
-}
+    height: 25px;
+    margin-left: 8px;
+    flex-shrink: 0;
+  }
 
-.parent.account-parent.is-open > a.account-toggle .account-chevron-icon {
-  transform: rotate(180deg);
-  filter: brightness(0) saturate(100%) invert(29%) sepia(60%) saturate(1583%) hue-rotate(180deg); /* turns it #1d70b8 blue, matching Services' open-state blue */
-}
+  .parent.account-parent.is-open > a.account-toggle .account-chevron-icon {
+    transform: rotate(180deg);
+    /* turns the chevron #1d70b8 blue, matching the Services open-state blue */
+    filter: brightness(0) saturate(100%) invert(29%) sepia(60%) saturate(1583%) hue-rotate(180deg);
+  }
 
-.parent.account-parent > a.account-toggle:focus .account-chevron-icon {
-  filter: brightness(0) saturate(100%); /* matches Services' focus rule exactly */
-}
+  .parent.account-parent > a.account-toggle:focus .account-chevron-icon {
+    filter: brightness(0) saturate(100%);
+  }
 
-
-.parent.account-parent > a.account-toggle:focus .account-name {
-  background-color: #ffdd00;
-  color: #0b0c0c;
-  text-decoration: none;
-}
-
-
+  .parent.account-parent > a.account-toggle:focus .account-name {
+    background-color: #ffdd00;
+    color: #0b0c0c;
+    text-decoration: none;
+  }
 
   .parent.account-parent > .child {
     display: none;
@@ -153,96 +212,7 @@
     border-bottom-style: inset;
   }
 
-  /* Replicate the original hover colour changes on open state */
-
-  .parent.account-parent.is-open {
-    background-color: #ffffff;
-    color: #1d70b8;
-
-  }
-
-  .parent a:hover  {
-    text-decoration: none;
-  }
-
-  .parent a:hover::after {
-    content: "";
-    position: absolute;
-    left: 20px;                 /* match padding-left so it starts under the text */
-    right: 20px;                 /* match the icon's right inset so it ends under the arrow */
-    bottom: 1px;
-    height: 4px;
-    background-color: #fff;
-  }
-
-  .parent a:focus::after {
-    content: "";
-    position: absolute;
-    left: 20px;                 /* match padding-left so it starts under the text */
-    right: 20px;                 /* match the icon's right inset so it ends under the arrow */
-    bottom: 1px;
-    height: 4px;
-    background-color: #0b0c0c;
-  }
-
-  .parent.account-parent a:hover::after  {
-  content: "";
-  position: absolute;
-  left: 20px;                 /* match padding-left so it starts under the text */
-  right: 20px;                 /* match the icon's right inset so it ends under the arrow */
-  bottom: 1px;
-  height: 4px;
-  background-color: #fff;
-  }
-
-  .parent.account-parent.is-open > a.account-toggle:focus::after  {
-  content: "";
-  position: absolute;
-  left: 20px;                 /* match padding-left so it starts under the text */
-  right: 20px;                 /* match the icon's right inset so it ends under the arrow */
-  bottom: 1px;
-  height: 4px;
-  background-color: #0b0c0c;
-  }
-
-    .parent.account-parent> a.account-toggle:focus::after  {
-    content: "";
-  position: absolute;
-  left: 20px;                 /* match padding-left so it starts under the text */
-  right: 20px;                 /* match the icon's right inset so it ends under the arrow */
-  bottom: 1px;
-  height: 4px;
-  background-color: #0b0c0c;
-
-  }
-
-  .parent.account-parent.is-open > a.account-toggle::after {
-  content: "";
-  position: absolute;
-  left: 20px;                 /* match padding-left so it starts under the text */
-  right: 20px;                 /* match the icon's right inset so it ends under the arrow */
-  bottom: 0px;
-  height: 4px;
-  background-color: #1d70b8;
-}
-
-.parent.sign-out > a {
-display: inline-flex;
-padding-left:20px;
-Padding-right:20px;
-height:60px;
-}
-.parent a:focus {
-  color: #0b0c0c;
-  text-decoration: none;
-
-}
- 
-  .parent-2:hover > ul {
-    display: block;
-    position: absolute;
-  }
- 
+  /* Base dropdown panel shell, reused by the account menu */
   .child {
     display: none;
     border-left: solid 1px #cecece;
@@ -254,7 +224,7 @@ height:60px;
     padding-top: 5px;
     padding-right: 5px;
   }
- 
+
   .child li {
     background-color: #ffffff;
     line-height: 16px;
@@ -262,116 +232,49 @@ height:60px;
     border-right: #ccc 0px solid;
     width: 100%;
   }
- 
+
   .child li a {
     color: #1d70b8;
     font-size: 15px;
   }
- 
-  .child-2 {
-    display: none;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.1);
-    z-index: 99999;
-    background: #ffffff;
-    margin-left: 265px;
-    margin-top: -21px;
-  }
- 
-  .child-2 li {
-    background-color: #ffffff;
-    line-height: 16px;
-    margin: 0px;
-    border-right: #ccc 0px solid;
-    width: 100%;
-  }
- 
-  .child-2 li a {
-    color: #1d70b8;
-    font-size: 15px;
-  }
- 
+
   ul {
     list-style: none;
     margin: 0;
     padding: 0px;
     min-width: 10em;
   }
- 
-  .parent:not(.account-parent):hover {
-    color: #1d70b8;
-  }
- 
- 
-  .parent-2:hover {
-    background-color: #ffffff;
-    color: #1d70b8;
-  }
- 
- 
-  .nav-list {
-    max-width: 280px;
-    padding: 3px 0px 8px 20px;
-  }
- 
-  .nav-list-2 {
-    max-width: 280px;
-    padding: 3px 5px 8px 20px;
-  }
- 
-  .nav-list:hover {
-    background-color: #f3f2f1;
-  }
- 
-  .nav-list-2:hover {
-    background-color: #f3f2f1;
-  }
- 
-  .nav-chevron--tight {
-    width: 12px;
-    margin-left: 4px;
-  }
- 
-  .servicesContent {
-    width: 265px;
-    background: #ffffff;
-    padding-bottom: 0px;
-    margin-bottom: 0px;
-  }
- 
-  .infoservicesContent {
-    width: 300px;
-    background: #ffffff;
-    padding-bottom: 0px;
-    margin-bottom: 5px;
-    margin-top: 5px;
-  }
- 
+
   .myAccountContent {
     width: 200px;
     padding: 20px 20px 10px 25px;
     background: #ffffff;
   }
- 
+
   .myAccountContent a {
     padding: 0px;
   }
- 
+
   .myAccountTitle {
     font-size: 16px;
     font-weight: 700;
     padding-bottom: 3px;
   }
- 
+
   .myAccount2ndLine {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
     width: 100%;
     padding-bottom: 0px;
   }
 
-  /* ---- Services dropdown in the service navigation bar ---- */
+  /* -------------------------------------------------------------
+     3. Service navigation bar ("Services" mega menu + submenus)
+     ------------------------------------------------------------- */
   .service-nav-parent {
     position: relative;
+    padding-left: 15px;
+    padding-right: 15px;
   }
 
   .service-nav-parent > .govuk-service-navigation__link {
@@ -380,64 +283,61 @@ height:60px;
     height: 18px;
   }
 
-  .service-nav-toggle:hover{
+  .service-nav-toggle {
+    position: relative;
+    text-decoration: none;
+  }
+
+  .service-nav-toggle:hover {
     border-bottom: 3px solid #0f385c;
   }
 
-  .service-nav-toggle:focus{
+  .service-nav-toggle:focus {
     border-bottom: none;
   }
 
+  .service-nav-toggle:focus .service-nav-chevron-icon {
+    filter: brightness(0) saturate(100%);
+  }
 
-/* Style + rotate the actual chevron icon */
-.service-nav-chevron-icon {
-  display: inline-block;
-  width: 15px;
-  height: 25px;
-  margin-left: 8px;
-  margin-top: 2px;
-  flex-shrink: 0;
+  /* Chevron icon next to "Services", flips when the menu is open */
+  .service-nav-chevron-icon {
+    display: inline-block;
+    width: 15px;
+    height: 25px;
+    margin-left: 8px;
+    margin-top: 2px;
+    flex-shrink: 0;
+    background-color: #1d70b8;
+    -webkit-mask-image: url("/public/images/icon_govuk_chevrondownBlue.svg");
+    mask-image: url("/public/images/icon_govuk_chevrondownBlue.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
 
-  background-color: #1d70b8; /* current default blue */
+  .service-nav-toggle:hover .service-nav-chevron-icon {
+    background-color: #0f385c;
+  }
 
-  -webkit-mask-image: url("/public/images/icon_govuk_chevrondownBlue.svg");
-  mask-image: url("/public/images/icon_govuk_chevrondownBlue.svg");
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-position: center;
-  -webkit-mask-size: contain;
-  mask-size: contain;
-}
+  .service-nav-parent.is-open .service-nav-chevron-icon {
+    transform: rotate(180deg);
+  }
 
-.service-nav-toggle:hover .service-nav-chevron-icon {
-  background-color: #0f385c;
-}
+  /* Blue underline shown under "Services" while the menu is open */
+  .service-nav-parent.is-open::after {
+    content: "";
+    position: absolute;
+    left: 15px;
+    right: 15px;
+    bottom: 0;
+    height: 4px;
+    background-color: #1d70b8;
+  }
 
-.service-nav-parent.is-open .service-nav-chevron-icon {
-  transform: rotate(180deg);
-}
-
-/* Blue underline, matching width of "Services" text + arrow */
-.service-nav-toggle {
-  position: relative;
-  text-decoration: none;
-}
-
-
-.service-nav-parent {
-  position: relative;
-}
-
-.service-nav-parent.is-open::after {
-  content: "";
-  position: absolute;
-  left: 15px;
-  right: 15px;
-  bottom: 0;
-  height: 4px;
-  background-color: #1d70b8;
-}
   .service-nav-parent.is-open {
     background-color: #ffffff;
   }
@@ -446,15 +346,7 @@ height:60px;
     display: block;
   }
 
-  .service-nav-parent.is-open .service-nav-chevron {
-    transform: rotate(180deg);
-  }
-
-  .service-nav-toggle:focus .service-nav-chevron-icon {
-  filter: brightness(0) saturate(100%);
-}
-
-
+  /* First-level dropdown panel listing all services */
   .service-dropdown {
     display: none;
     position: absolute;
@@ -467,17 +359,10 @@ height:60px;
     border-bottom: 1px solid #cecece;
     z-index: 99999;
     padding: 5px 0;
-
   }
 
   .service-dropdown li {
     width: 100%;
-
-  }
-
-  .service-nav-parent {
-    padding-left: 15px;
-    padding-right: 15px;
   }
 
   .service-dropdown li > a {
@@ -491,9 +376,16 @@ height:60px;
 
   .service-dropdown li > a:hover {
     background-color: #f3f2f1;
+    color: #0f385c;
     text-decoration: underline;
   }
 
+  .service-dropdown li > a:focus {
+    color: #0b0c0c;
+    text-decoration: 2px underline;
+  }
+
+  /* Items within the dropdown that open a second-level flyout submenu */
   .service-has-submenu {
     position: relative;
   }
@@ -504,36 +396,35 @@ height:60px;
     align-items: center;
   }
 
-.service-submenu-chevron {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  margin-left: 8px;
-  flex-shrink: 0;
-  position: absolute;
-  top: 5.5px;
-  right: 7px;
+  .service-submenu-chevron {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-left: 8px;
+    flex-shrink: 0;
+    position: absolute;
+    top: 5.5px;
+    right: 7px;
+    background-color: #1d70b8;
+    -webkit-mask-image: url("/public/images/icon_govuk_chevronright-blue.svg");
+    mask-image: url("/public/images/icon_govuk_chevronright-blue.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
 
-  background-color: #1d70b8; /* current default blue */
+  .service-has-submenu > a:hover .service-submenu-chevron {
+    background-color: #0f385c;
+  }
 
-  -webkit-mask-image: url("/public/images/icon_govuk_chevronright-blue.svg");
-  mask-image: url("/public/images/icon_govuk_chevronright-blue.svg");
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-position: center;
-  -webkit-mask-size: contain;
-  mask-size: contain;
-}
+  .service-has-submenu > a:focus .service-submenu-chevron {
+    background-color: #0b0c0c;
+  }
 
-.service-has-submenu > a:hover .service-submenu-chevron {
-  background-color: #0f385c;
-}
-
-.service-has-submenu > a:focus .service-submenu-chevron {
-  background-color: #0b0c0c;
-}
-
+  /* Second-level flyout panel */
   .service-submenu {
     display: none;
     position: absolute;
@@ -547,55 +438,91 @@ height:60px;
     z-index: 999999;
     padding: 5px 0;
   }
-.service-submenu {
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 100%;
-  width: 300px;
-  max-height: 70vh;
-  overflow-y: auto;
-  background: #ffffff;
-  border: 1px solid #cecece;
-  z-index: 999999;
-  padding: 5px 0;
-}
 
-.service-has-submenu.is-open > .service-submenu {
-  display: block;
-}
+  .service-has-submenu.is-open > .service-submenu {
+    display: block;
+  }
 
-.service-dropdown li > a:hover {
-  color: #0f385c;
-  text-decoration: underline;
-}
+  /* -------------------------------------------------------------
+     4. Page layout spacing overrides (base GOV.UK template)
+     ------------------------------------------------------------- */
+  .govuk-main-wrapper {
+    padding-top: 10px;
+  }
 
-.service-dropdown li > a:focus {
-  color: #0b0c0c;
-  text-decoration: 2px underline;
-}
+  .govuk-main-wrapper--auto-spacing:first-child, .govuk-main-wrapper--l {
+    padding-top: 0px;
+  }
 
+  /* -------------------------------------------------------------
+     5. "My services" shortcut cards + the "Edit shortcuts" form
+     ------------------------------------------------------------- */
+  .hmlr-card-group__item {
+    padding: 0;
+  }
 
+  .linkTextSection {
+    border-top: 1px solid #b1b4b6;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    margin: 0 15px;
+    padding: 5px 0 5px 0;
+  }
 
+  .linkTextSectionContent {
+    padding: 10px 30px 10px 0;
+  }
+
+  #inputs {
+    margin: auto;
+    margin-top: 27px;
+    max-width: 1200px;
+    min-height: 180px;
+  }
+
+  /* -------------------------------------------------------------
+     6. Section dividers
+     ------------------------------------------------------------- */
+  .dividerLine10 {
+    height: 2px;
+    margin: 25px auto;
+    background-color: #0b0c0c;
+  }
+
+  /* -------------------------------------------------------------
+     7. "News and updates" side panel images
+     ------------------------------------------------------------- */
+  .newsImage {
+    display: block;
+    height: 100%;
+    width: 100%;
+    border: 1px solid #d8dde0;
+    margin-bottom: 10px;
+    aspect-ratio: auto 300 / 200;
+  }
 </style>
+
+<!-- Top strip: HMLR logo (left) and account / sign-out links (right) -->
 <div class="govuk-generic-header">
   <div class="govuk-generic-header__container">
- 
+
     <div class="govuk-generic-header__logo">
       <a href="#" class="govuk-generic-header__homepage-link">
         <img class="hmlr-logo" src="/public/images/colour-logo-image.png" alt="HM Land Registry logo">
         HM Land Registry portal
       </a>
-
     </div>
- 
+
     <ul class="navbar-menu--right">
- 
-      <li class="parent account-parent" >
-<a href="#" class="account-toggle" aria-haspopup="true" aria-expanded="false">
-  <span class="account-name">John James</span>
-  <img src="/public/images/icon_govuk_chevrondownWhite.svg" class="account-chevron-icon" alt="">
-</a>
+
+      <!-- "My account" dropdown: shows who is signed in, their user ID,
+           last login time, and their primary Business Unit Administrator -->
+      <li class="parent account-parent">
+        <a href="#" class="account-toggle" aria-haspopup="true" aria-expanded="false">
+          <span class="account-name">John James</span>
+          <img src="/public/images/icon_govuk_chevrondownWhite.svg" class="account-chevron-icon" alt="">
+        </a>
         <ul class="child">
           <div class="govuk-body myAccountContent">
             <div>
@@ -613,19 +540,19 @@ height:60px;
           </div>
         </ul>
       </li>
- 
+
       <li class="parent sign-out"><a href="#">Sign out</a></li>
- 
+
     </ul>
- 
+
   </div>
 </div>
 
-
+<!-- Service navigation bar: "Services" mega menu plus the main page tabs -->
 <section aria-label="Service information" class="govuk-service-navigation"
   data-module="govuk-service-navigation" style="background-color: #f3f2f1; border-bottom-color:#cecece">
   <div class="govuk-width-container">
-    <div class="govuk-service-navigation__container" >
+    <div class="govuk-service-navigation__container">
       <nav aria-label="Menu" class="govuk-service-navigation__wrapper">
         <button type="button" class="govuk-service-navigation__toggle govuk-js-service-navigation-toggle" aria-controls="navigation" hidden aria-hidden="true">
           Menu
@@ -642,6 +569,8 @@ height:60px;
               <li><a href="#">Portal homepage</a></li>
               <li><a href="./va-1.html">View applications</a></li>
 
+              <!-- Each ".service-has-submenu" item below opens a second-level
+                   flyout list of related services when clicked -->
               <li class="service-has-submenu">
                 <a href="#">
                   Information services
@@ -762,6 +691,9 @@ height:60px;
 </section>
 
 <script>
+  // Behaviour for the two top-level dropdowns: the "Services" mega menu
+  // and the "My account" panel. Opening one closes the other, and both
+  // close on an outside click or the Escape key.
   (function () {
 
     /* ---- Services dropdown ---- */
@@ -821,6 +753,8 @@ height:60px;
 
   })();
 
+  // Behaviour for the second-level "flyout" submenus inside the Services
+  // dropdown (e.g. Information services, Land charges Services).
   (function () {
     var submenuParents = document.querySelectorAll('.service-has-submenu');
 
@@ -863,22 +797,9 @@ height:60px;
       }
     });
   })();
-
-if (!isOpen) {
-  document.querySelectorAll('.service-has-submenu.is-open').forEach(function (p) {
-    p.classList.remove('is-open');
-  });
-}
-
-// in the existing outside-click handler, alongside the serviceParent check:
-if (serviceParent && !serviceParent.contains(e.target)) {
-  document.querySelectorAll('.service-has-submenu.is-open').forEach(function (p) {
-    p.classList.remove('is-open');
-  });
-}
-
 </script>
 
+<!-- "Beta" banner shown above the main content -->
 <div class="govuk-body govuk-width-container">
 <div class="govuk-phase-banner">
   <p class="govuk-phase-banner__content">
@@ -895,158 +816,18 @@ if (serviceParent && !serviceParent.contains(e.target)) {
 
 {% block content %}
 
-<style>
-  
-    .govuk-main-wrapper {
-      padding-top: 10px;
-    }
-  
-    .notificationContent {
-      padding: 20px;
-      width:290px;
-      margin-bottom: 0px;
-      background: #fff;
-    }
-    
-    .notificationTopRow {
-      width:100%;
-    display:flex;
-    padding-bottom: 3px;
-    }
-    
-    .notificationTitle {
-      font-size:16px;
-      font-weight:700;
-    width:50%;
-    }
-    
-    .myAccountTitle {
-      font-size:16px;
-      font-weight:700;
-    padding-bottom: 3px;
-    }
-    
-    .notificationTime {
-      font-size:12px;
-      font-weight:400;
-      text-align: right;
-      width:50%;
-    }
-    
-    .notification2ndLine {
-      font-size:16px;
-      font-weight:400;
-      width: 100%;
-      padding-bottom:15px;
-    }
-    
-    .myAccount2ndLine {
-      font-size:16px;
-      font-weight:400;
-      width: 100%;
-      padding-bottom:0px;
-    }
-  
-    
-    .NotificationSingle {
-        display: grid;
-        padding-bottom: 20px;
-        border-bottom: 1px solid #dedede;
-        margin-bottom: 20px;
-    }
-    
-    .NotificationSingleLast {
-        display: grid;
-    }
-  
-
-
-    
-    #logOut {
-      margin-bottom: 0px;
-        margin-top: 25px;
-        width: 100%;
-    }
-    
-    #inputs {
-      margin: auto;
-        margin-top: 27px;
-        max-width: 1200px;
-        min-height: 180px;
-    }
-  
-  
-  .govuk-main-wrapper--auto-spacing:first-child, .govuk-main-wrapper--l {
-      padding-top: 0px;
-  }
-  
-  .hmlr-card-group__item {
-    padding: 0;
-  }
-  
-  .linkTextSection {
-    border-top: 1px solid #b1b4b6;
-    border-left: none;
-    border-right: none;
-    border-bottom: none;
-    margin: 0 15px;
-    padding: 5px 0 5px 0;
-  }
-  
-  .linkTextSectionContent {
-    padding: 10px 30px 10px 0;
-  }
-  
-  .dividerLine10 {
-    height: 2px;
-    margin: 25px auto;
-    background-color: #0b0c0c;
-  }
-
-  .dividerLine {
-    height: 1px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    background-color: #b1b4b6;
-  }
-  
-  
-  .newsImage {
-    display: block;
-      height: 100%;
-      width: 100%;
-      border: 1px solid #d8dde0;
-      margin-bottom: 10px;
-      aspect-ratio: auto 300 / 200;
-  }
-  
-  
-  .notification-badge{
-    background: #d4351c;
-    border-radius: 12px;
-    color: #fff;
-    display: inline-block;
-    font-family: arial, sans-serif;
-    font-size: 1rem;
-    font-weight: 600;
-    line-height: 1.5;
-    min-width: 10px;
-    padding: 1px 6px 0px;
-    text-align: center;
-    white-space: nowrap;
-  }
-  
-  
-  </style>
-
-  
-
+<!-- =============================================================
+     "My services" shortcut cards
+     Shows up to 6 user-configurable shortcut links. "Edit shortcuts"
+     reveals a row of <select> inputs (Position 1-6) that let the
+     user choose which service each shortcut card should point to.
+     ============================================================= -->
 <div>
   <div id="linksPanel" class="govuk-body">
 
     <h2 class="govuk-heading-m">My services<button id="edit"
      class="govuk-button govuk-button--secondary" style="float:right;margin-top: -5px;margin-bottom: 0px;" onclick="myFunction()">Edit shortcuts</button></h2>
-        
+
     <div id="linksDisplay" style="margin-bottom: 20px;">
       <div class="service-values">
 
@@ -1104,13 +885,15 @@ if (serviceParent && !serviceParent.contains(e.target)) {
             </div>
           </div>
         </li>
-      
+
       </ul>
     </div>
-  
-  </div>    
-</div>   
-    
+
+  </div>
+</div>
+
+<!-- Shortcut picker form: one <select> per shortcut position (1-6),
+     hidden until "Edit shortcuts" is clicked -->
 <div id="inputs">
 
   <div class="govuk-grid-column-one-third" style="margin-bottom: 30px;">
@@ -1543,13 +1326,14 @@ if (serviceParent && !serviceParent.contains(e.target)) {
 </div>
 
 <!-- Divider line -->
-<div class="dividerLine10"></div> 
+<div class="dividerLine10"></div>
 
 
 <div class="govuk-grid-row">
 <!-- Left hand panel -->
   <div class="govuk-grid-column-two-thirds">
-    <!-- Notifications -->
+
+    <!-- Notifications: unresolved requisitions, unread messages, PDF downloads -->
     <h2 class="govuk-heading-m">Notifications</h2>
 
     <ul id="row1Links" class="govuk-grid-row" >
@@ -1590,15 +1374,17 @@ if (serviceParent && !serviceParent.contains(e.target)) {
     </ul>
 
 <!-- Divider line -->
-<div class="dividerLine10"></div> 
+<div class="dividerLine10"></div>
 
+<!-- "Services and information" links: training, requisition benchmarking,
+     expedite requests, specialist support, and policy/service-status links -->
 <ul id="row1Links" class="govuk-grid-row" >
   <li class="hmlr-card-group__item" id="value0" >
       <div class="linkTextSection" style="border-top: none;">
         <h2 class="govuk-heading-m" >Services and information</h2>
         <div class="linkTextSectionContent">
           <h3 class="govuk-heading-s govuk-!-margin-bottom-2"><a id="value-heading0" href='#'>Easier and faster applications to HMLR (opens in new tab)</a></h3>
-          <p class="govuk-body">Get FREE training to help you submit complete and correct applications and speed up your registrations. Join live training sessions with HMLR experts and learn how to reduce the number of requisitions. 
+          <p class="govuk-body">Get FREE training to help you submit complete and correct applications and speed up your registrations. Join live training sessions with HMLR experts and learn how to reduce the number of requisitions.
           </p>
         </div>
       </div>
@@ -1651,7 +1437,7 @@ if (serviceParent && !serviceParent.contains(e.target)) {
           </div>
         </div>
       </li>
-      
+
       <li class="hmlr-card-group__item" id="value2">
         <div class="linkTextSection">
           <div class="linkTextSectionContent">
@@ -1663,7 +1449,7 @@ if (serviceParent && !serviceParent.contains(e.target)) {
     </ul>
 </div>
 
-<!-- Right hand news panel -->
+<!-- Right hand news panel: promotional/informational tiles with thumbnail images -->
   <div class="govuk-grid-column-one-third">
 
     <h2 class="govuk-heading-m govuk-!-margin-bottom-6">News and updates</h2>
@@ -1694,14 +1480,13 @@ if (serviceParent && !serviceParent.contains(e.target)) {
   </div>
 </div>
 
-
+<!-- Despatch address and direct debit summary -->
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
-   
-    <!-- Divider line -->
-    <div class="dividerLine10"></div> 
 
-      <!-- Despatch details -->
+    <!-- Divider line -->
+    <div class="dividerLine10"></div>
+
       <h2 class="govuk-heading-m">Your despatch address</h2>
       <p class="govuk-body">We will send documents you have ordered through business e-services (for example, official copies) to this address.</p>
       <p class="govuk-body">
@@ -1719,396 +1504,395 @@ if (serviceParent && !serviceParent.contains(e.target)) {
   </div>
 </div>
 
-
-
-
-
 <script>
-
+  // Lookup table mapping each <select> option's value to the shortcut
+  // card heading and destination link it should render.
   const data = [
-  { 
-      id: 'blank', 
-      heading:'',  
+    {
+      id: 'blank',
+      heading: '',
       href: ''
     },
-    { 
+    {
       id: 'digitalRegistrationService',
       heading: 'Digital registration service',
       href: '#'
     },
-    { 
+    {
       id: 'viewMyApplications',
-      heading: 'View applications', 
+      heading: 'View applications',
       href: 'page2.html'
     },
-    { 
+    {
       id: 'applicationEnquiry',
-      heading: 'Application enquiry', 
+      heading: 'Application enquiry',
       href: '#'
     },
-    { 
+    {
       id: 'localLandCharges',
-      heading: 'Local land charges', 
+      heading: 'Local land charges',
       href: '#'
     },
-    { 
+    {
       id: 'officialSearchOfWholeOS1',
-      heading: 'Official search of whole (OS1)', 
+      heading: 'Official search of whole (OS1)',
       href: '#'
     },
-    { 
+    {
       id: 'officialSearchOfPartOS2',
-      heading: 'Official search of part (OS2)', 
+      heading: 'Official search of part (OS2)',
       href: '#'
     },
-    { 
+    {
       id: 'officialSearchOfWholeOrPartWithoutPriorityOS3',
-      heading: 'Official search of whole or part without priority (OS3)',  
+      heading: 'Official search of whole or part without priority (OS3)',
       href: '#'
     },
-    { 
+    {
       id: 'cancellationOfOfficialSearchOfWholeOS1',
-      heading: 'Cancellation of official Search of Whole (OS1)', 
+      heading: 'Cancellation of official Search of Whole (OS1)',
       href: '#'
     },
-    { 
+    {
       id: 'cancellationOfOfficialSearchOfPartOS2',
-      heading: 'Cancellation of official Search of Part (OS2)', 
+      heading: 'Cancellation of official Search of Part (OS2)',
       href: '#'
     },
-    { 
+    {
       id: 'documentView',
-      heading: 'Document view', 
+      heading: 'Document view',
       href: '#'
     },
-    { 
+    {
       id: 'homeRightsSearch',
-      heading: 'Home rights search', 
+      heading: 'Home rights search',
       href: '#'
     },
-    { 
+    {
       id: 'officialCopyDeedsReferred',
-      heading: 'Official copy – deeds referred', 
+      heading: 'Official copy – deeds referred',
       href: '#'
     },
-    { 
-      id: 'officialCopyRegisterHistorical', 
-      heading: 'Official copy – register (historical)', 
+    {
+      id: 'officialCopyRegisterHistorical',
+      heading: 'Official copy – register (historical)',
       href: '#'
     },
-    { 
+    {
       id: 'officialCopyTitlePlanHistorical',
-      heading: 'Official copy – title plan (Historical)', 
+      heading: 'Official copy – title plan (Historical)',
       href: '#'
     },
-    { 
+    {
       id: 'officialCopyRegisterPlanCI',
-      heading: 'Official copy – register, title plan or CI',  
+      heading: 'Official copy – register, title plan or CI',
       href: '#'
     },
-    { 
+    {
       id: 'searchOfTheIndexMap',
-      heading: 'Search of the index map', 
+      heading: 'Search of the index map',
       href: '#'
     },
-    { 
-      id: 'registerViewPDF', 
-      heading: 'Register view (PDF)', 
+    {
+      id: 'registerViewPDF',
+      heading: 'Register view (PDF)',
       href: '#'
     },
-    { 
+    {
       id: 'registerViewHTML',
-      heading: 'Register view (HTML)',  
+      heading: 'Register view (HTML)',
       href: '#'
     },
-    { 
-      id: 'searchOfTheIndexFranchisesAndManors', 
-      heading: 'Search of the index of Franchises and manors (SIF)', 
+    {
+      id: 'searchOfTheIndexFranchisesAndManors',
+      heading: 'Search of the index of Franchises and manors (SIF)',
       href: '#'
     },
-    { 
+    {
       id: 'titlePlanView',
-      heading: 'Title plan view', 
+      heading: 'Title plan view',
       href: '#'
     },
-    { 
-      id: 'withdrawlOfficialSearchWithPriority', 
-      heading: 'Withdraw official search with priority', 
+    {
+      id: 'withdrawlOfficialSearchWithPriority',
+      heading: 'Withdraw official search with priority',
       href: '#'
     },
-    { 
+    {
       id: 'agreedNotice',
-      heading: 'Agreed notice',  
+      heading: 'Agreed notice',
       href: '#'
     },
-    { 
+    {
       id: 'cancellationOfACaution',
-      heading: 'Cancellation of a caution', 
+      heading: 'Cancellation of a caution',
       href: '#'
     },
-    { 
-      id: 'cancellationOfANotice', 
-      heading: 'Cancellation of a notice (not unilateral)', 
+    {
+      id: 'cancellationOfANotice',
+      heading: 'Cancellation of a notice (not unilateral)',
       href: '#'
     },
-    { 
+    {
       id: 'changeOfAddressForService',
-      heading: 'Change of address for service', 
+      heading: 'Change of address for service',
       href: '#'
     },
-    { 
+    {
       id: 'changeOfName',
-      heading: 'Change of name', 
+      heading: 'Change of name',
       href: '#'
     },
-    { 
+    {
       id: 'changeOfPropertyDescription',
-      heading: 'Change of property description', 
+      heading: 'Change of property description',
       href: '#'
     },
-    { 
+    {
       id: 'statutoryCharge',
-      heading: 'Statutory charge',  
+      heading: 'Statutory charge',
       href: '#'
     },
-    { 
+    {
       id: 'deathOfJointProprietor',
-      heading: 'Death of joint proprietor', 
+      heading: 'Death of joint proprietor',
       href: '#'
     },
-    { 
+    {
       id: 'homeRights',
-      heading: 'Home rights (E-HR1 notice <br>of home rights)', 
+      heading: 'Home rights (E-HR1 notice <br>of home rights)',
       href: '#'
     },
-    { 
-      id: 'cancellationOfHomeRights', 
-      heading: 'Cancellation of home rights (e-HR4)', 
+    {
+      id: 'cancellationOfHomeRights',
+      heading: 'Cancellation of home rights (e-HR4)',
       href: '#'
     },
-    { 
-      id: 'restrictions', 
-      heading: 'Restrictions (standard e-RX1)', 
+    {
+      id: 'restrictions',
+      heading: 'Restrictions (standard e-RX1)',
       href: '#'
     },
-    { 
+    {
       id: 'cancellationOfRestriction',
-      heading: 'Cancellation of restriction (e-RX3)', 
+      heading: 'Cancellation of restriction (e-RX3)',
       href: '#'
     },
-    { 
+    {
       id: 'withdrawlOfARestriction',
-      heading: 'Withdrawal of a restriction (e-RX4)', 
+      heading: 'Withdrawal of a restriction (e-RX4)',
       href: '#'
     },
-    { 
+    {
       id: 'unilateralNotice',
-      heading: 'Unilateral notice (e-UN1)', 
+      heading: 'Unilateral notice (e-UN1)',
       href: '#'
     },
-    { 
-      id: 'cancellationOfUnilateralNotice', 
-      heading: 'Cancellation of unilateral notice (eUN4)', 
+    {
+      id: 'cancellationOfUnilateralNotice',
+      heading: 'Cancellation of unilateral notice (eUN4)',
       href: '#'
     },
-    { 
+    {
       id: 'removalOfUnilateralNotice',
-      heading: 'Removal of a unilateral notice (e-UN2)', 
+      heading: 'Removal of a unilateral notice (e-UN2)',
       href: '#'
     },
-    { 
+    {
       id: 'withdrawlOfCaution',
-      heading: 'Withdrawl of caution', 
+      heading: 'Withdrawl of caution',
       href: '#'
     },
-    { 
+    {
       id: 'dischargeOfCharge',
-      heading: 'Discharge of a charge', 
+      heading: 'Discharge of a charge',
       href: '#'
     },
-    { 
+    {
       id: 'enquiryByPropertyDescription',
-      heading: 'Enquiry by property description <br>- title view', 
+      heading: 'Enquiry by property description <br>- title view',
       href: '#'
     },
-    { 
+    {
       id: 'bankruptcySearch',
-      heading: 'Bankruptcy search', 
+      heading: 'Bankruptcy search',
       href: '#'
     },
-    { 
+    {
       id: 'fullSearch',
-      heading: 'Full search', 
+      heading: 'Full search',
       href: '#'
     },
-    { 
+    {
       id: 'documentRegistrationService',
-      heading: 'Document registration service', 
+      heading: 'Document registration service',
       href: '#'
     },
-    { 
+    {
       id: 'registrationView',
-      heading: 'Registration view',  
+      heading: 'Registration view',
       href: '#'
     },
-    { 
-      id: 'replyToRequisition', 
-      heading: 'Reply to requisition', 
+    {
+      id: 'replyToRequisition',
+      heading: 'Reply to requisition',
       href: '#'
     },
-    { 
+    {
       id: 'dataSynchronisationEnquiry',
-      heading: 'Data synchronisation enquiry', 
+      heading: 'Data synchronisation enquiry',
       href: '#'
     },
-    { 
+    {
       id: 'dataSynchronisationDownloads',
-      heading: 'Data synchronisation downloads', 
+      heading: 'Data synchronisation downloads',
       href: '#'
     },
-    { 
+    {
       id: 'pdfDownloads',
-      heading: 'PDF downloads', 
+      heading: 'PDF downloads',
       href: '#'
     },
-    { 
+    {
       id: 'Notifications',
-      heading: 'Notifications', 
+      heading: 'Notifications',
       href: '#'
     },
-    { 
-      id: 'messageArea', 
-      heading: 'Message area', 
+    {
+      id: 'messageArea',
+      heading: 'Message area',
       href: '#'
     },
-    { 
+    {
       id: 'servicesRequested',
-      heading: 'Services requested', 
+      heading: 'Services requested',
       href: '#'
     },
-    { 
+    {
       id: 'alternateDespatchAddress',
-      heading: 'Alternate despatch address', 
+      heading: 'Alternate despatch address',
       href: '#'
     },
-    { 
-      id: 'manageBusinessUnits', 
-      heading: 'Manage business units', 
+    {
+      id: 'manageBusinessUnits',
+      heading: 'Manage business units',
       href: '#'
     },
-    { 
-      id: 'manageGroups', 
-      heading: 'Manage groups', 
+    {
+      id: 'manageGroups',
+      heading: 'Manage groups',
       href: '#'
     },
-    { 
+    {
       id: 'manageUsers',
-      heading: 'Manage users', 
+      heading: 'Manage users',
       href: '#'
     },
-    { 
+    {
       id: 'createUser',
-      heading: 'Create user', 
+      heading: 'Create user',
       href: '#'
     },
-    { 
-      id: 'personalDetails', 
-      heading: 'Personal details', 
+    {
+      id: 'personalDetails',
+      heading: 'Personal details',
       href: '#'
     },
-    { 
-      id: 'changePassword', 
-      heading: 'Change password',  
+    {
+      id: 'changePassword',
+      heading: 'Change password',
       href: '#'
     },
-    { 
-      id: 'administratorReport', 
-      heading: 'Administrator report', 
+    {
+      id: 'administratorReport',
+      heading: 'Administrator report',
       href: '#'
     },
-    { 
+    {
       id: 'vddinformation',
-      heading: 'VDD information', 
+      heading: 'VDD information',
       href: '#'
     },
-    { 
+    {
       id: 'managedServices',
-      heading: 'Application Management Services', 
+      heading: 'Application Management Services',
       href: 'managedServices.html'
     },
-    { 
-      id: 'mapSearch', 
+    {
+      id: 'mapSearch',
       heading: 'MapSearch (opens in new tab)',
       href: '#'
     },
 
   ]
 
-let inEditMode = false
+  let inEditMode = false
 
-const button = document.getElementById('edit')
-const currentInputs = document.getElementsByClassName('selects')
-const inputSection = document.getElementById('inputs')
-const valuesSection = document.getElementById('service-values')
+  const button = document.getElementById('edit')
+  const currentInputs = document.getElementsByClassName('selects')
+  const inputSection = document.getElementById('inputs')
+  const valuesSection = document.getElementById('service-values')
 
-const htmlCollectionToArray = (array) => Array.prototype.slice.call(array)
-const selects = htmlCollectionToArray(currentInputs);
+  const htmlCollectionToArray = (array) => Array.prototype.slice.call(array)
+  const selects = htmlCollectionToArray(currentInputs);
 
-const initialiseApp = () => {
-  updateValues()
-  inputSection.style.display = 'none'
-}
+  // Sets up the shortcut cards from the current <select> values, and
+  // keeps the picker form hidden until "Edit shortcuts" is clicked.
+  const initialiseApp = () => {
+    updateValues()
+    inputSection.style.display = 'none'
+  }
 
-const updateValues = () => {
-  for (const [index, select] of selects.entries()) {
-    // Find the associated data from our array of mock data
-    const service = data.find(element => element.id === select.value)
+  // Reads each Position <select>, looks up its matching entry in `data`,
+  // and writes that entry's heading/link into the corresponding shortcut card.
+  const updateValues = () => {
+    for (const [index, select] of selects.entries()) {
+      const service = data.find(element => element.id === select.value)
 
-    if(service) {
-      // Update the text of the relevant fields
-      document.getElementById(`value${index}`).classList.remove('unselected')
-      document.getElementById(`value-heading${index}`).innerHTML = service.heading
-    } else {
-      document.getElementById(`value${index}`).classList.add('unselected')
+      if (service) {
+        document.getElementById(`value${index}`).classList.remove('unselected')
+        document.getElementById(`value-heading${index}`).innerHTML = service.heading
+      } else {
+        document.getElementById(`value${index}`).classList.add('unselected')
+      }
     }
   }
-}
 
-const handleEdit = (event) => {
-  event.preventDefault()
-  inEditMode = !inEditMode
+  // Toggles the "Edit shortcuts" / "Update shortcuts" button and shows
+  // or hides the Position 1-6 picker form.
+  const handleEdit = (event) => {
+    event.preventDefault()
+    inEditMode = !inEditMode
 
-  if (inEditMode) {
-    button.innerHTML = 'Update shortcuts'
-    inputSection.style.display = 'block'
-    button.classList.remove('govuk-button--secondary') // Add class
-  } else {
-    inputSection.style.display = 'none'
-    button.innerHTML = 'Edit shortcuts'
-    button.classList.add('govuk-button--secondary') // Remove class
+    if (inEditMode) {
+      button.innerHTML = 'Update shortcuts'
+      inputSection.style.display = 'block'
+      button.classList.remove('govuk-button--secondary')
+    } else {
+      inputSection.style.display = 'none'
+      button.innerHTML = 'Edit shortcuts'
+      button.classList.add('govuk-button--secondary')
+    }
+
+    updateValues()
   }
 
-  updateValues()
-}
-
-// load data from some database... 
-initialiseApp()
-button.addEventListener('click', handleEdit)
-          
-</script>
-
-
-<script>
-
-window.onload = function() {
-  updateValues();
-};
+  // In a real service this data would come from a database.
+  initialiseApp()
+  button.addEventListener('click', handleEdit)
 
 </script>
 
+<script>
+  window.onload = function () {
+    updateValues();
+  };
+</script>
 
 <script>
-    function myFunction() {
+  // Shows/hides the "My services" shortcut card panel (separate from the
+  // Position 1-6 edit form above).
+  function myFunction() {
     var x = document.getElementById("linksDisplay");
     if (x.style.display === "none") {
       x.style.display = "block";
@@ -2116,60 +1900,13 @@ window.onload = function() {
       x.style.display = "none";
     }
   }
-  
 </script>
 
-<script>
-
-
-
-  /* When the user clicks on the services button, 
-toggle between hiding and showing the dropdown content */
-function myFunction1() {
-document.getElementById("myDropdown-services").classList.toggle("show");
-document.getElementById("dropdown-services").classList.toggle("dropdown-services-clicked");
-document.getElementById("dropdown-services-button").classList.toggle("dropbtn-services-clicked");
-}
-
-/* When the user clicks on the account button, 
-toggle between hiding and showing the dropdown content */
-function myFunction2() {
-document.getElementById("myDropdown-account").classList.toggle("show");
-document.getElementById("dropdown-account").classList.toggle("dropdown-account-clicked");
-document.getElementById("dropdown-account-button").classList.toggle("dropbtn-account-clicked");
-}
-
-/* Close the dropdown if the user clicks outside of it 
-window.onclick = function(e) {
-if (!e.target.matches('.dropbtn-account')) {
-
-var myDropdown = document.getElementById("myDropdown");
-if (myDropdown.classList.contains('show')) {
-myDropdown.classList.remove('show');
-};
-
-var myDropdown = document.getElementById("dropdown-account");
-if (myDropdown.classList.contains('dropdown-clicked')) {
-myDropdown.classList.remove('dropdown-clicked');
-};
-
-var myDropdown = document.getElementById("dropdown-button");
-if (myDropdown.classList.contains('dropbtn-clicked')) {
-myDropdown.classList.remove('dropbtn-clicked');
-}
-}
-}
-*/
-
-
-</script>
 {% endblock %}
 
 {% block footer %}
 <div class="govuk-footer" style="background-color: #f3f2f1;border-top-color: #0b0c0c">
   <div class="govuk-width-container">
-    <div class="govuk-footer__meta">
-      <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
     <div class="govuk-footer__meta">
       <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
         <h2 class="govuk-visually-hidden">Support links</h2>

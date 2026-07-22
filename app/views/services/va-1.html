@@ -11,10 +11,13 @@
     margin-left: 30px;
     margin-right: 30px;
     min-width: calc(100% - 60px);
-  }
-
-  .govuk-generic-header__homepage-link{
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    margin:auto;
+    justify-content: space-between;
+    width: 965px;
+    padding: 0;
+    
   }
 
   .govuk-width-container {
@@ -22,7 +25,9 @@
     margin-right: 30px;
     min-width: calc(100% - 60px);
   }
-  .hmlr-logo {
+ 
+ 
+    .hmlr-logo {
     height: 30px;
     margin-right: 3px;
   }
@@ -30,15 +35,11 @@
   .govuk-generic-header {
     border-bottom: none
   }
- 
-  .govuk-generic-header__container {
-    display: flex;
-    align-items: center;
-    margin:auto;
-    justify-content: space-between;
-    width: 965px;
-    padding: 0;
+  
+  .govuk-generic-header__homepage-link{
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
+
  
   .govuk-generic-header__logo {
     display: flex;
@@ -59,9 +60,8 @@
     display: block;
     position: relative;
     float: left;
-    line-height: 60px;
+    line-height: 58px;
     font-weight: bold;
-
   }
  
   .parentIconDown {
@@ -79,11 +79,30 @@
     background-position-x: 112px;
     background-position-y: center;
   }
- 
+
+
+.account-name {
+  display: inline-block;
+}
+
   .parent a {
-    margin: 20px;
     color: #ffffff;
     text-decoration: none;
+  }
+
+    .parent.account-parent.is-open > a.account-toggle {
+    color: #1d70b8;
+
+  }
+
+  .parent a:hover {
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+
+  a:focus, .govuk-link:focus {
+    box-shadow: none;
   }
  
   .parent-2 a {
@@ -98,15 +117,42 @@
   }
 
   /* Make the <a> fill the entire <li> so the whole area is clickable */
-  .parent.account-parent > a.account-toggle {
-    display: block;
-    margin: 0;
-    padding-left: 20px;
-    margin-right: 20px;
-    height: 60px;
-    line-height: 60px;
-    width:100%
-  }
+.parent.account-parent > a.account-toggle {
+  display: inline-flex;
+  align-items: center;
+  width: auto;
+  position: relative;
+  padding-left: 20px;
+  padding-right: 15px;
+  margin-right: 0px;
+  height: 60px;
+  border-bottom-style: none;
+}
+
+.account-chevron-icon{
+    width: 25px;
+  height: 25px;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+
+.parent.account-parent.is-open > a.account-toggle .account-chevron-icon {
+  transform: rotate(180deg);
+  filter: brightness(0) saturate(100%) invert(29%) sepia(60%) saturate(1583%) hue-rotate(180deg); /* turns it #1d70b8 blue, matching Services' open-state blue */
+}
+
+.parent.account-parent > a.account-toggle:focus .account-chevron-icon {
+  filter: brightness(0) saturate(100%); /* matches Services' focus rule exactly */
+}
+
+
+.parent.account-parent > a.account-toggle:focus .account-name {
+  background-color: #ffdd00;
+  color: #0b0c0c;
+  text-decoration: none;
+}
+
+
 
   .parent.account-parent > .child {
     display: none;
@@ -116,6 +162,7 @@
 
   .parent.account-parent.is-open > .child {
     display: block;
+    border-bottom-style: inset;
   }
 
   /* Replicate the original hover colour changes on open state */
@@ -123,18 +170,86 @@
   .parent.account-parent.is-open {
     background-color: #ffffff;
     color: #1d70b8;
+
   }
 
-  .parent.account-parent.is-open > a.account-toggle {
-    color: #1d70b8;
-    text-decoration: underline;
+  .parent a:hover  {
+    text-decoration: none;
   }
 
-  /* Keep the old hover behaviour for any parent that is NOT account-parent */
-  .parent:not(.account-parent):hover > ul {
-    display: block;
+  .parent a:hover::after {
+    content: "";
     position: absolute;
+    left: 20px;                 /* match padding-left so it starts under the text */
+    right: 20px;                 /* match the icon's right inset so it ends under the arrow */
+    bottom: 1px;
+    height: 4px;
+    background-color: #fff;
   }
+
+  .parent a:focus::after {
+    content: "";
+    position: absolute;
+    left: 20px;                 /* match padding-left so it starts under the text */
+    right: 20px;                 /* match the icon's right inset so it ends under the arrow */
+    bottom: 1px;
+    height: 4px;
+    background-color: #0b0c0c;
+  }
+
+  .parent.account-parent a:hover::after  {
+  content: "";
+  position: absolute;
+  left: 20px;                 /* match padding-left so it starts under the text */
+  right: 20px;                 /* match the icon's right inset so it ends under the arrow */
+  bottom: 1px;
+  height: 4px;
+  background-color: #fff;
+  }
+
+  .parent.account-parent.is-open > a.account-toggle:focus::after  {
+  content: "";
+  position: absolute;
+  left: 20px;                 /* match padding-left so it starts under the text */
+  right: 20px;                 /* match the icon's right inset so it ends under the arrow */
+  bottom: 1px;
+  height: 4px;
+  background-color: #0b0c0c;
+  }
+
+    .parent.account-parent> a.account-toggle:focus::after  {
+    content: "";
+  position: absolute;
+  left: 20px;                 /* match padding-left so it starts under the text */
+  right: 20px;                 /* match the icon's right inset so it ends under the arrow */
+  bottom: 1px;
+  height: 4px;
+  background-color: #0b0c0c;
+
+  }
+
+  .parent.account-parent.is-open > a.account-toggle::after {
+  content: "";
+  position: absolute;
+  left: 20px;                 /* match padding-left so it starts under the text */
+  right: 20px;                 /* match the icon's right inset so it ends under the arrow */
+  bottom: 0px;
+  height: 4px;
+  background-color: #1d70b8;
+}
+
+.parent.sign-out > a {
+display: inline-flex;
+align-items: center;
+padding-left:20px;
+padding-right:20px;
+height:60px;
+}
+.parent a:focus {
+  color: #0b0c0c;
+  text-decoration: none;
+
+}
  
   .parent-2:hover > ul {
     display: block;
@@ -196,24 +311,15 @@
   }
  
   .parent:not(.account-parent):hover {
-    background-color: #ffffff;
     color: #1d70b8;
   }
  
-  .parent:not(.account-parent):hover > a {
-    color: #1d70b8;
-    text-decoration: underline;
-  }
  
   .parent-2:hover {
     background-color: #ffffff;
     color: #1d70b8;
   }
  
-  .parent-2:hover > a {
-    color: #1d70b8;
-    text-decoration: underline;
-  }
  
   .nav-list {
     max-width: 280px;
@@ -282,20 +388,69 @@
   }
 
   .service-nav-parent > .govuk-service-navigation__link {
-    display: flex;
+    display: inline-flex;
     align-items: center;
+    height: 18px;
   }
 
-  .service-nav-chevron {
-    width: 0;
-    height: 0;
-    margin-left: 6px;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 5px solid #1d70b8;
-    display: inline-block;
+  .service-nav-toggle:hover{
+    border-bottom: 3px solid #0f385c;
   }
 
+  .service-nav-toggle:focus{
+    border-bottom: none;
+  }
+
+
+/* Style + rotate the actual chevron icon */
+.service-nav-chevron-icon {
+  display: inline-block;
+  width: 15px;
+  height: 25px;
+  margin-left: 8px;
+  margin-top: 2px;
+  flex-shrink: 0;
+
+  background-color: #1d70b8; /* current default blue */
+
+  -webkit-mask-image: url("/public/images/icon_govuk_chevrondownBlue.svg");
+  mask-image: url("/public/images/icon_govuk_chevrondownBlue.svg");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+.service-nav-toggle:hover .service-nav-chevron-icon {
+  background-color: #0f385c;
+}
+
+.service-nav-parent.is-open .service-nav-chevron-icon {
+  transform: rotate(180deg);
+}
+
+/* Blue underline, matching width of "Services" text + arrow */
+.service-nav-toggle {
+  position: relative;
+  text-decoration: none;
+}
+
+
+.service-nav-parent {
+  position: relative;
+}
+
+.service-nav-parent.is-open::after {
+  content: "";
+  position: absolute;
+  left: 15px;
+  right: 15px;
+  bottom: 0;
+  height: 4px;
+  background-color: #1d70b8;
+}
   .service-nav-parent.is-open {
     background-color: #ffffff;
   }
@@ -308,26 +463,39 @@
     transform: rotate(180deg);
   }
 
+  .service-nav-toggle:focus .service-nav-chevron-icon {
+  filter: brightness(0) saturate(100%);
+}
+
+
   .service-dropdown {
     display: none;
     position: absolute;
     top: 100%;
     left: 0;
-    width: 300px;
+    width: 250px;
     background: #ffffff;
-    box-shadow: 0px 8px 18px 0px rgba(0, 0, 0, 0.1);
+    border-left: 1px solid #cecece;
+    border-right: 1px solid #cecece;
+    border-bottom: 1px solid #cecece;
     z-index: 99999;
     padding: 5px 0;
-    border-bottom: 5px solid #1d70b8;
+
   }
 
   .service-dropdown li {
     width: 100%;
+
+  }
+
+  .service-nav-parent {
+    padding-left: 15px;
+    padding-right: 15px;
   }
 
   .service-dropdown li > a {
     display: block;
-    padding: 10px 20px;
+    padding: 5px 15px;
     color: #1d70b8;
     font-size: 16px;
     text-decoration: none;
@@ -349,30 +517,79 @@
     align-items: center;
   }
 
-  .service-submenu-chevron {
-    width: 12px;
-    margin-left: 8px;
-    flex-shrink: 0;
-  }
+.service-submenu-chevron {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-left: 8px;
+  flex-shrink: 0;
+  position: absolute;
+  top: 5.5px;
+  right: 7px;
+
+  background-color: #1d70b8; /* current default blue */
+
+  -webkit-mask-image: url("/public/images/icon_govuk_chevronright-blue.svg");
+  mask-image: url("/public/images/icon_govuk_chevronright-blue.svg");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+.service-has-submenu > a:hover .service-submenu-chevron {
+  background-color: #0f385c;
+}
+
+.service-has-submenu > a:focus .service-submenu-chevron {
+  background-color: #0b0c0c;
+}
 
   .service-submenu {
     display: none;
     position: absolute;
     top: 0;
     left: 100%;
-    width: 340px;
+    width: 300px;
     max-height: 70vh;
     overflow-y: auto;
     background: #ffffff;
-    box-shadow: 0px 8px 18px 0px rgba(0, 0, 0, 0.1);
+    border: 1px solid #cecece;
     z-index: 999999;
     padding: 5px 0;
   }
+.service-submenu {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  width: 300px;
+  max-height: 70vh;
+  overflow-y: auto;
+  background: #ffffff;
+  border: 1px solid #cecece;
+  z-index: 999999;
+  padding: 5px 0;
+}
 
-  .service-has-submenu:hover > .service-submenu,
-  .service-has-submenu:focus-within > .service-submenu {
-    display: block;
-  }
+.service-has-submenu.is-open > .service-submenu {
+  display: block;
+}
+
+.service-dropdown li > a:hover {
+  color: #0f385c;
+  text-decoration: underline;
+}
+
+.service-dropdown li > a:focus {
+  color: #0b0c0c;
+  text-decoration: 2px underline;
+}
+
+
+
 
 </style>
 <div class="govuk-generic-header">
@@ -388,8 +605,11 @@
  
     <ul class="navbar-menu--right">
  
-      <li class="parent account-parent parentIconDown2" style="padding-right: 20px;">
-        <a href="#" class="account-toggle" aria-haspopup="true" aria-expanded="false">John James</a>
+      <li class="parent account-parent" >
+<a href="#" class="account-toggle" aria-haspopup="true" aria-expanded="false">
+  <span class="account-name">John James</span>
+  <img src="/public/images/icon_govuk_chevrondownWhite.svg" class="account-chevron-icon" alt="">
+</a>
         <ul class="child">
           <div class="govuk-body myAccountContent">
             <div>
@@ -408,12 +628,13 @@
         </ul>
       </li>
  
-      <li class="parent"><a href="#">Sign out</a></li>
+      <li class="parent sign-out"><a href="#">Sign out</a></li>
  
     </ul>
  
   </div>
 </div>
+
 
 <section aria-label="Service information" class="govuk-service-navigation"
   data-module="govuk-service-navigation" style="background-color: #f3f2f1; border-bottom-color:#cecece">
@@ -428,17 +649,17 @@
           <li class="govuk-service-navigation__item service-nav-parent">
             <a class="govuk-service-navigation__link service-nav-toggle" href="#" aria-haspopup="true" aria-expanded="false">
               Services
-              <span class="service-nav-chevron"></span>
+              <span class="service-nav-chevron-icon" aria-hidden="true"></span>
             </a>
 
             <ul class="service-dropdown">
-              <li><a href="./portal-homepage-1.html">Portal homepage</a></li>
-              <li><a href="#">View applications</a></li>
+              <li><a href="#">Portal homepage</a></li>
+              <li><a href="./va-1.html">View applications</a></li>
 
               <li class="service-has-submenu">
                 <a href="#">
                   Information services
-                  <img src="/public/images/icon_govuk_chevronright-blue.svg" class="service-submenu-chevron" alt="">
+                  <span class="service-submenu-chevron" aria-hidden="true"></span>
                 </a>
                 <ul class="service-submenu">
                   <li><a href="#">Request official copies</a></li>
@@ -464,7 +685,7 @@
               <li class="service-has-submenu">
                 <a href="#">
                   Land charges Services
-                  <img src="/public/images/icon_govuk_chevronright-blue.svg" class="service-submenu-chevron" alt="">
+                  <span class="service-submenu-chevron" aria-hidden="true"></span>
                 </a>
                 <ul class="service-submenu">
                   <li><a href="#">Bankruptcy search</a></li>
@@ -480,7 +701,7 @@
               <li class="service-has-submenu">
                 <a href="#">
                   Network Services
-                  <img src="/public/images/icon_govuk_chevronright-blue.svg" class="service-submenu-chevron" alt="">
+                  <span class="service-submenu-chevron" aria-hidden="true"></span>
                 </a>
                 <ul class="service-submenu">
                   <li><a href="#">e-AN1 Agreed notice</a></li>
@@ -508,7 +729,7 @@
               <li class="service-has-submenu">
                 <a href="#">
                   General Facilities
-                  <img src="/public/images/icon_govuk_chevronright-blue.svg" class="service-submenu-chevron" alt="">
+                  <span class="service-submenu-chevron" aria-hidden="true"></span>
                 </a>
                 <ul class="service-submenu">
                   <li><a href="#">Message area</a></li>
@@ -521,7 +742,7 @@
               <li class="service-has-submenu">
                 <a href="#">
                   Administrative Services
-                  <img src="/public/images/icon_govuk_chevronright-blue.svg" class="service-submenu-chevron" alt="">
+                  <span class="service-submenu-chevron" aria-hidden="true"></span>
                 </a>
                 <ul class="service-submenu">
                   <li><a href="#">Alternative despatch address</a></li>
@@ -613,6 +834,63 @@
     });
 
   })();
+
+  (function () {
+    var submenuParents = document.querySelectorAll('.service-has-submenu');
+
+    submenuParents.forEach(function (parent) {
+      var trigger = parent.querySelector(':scope > a');
+
+      trigger.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        var isOpen = parent.classList.contains('is-open');
+
+        // close any other open submenus first
+        submenuParents.forEach(function (p) {
+          p.classList.remove('is-open');
+        });
+
+        if (!isOpen) {
+          parent.classList.add('is-open');
+        }
+      });
+    });
+
+    // close submenus when clicking anywhere else
+    document.addEventListener('click', function (e) {
+      var clickedInsideSubmenu = e.target.closest('.service-has-submenu');
+      if (!clickedInsideSubmenu) {
+        submenuParents.forEach(function (p) {
+          p.classList.remove('is-open');
+        });
+      }
+    });
+
+    // close on Escape
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        submenuParents.forEach(function (p) {
+          p.classList.remove('is-open');
+        });
+      }
+    });
+  })();
+
+if (!isOpen) {
+  document.querySelectorAll('.service-has-submenu.is-open').forEach(function (p) {
+    p.classList.remove('is-open');
+  });
+}
+
+// in the existing outside-click handler, alongside the serviceParent check:
+if (serviceParent && !serviceParent.contains(e.target)) {
+  document.querySelectorAll('.service-has-submenu.is-open').forEach(function (p) {
+    p.classList.remove('is-open');
+  });
+}
+
 </script>
 
 <div class="govuk-body govuk-width-container">
@@ -684,46 +962,7 @@
  
  
 
-.parent {display: block;position: relative;float: left;line-height: 50px; font-weight: bold;}
-.parentgov {display: block;position: relative;float: left;line-height: 50px; font-weight: bold;font-size: 24px;}
-.parentIconDown {background-image: url("/public/images/icon_govuk_chevrondownWhite.svg"); background-size: 25px; background-repeat: no-repeat; background-position-x: 85px;background-position-y: center;}
-.parentIconDown2 {background-image: url("/public/images/icon_govuk_chevrondownWhite.svg"); background-size: 25px; background-repeat: no-repeat; background-position-x: 112px;background-position-y: center;}
-.parent a{margin: 20px;color: #FFFFFF;text-decoration: none;}
-.parent-2 a{margin: 20px;color: #FFFFFF;text-decoration: none;}
-.parentgov a{margin: 20px;color: #FFFFFF;text-decoration: none;}
-.parent:hover > ul {display:block;position:absolute;}
-.parent-2:hover > ul {display:block;position:absolute;}
-.parentgov:hover > ul {display:block;position:absolute;}
-.child {display:none ;box-shadow: 0px 8px 18px 0px rgba(0,0,0,0.1);z-index:99999;background: #ffffff; padding-bottom: 5px;padding-top: 5px; padding-right:20px;}
-.child li {background-color: #ffffff;line-height: 16px; margin:0px; border-right:#CCC 0px solid; width:100%;}
-.child li a{color: #1d70b8; font-size:15px;}
-.child-2 {display:none ;box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);z-index:99999;background: #ffffff;margin-left:265px;margin-top: -21px;}
-.child-2 li {background-color: #ffffff;line-height: 16px; margin:0px; border-right:#CCC 0px solid; width:100%;}
-.child-2 li a{color: #1d70b8; font-size:15px;}
-ul{list-style: none;margin: 0;padding: 0px; min-width:10em;}
-.parent:hover {background-color: #ffffff;color:#1d70b8;}
-.parent:hover > a {color:#1d70b8;text-decoration:underline;}
-.parent-2:hover {background-color: #ffffff;color:#1d70b8;}
-.parent-2:hover > a {color:#1d70b8;text-decoration:underline;}
-.parentgov:hover > a {text-decoration: underline;}
-.parentIconDown:hover {background-image: url("/public/images/icon_govuk_chevrondownBlue.svg");}
-.parentIconDown2:hover {background-image: url("/public/images/icon_govuk_chevrondownBlue.svg");}
 
-.expand{font-size:12px;float:right;margin-right:5px;}
-.iconRight {background-image: url("/public/images/icon_govuk_chevronrightGreen.svg"); background-size: 25px; background-repeat: no-repeat; background-position-x: 134px;background-position-y: center;}
-
-.parentIconDown3 {
-  background-image: url(/public/images/icon_Basket.svg);
-    background-size: 23px;
-    background-repeat: no-repeat;
-    background-position-x: 16px;
-    background-position-y: 23px;
-    width: 130px;
-  }
-
-  .parentIconDown3:hover {
-  background-image: url(/public/images/icon_BasketGreen.svg);
-  }
 
 
   .notificationContent {
@@ -1206,7 +1445,7 @@ ul{list-style: none;margin: 0;padding: 0px; min-width:10em;}
   .table-area {
     float: left;
     overflow-x: auto;
-    padding: 0px 30px 30px 30px;
+    padding: 0px 0px 30px 20px;
   }
 
   /* Clean sorting arrow CSS - no conflicts */
