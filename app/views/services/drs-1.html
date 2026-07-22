@@ -11,8 +11,200 @@
     height: 30px;
     margin-right: 3px;
   }
-    .govuk-generic-header__homepage-link{
+.govuk-generic-header {
+    border-bottom: none
+  }
+
+  .govuk-generic-header__homepage-link {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+
+  .govuk-generic-header__container {
+    display: flex;
+    align-items: center;
+    margin: auto;
+    justify-content: space-between;
+    width: 965px;
+    padding: 0;
+  }
+
+  .govuk-generic-header__logo {
+    display: flex;
+    align-items: center;
+  }
+      .navbar-menu--right {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+    .parent {
+    display: block;
+    position: relative;
+    float: left;
+    line-height: 58px;
+    font-weight: bold;
+  }
+
+  .parent a {
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+  .parent a:hover {
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+  .parent a:focus {
+    color: #0b0c0c;
+    text-decoration: none;
+  }
+
+  .parent:not(.account-parent):hover {
+    color: #1d70b8;
+  }
+
+  .parent.sign-out > a {
+    display: inline-flex;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 60px;
+  }
+
+  a:focus, .govuk-link:focus {
+    box-shadow: none;
+  }
+
+  /* Blue/white/dark underline states shown under nav links on hover & focus */
+  .parent a:hover::after {
+    content: "";
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: 1px;
+    height: 4px;
+    background-color: #fff;
+  }
+
+  .parent a:focus::after {
+    content: "";
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: 1px;
+    height: 4px;
+    background-color: #0b0c0c;
+  }
+
+  .parent.account-parent a:hover::after {
+    content: "";
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: 1px;
+    height: 4px;
+    background-color: #fff;
+  }
+
+  .parent.account-parent > a.account-toggle:focus::after {
+    content: "";
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: 1px;
+    height: 4px;
+    background-color: #0b0c0c;
+  }
+
+  .parent.account-parent.is-open > a.account-toggle:focus::after {
+    content: "";
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: 1px;
+    height: 4px;
+    background-color: #0b0c0c;
+  }
+
+  .parent.account-parent.is-open > a.account-toggle::after {
+    content: "";
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: 0px;
+    height: 4px;
+    background-color: #1d70b8;
+  }
+
+  /* -------------------------------------------------------------
+     2. "My account" dropdown panel (John James / sign-in details)
+     ------------------------------------------------------------- */
+  .parent.account-parent {
+    cursor: pointer;
+  }
+
+  .parent.account-parent.is-open > a.account-toggle {
+    color: #1d70b8;
+  }
+
+  .parent.account-parent.is-open {
+    background-color: #ffffff;
+    color: #1d70b8;
+  }
+
+  /* Make the whole toggle area (text + chevron) clickable */
+  .parent.account-parent > a.account-toggle {
+    display: inline-flex;
+    align-items: center;
+    width: auto;
+    position: relative;
+    padding-left: 20px;
+    padding-right: 15px;
+    margin-right: 0px;
+    height: 60px;
+    border-bottom-style: none;
+  }
+
+  .account-name {
+    display: inline-block;
+  }
+
+  .account-chevron-icon {
+    width: 25px;
+    height: 25px;
+    margin-left: 8px;
+    flex-shrink: 0;
+  }
+
+  .parent.account-parent.is-open > a.account-toggle .account-chevron-icon {
+    transform: rotate(180deg);
+    /* turns the chevron #1d70b8 blue, matching the Services open-state blue */
+    filter: brightness(0) saturate(100%) invert(29%) sepia(60%) saturate(1583%) hue-rotate(180deg);
+  }
+
+  .parent.account-parent > a.account-toggle:focus .account-chevron-icon {
+    filter: brightness(0) saturate(100%);
+  }
+
+  .parent.account-parent > a.account-toggle:focus .account-name {
+    background-color: #ffdd00;
+    color: #0b0c0c;
+    text-decoration: none;
+  }
+
+  .parent.account-parent > .child {
+    display: none;
+    position: absolute;
+    right: 0;
+  }
+
+  .parent.account-parent.is-open > .child {
+    display: block;
+    border-bottom-style: inset;
   }
 </style>
 <div class="govuk-generic-header">
@@ -23,6 +215,11 @@
          HM Land Registry portal
       </a>
     </div>
+    <ul class="navbar-menu--right">
+ 
+      <li class="parent sign-out"><a href="#">Sign out</a></li>
+ 
+    </ul>
   </div>
 </div>
 
