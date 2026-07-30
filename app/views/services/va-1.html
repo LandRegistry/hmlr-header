@@ -7,56 +7,67 @@
 {% block header %}
 
 <style>
-  .govuk-generic-header__container{
-    margin-left: 30px;
-    margin-right: 30px;
-    min-width: calc(100% - 60px);
-    display: flex;
-    align-items: center;
-    margin:auto;
-    justify-content: space-between;
-    width: 965px;
-    padding: 0;
-    
-  }
+  /* =============================================================
+     ALL PAGE STYLES
+     Consolidated into a single block so they only need to be
+     looked up in one place. Grouped by the UI region they style.
+     Note: this page's header has no "My account" dropdown (just a
+     Sign out link), so account-menu styling isn't included here.
+     ============================================================= */
 
+  /* -------------------------------------------------------------
+     1. Page layout & width overrides (base GOV.UK template)
+     ------------------------------------------------------------- */
   .govuk-width-container {
     margin-left: 30px;
     margin-right: 30px;
     min-width: calc(100% - 60px);
   }
- 
- 
-    .hmlr-logo {
+
+  .govuk-main-wrapper {
+    padding-top: 10px;
+  }
+
+  /* -------------------------------------------------------------
+     2. Generic header bar (HMLR logo + top-right sign out link)
+     ------------------------------------------------------------- */
+  .govuk-generic-header__container {
+    display: flex;
+    align-items: center;
+    margin: auto;
+    justify-content: space-between;
+    width: 965px;
+    padding: 0;
+    min-width: calc(100% - 60px);
+  }
+
+  .hmlr-logo {
     height: 30px;
     margin-right: 3px;
   }
- 
+
   .govuk-generic-header {
     border-bottom: none
   }
-  
-  .govuk-generic-header__homepage-link{
+
+  .govuk-generic-header__homepage-link {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
- 
   .govuk-generic-header__logo {
     display: flex;
     align-items: center;
   }
 
- 
-  /* ---- Right-aligned nav ---- */
   .navbar-menu--right {
     display: flex;
     align-items: center;
     list-style: none;
     margin: 0;
     padding: 0;
-    min-width: 0px;;
+    min-width: 0px;
   }
- 
+
   .parent {
     display: block;
     position: relative;
@@ -64,36 +75,10 @@
     line-height: 58px;
     font-weight: bold;
   }
- 
-  .parentIconDown {
-    background-image: url("/public/images/icon_govuk_chevrondownWhite.svg");
-    background-size: 25px;
-    background-repeat: no-repeat;
-    background-position-x: 85px;
-    background-position-y: center;
-  }
- 
-  .parentIconDown2 {
-    background-image: url("/public/images/icon_govuk_chevrondownWhite.svg");
-    background-size: 25px;
-    background-repeat: no-repeat;
-    background-position-x: 112px;
-    background-position-y: center;
-  }
-
-
-.account-name {
-  display: inline-block;
-}
 
   .parent a {
     color: #ffffff;
     text-decoration: none;
-  }
-
-    .parent.account-parent.is-open > a.account-toggle {
-    color: #1d70b8;
-
   }
 
   .parent a:hover {
@@ -101,88 +86,33 @@
     text-decoration: none;
   }
 
+  .parent a:focus {
+    color: #0b0c0c;
+    text-decoration: none;
+  }
+
+  .parent:not(.account-parent):hover {
+    color: #1d70b8;
+  }
+
+  .parent.sign-out > a {
+    display: inline-flex;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 60px;
+  }
 
   a:focus, .govuk-link:focus {
     box-shadow: none;
   }
- 
-  .parent-2 a {
-    margin: 20px;
-    color: #ffffff;
-    text-decoration: none;
-  }
 
-  /* Account dropdown: hidden by default, shown on .is-open */
-  .parent.account-parent {
-    cursor: pointer;
-  }
-
-  /* Make the <a> fill the entire <li> so the whole area is clickable */
-.parent.account-parent > a.account-toggle {
-  display: inline-flex;
-  align-items: center;
-  width: auto;
-  position: relative;
-  padding-left: 20px;
-  padding-right: 15px;
-  margin-right: 0px;
-  height: 60px;
-  border-bottom-style: none;
-}
-
-.account-chevron-icon{
-    width: 25px;
-  height: 25px;
-  margin-left: 8px;
-  flex-shrink: 0;
-}
-
-.parent.account-parent.is-open > a.account-toggle .account-chevron-icon {
-  transform: rotate(180deg);
-  filter: brightness(0) saturate(100%) invert(29%) sepia(60%) saturate(1583%) hue-rotate(180deg); /* turns it #1d70b8 blue, matching Services' open-state blue */
-}
-
-.parent.account-parent > a.account-toggle:focus .account-chevron-icon {
-  filter: brightness(0) saturate(100%); /* matches Services' focus rule exactly */
-}
-
-
-.parent.account-parent > a.account-toggle:focus .account-name {
-  background-color: #ffdd00;
-  color: #0b0c0c;
-  text-decoration: none;
-}
-
-
-
-  .parent.account-parent > .child {
-    display: none;
-    position: absolute;
-    right: 0;
-  }
-
-  .parent.account-parent.is-open > .child {
-    display: block;
-    border-bottom-style: inset;
-  }
-
-  /* Replicate the original hover colour changes on open state */
-
-  .parent.account-parent.is-open {
-    background-color: #ffffff;
-    color: #1d70b8;
-
-  }
-
-  .parent a:hover  {
-    text-decoration: none;
-  }
-
+  /* White/dark underline shown under nav links (e.g. Sign out) on hover & focus */
   .parent a:hover::after {
     content: "";
     position: absolute;
-    left: 20px;                 /* match padding-left so it starts under the text */
-    right: 20px;                 /* match the icon's right inset so it ends under the arrow */
+    left: 20px;
+    right: 20px;
     bottom: 1px;
     height: 4px;
     background-color: #fff;
@@ -191,201 +121,27 @@
   .parent a:focus::after {
     content: "";
     position: absolute;
-    left: 20px;                 /* match padding-left so it starts under the text */
-    right: 20px;                 /* match the icon's right inset so it ends under the arrow */
+    left: 20px;
+    right: 20px;
     bottom: 1px;
     height: 4px;
     background-color: #0b0c0c;
   }
 
-  .parent.account-parent a:hover::after  {
-  content: "";
-  position: absolute;
-  left: 20px;                 /* match padding-left so it starts under the text */
-  right: 20px;                 /* match the icon's right inset so it ends under the arrow */
-  bottom: 1px;
-  height: 4px;
-  background-color: #fff;
-  }
-
-  .parent.account-parent.is-open > a.account-toggle:focus::after  {
-  content: "";
-  position: absolute;
-  left: 20px;                 /* match padding-left so it starts under the text */
-  right: 20px;                 /* match the icon's right inset so it ends under the arrow */
-  bottom: 1px;
-  height: 4px;
-  background-color: #0b0c0c;
-  }
-
-    .parent.account-parent> a.account-toggle:focus::after  {
-    content: "";
-  position: absolute;
-  left: 20px;                 /* match padding-left so it starts under the text */
-  right: 20px;                 /* match the icon's right inset so it ends under the arrow */
-  bottom: 1px;
-  height: 4px;
-  background-color: #0b0c0c;
-
-  }
-
-  .parent.account-parent.is-open > a.account-toggle::after {
-  content: "";
-  position: absolute;
-  left: 20px;                 /* match padding-left so it starts under the text */
-  right: 20px;                 /* match the icon's right inset so it ends under the arrow */
-  bottom: 0px;
-  height: 4px;
-  background-color: #1d70b8;
-}
-
-.parent.sign-out > a {
-display: inline-flex;
-align-items: center;
-padding-left:20px;
-padding-right:20px;
-height:60px;
-}
-.parent a:focus {
-  color: #0b0c0c;
-  text-decoration: none;
-
-}
- 
-  .parent-2:hover > ul {
-    display: block;
-    position: absolute;
-  }
- 
-  .child {
-    display: none;
-    border-left: solid 1px #cecece;
-    border-right: solid 1px #cecece;
-    border-bottom: solid 1px #cecece;
-    z-index: 99999;
-    background: #ffffff;
-    padding-bottom: 0px;
-    padding-top: 5px;
-    padding-right: 5px;
-  }
- 
-  .child li {
-    background-color: #ffffff;
-    line-height: 16px;
-    margin: 0px;
-    border-right: #ccc 0px solid;
-    width: 100%;
-  }
- 
-  .child li a {
-    color: #1d70b8;
-    font-size: 15px;
-  }
- 
-  .child-2 {
-    display: none;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.1);
-    z-index: 99999;
-    background: #ffffff;
-    margin-left: 265px;
-    margin-top: -21px;
-  }
- 
-  .child-2 li {
-    background-color: #ffffff;
-    line-height: 16px;
-    margin: 0px;
-    border-right: #ccc 0px solid;
-    width: 100%;
-  }
- 
-  .child-2 li a {
-    color: #1d70b8;
-    font-size: 15px;
-  }
- 
   ul {
     list-style: none;
     margin: 0;
     padding: 0px;
     min-width: 10em;
   }
- 
-  .parent:not(.account-parent):hover {
-    color: #1d70b8;
-  }
- 
- 
-  .parent-2:hover {
-    background-color: #ffffff;
-    color: #1d70b8;
-  }
- 
- 
-  .nav-list {
-    max-width: 280px;
-    padding: 3px 0px 8px 20px;
-  }
- 
-  .nav-list-2 {
-    max-width: 280px;
-    padding: 3px 5px 8px 20px;
-  }
- 
-  .nav-list:hover {
-    background-color: #f3f2f1;
-  }
- 
-  .nav-list-2:hover {
-    background-color: #f3f2f1;
-  }
- 
-  .nav-chevron--tight {
-    width: 12px;
-    margin-left: 4px;
-  }
- 
-  .servicesContent {
-    width: 265px;
-    background: #ffffff;
-    padding-bottom: 0px;
-    margin-bottom: 0px;
-  }
- 
-  .infoservicesContent {
-    width: 300px;
-    background: #ffffff;
-    padding-bottom: 0px;
-    margin-bottom: 5px;
-    margin-top: 5px;
-  }
- 
-  .myAccountContent {
-    width: 200px;
-    padding: 20px 20px 10px 25px;
-    background: #ffffff;
-  }
- 
-  .myAccountContent a {
-    padding: 0px;
-  }
- 
-  .myAccountTitle {
-    font-size: 16px;
-    font-weight: 700;
-    padding-bottom: 3px;
-  }
- 
-  .myAccount2ndLine {
-    font-size: 14px;
-    font-weight: 400;
-    width: 100%;
-    padding-bottom: 0px;
-  }
 
-  /* ---- Services dropdown in the service navigation bar ---- */
+  /* -------------------------------------------------------------
+     3. Service navigation bar ("Services" mega menu + submenus)
+     ------------------------------------------------------------- */
   .service-nav-parent {
     position: relative;
+    padding-left: 15px;
+    padding-right: 15px;
   }
 
   .service-nav-parent > .govuk-service-navigation__link {
@@ -394,64 +150,61 @@ height:60px;
     height: 18px;
   }
 
-  .service-nav-toggle:hover{
+  .service-nav-toggle {
+    position: relative;
+    text-decoration: none;
+  }
+
+  .service-nav-toggle:hover {
     border-bottom: 3px solid #0f385c;
   }
 
-  .service-nav-toggle:focus{
+  .service-nav-toggle:focus {
     border-bottom: none;
   }
 
+  .service-nav-toggle:focus .service-nav-chevron-icon {
+    filter: brightness(0) saturate(100%);
+  }
 
-/* Style + rotate the actual chevron icon */
-.service-nav-chevron-icon {
-  display: inline-block;
-  width: 15px;
-  height: 25px;
-  margin-left: 8px;
-  margin-top: 2px;
-  flex-shrink: 0;
+  /* Chevron icon next to "Services", flips when the menu is open */
+  .service-nav-chevron-icon {
+    display: inline-block;
+    width: 15px;
+    height: 25px;
+    margin-left: 8px;
+    margin-top: 2px;
+    flex-shrink: 0;
+    background-color: #1d70b8;
+    -webkit-mask-image: url("/public/images/icon_govuk_chevrondownBlue.svg");
+    mask-image: url("/public/images/icon_govuk_chevrondownBlue.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
 
-  background-color: #1d70b8; /* current default blue */
+  .service-nav-toggle:hover .service-nav-chevron-icon {
+    background-color: #0f385c;
+  }
 
-  -webkit-mask-image: url("/public/images/icon_govuk_chevrondownBlue.svg");
-  mask-image: url("/public/images/icon_govuk_chevrondownBlue.svg");
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-position: center;
-  -webkit-mask-size: contain;
-  mask-size: contain;
-}
+  .service-nav-parent.is-open .service-nav-chevron-icon {
+    transform: rotate(180deg);
+  }
 
-.service-nav-toggle:hover .service-nav-chevron-icon {
-  background-color: #0f385c;
-}
+  /* Blue underline shown under "Services" while the menu is open */
+  .service-nav-parent.is-open::after {
+    content: "";
+    position: absolute;
+    left: 15px;
+    right: 15px;
+    bottom: 0;
+    height: 4px;
+    background-color: #1d70b8;
+  }
 
-.service-nav-parent.is-open .service-nav-chevron-icon {
-  transform: rotate(180deg);
-}
-
-/* Blue underline, matching width of "Services" text + arrow */
-.service-nav-toggle {
-  position: relative;
-  text-decoration: none;
-}
-
-
-.service-nav-parent {
-  position: relative;
-}
-
-.service-nav-parent.is-open::after {
-  content: "";
-  position: absolute;
-  left: 15px;
-  right: 15px;
-  bottom: 0;
-  height: 4px;
-  background-color: #1d70b8;
-}
   .service-nav-parent.is-open {
     background-color: #ffffff;
   }
@@ -460,15 +213,7 @@ height:60px;
     display: block;
   }
 
-  .service-nav-parent.is-open .service-nav-chevron {
-    transform: rotate(180deg);
-  }
-
-  .service-nav-toggle:focus .service-nav-chevron-icon {
-  filter: brightness(0) saturate(100%);
-}
-
-
+  /* First-level dropdown panel listing all services */
   .service-dropdown {
     display: none;
     position: absolute;
@@ -481,17 +226,10 @@ height:60px;
     border-bottom: 1px solid #cecece;
     z-index: 99999;
     padding: 5px 0;
-
   }
 
   .service-dropdown li {
     width: 100%;
-
-  }
-
-  .service-nav-parent {
-    padding-left: 15px;
-    padding-right: 15px;
   }
 
   .service-dropdown li > a {
@@ -505,9 +243,16 @@ height:60px;
 
   .service-dropdown li > a:hover {
     background-color: #f3f2f1;
+    color: #0f385c;
     text-decoration: underline;
   }
 
+  .service-dropdown li > a:focus {
+    color: #0b0c0c;
+    text-decoration: 2px underline;
+  }
+
+  /* Items within the dropdown that open a second-level flyout submenu */
   .service-has-submenu {
     position: relative;
   }
@@ -518,36 +263,35 @@ height:60px;
     align-items: center;
   }
 
-.service-submenu-chevron {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  margin-left: 8px;
-  flex-shrink: 0;
-  position: absolute;
-  top: 5.5px;
-  right: 7px;
+  .service-submenu-chevron {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-left: 8px;
+    flex-shrink: 0;
+    position: absolute;
+    top: 5.5px;
+    right: 7px;
+    background-color: #1d70b8;
+    -webkit-mask-image: url("/public/images/icon_govuk_chevronright-blue.svg");
+    mask-image: url("/public/images/icon_govuk_chevronright-blue.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
 
-  background-color: #1d70b8; /* current default blue */
+  .service-has-submenu > a:hover .service-submenu-chevron {
+    background-color: #0f385c;
+  }
 
-  -webkit-mask-image: url("/public/images/icon_govuk_chevronright-blue.svg");
-  mask-image: url("/public/images/icon_govuk_chevronright-blue.svg");
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-position: center;
-  -webkit-mask-size: contain;
-  mask-size: contain;
-}
+  .service-has-submenu > a:focus .service-submenu-chevron {
+    background-color: #0b0c0c;
+  }
 
-.service-has-submenu > a:hover .service-submenu-chevron {
-  background-color: #0f385c;
-}
-
-.service-has-submenu > a:focus .service-submenu-chevron {
-  background-color: #0b0c0c;
-}
-
+  /* Second-level flyout panel */
   .service-submenu {
     display: none;
     position: absolute;
@@ -561,63 +305,35 @@ height:60px;
     z-index: 999999;
     padding: 5px 0;
   }
-.service-submenu {
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 100%;
-  width: 300px;
-  max-height: 70vh;
-  overflow-y: auto;
-  background: #ffffff;
-  border: 1px solid #cecece;
-  z-index: 999999;
-  padding: 5px 0;
-}
 
-.service-has-submenu.is-open > .service-submenu {
-  display: block;
-}
-
-.service-dropdown li > a:hover {
-  color: #0f385c;
-  text-decoration: underline;
-}
-
-.service-dropdown li > a:focus {
-  color: #0b0c0c;
-  text-decoration: 2px underline;
-}
-
-
-
+  .service-has-submenu.is-open > .service-submenu {
+    display: block;
+  }
 </style>
+
+<!-- Top strip: HMLR logo (left) and sign-out link (right) -->
 <div class="govuk-generic-header">
   <div class="govuk-generic-header__container">
- 
+
     <div class="govuk-generic-header__logo">
       <a href="./portal-homepage-1.html" class="govuk-generic-header__homepage-link">
         <img class="hmlr-logo" src="/public/images/colour-logo-image.png" alt="HM Land Registry logo">
         HM Land Registry portal
       </a>
-
     </div>
- 
-    <ul class="navbar-menu--right">
 
- 
+    <ul class="navbar-menu--right">
       <li class="parent sign-out"><a href="#">Sign out</a></li>
- 
     </ul>
- 
+
   </div>
 </div>
 
-
+<!-- Service navigation bar: "Services" mega menu plus the main page tabs -->
 <section aria-label="Service information" class="govuk-service-navigation"
   data-module="govuk-service-navigation" style="background-color: #f3f2f1; border-bottom-color:#cecece">
   <div class="govuk-width-container">
-    <div class="govuk-service-navigation__container" >
+    <div class="govuk-service-navigation__container">
       <nav aria-label="Menu" class="govuk-service-navigation__wrapper">
         <button type="button" class="govuk-service-navigation__toggle govuk-js-service-navigation-toggle" aria-controls="navigation" hidden aria-hidden="true">
           Menu
@@ -634,6 +350,8 @@ height:60px;
               <li><a href="#">Portal homepage</a></li>
               <li><a href="./va-1.html">View applications</a></li>
 
+              <!-- Each ".service-has-submenu" item below opens a second-level
+                   flyout list of related services when clicked -->
               <li class="service-has-submenu">
                 <a href="#">
                   Information services
@@ -754,6 +472,9 @@ height:60px;
 </section>
 
 <script>
+  // Behaviour for the "Services" mega menu: opens on click, closes on
+  // an outside click or the Escape key. (This page has no "My account"
+  // dropdown, so there's nothing to coordinate with here.)
   (function () {
 
     /* ---- Services dropdown ---- */
@@ -766,39 +487,14 @@ height:60px;
         e.stopPropagation();
         var isOpen = serviceParent.classList.toggle('is-open');
         serviceToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-        // close account menu if open
-        if (accountParent) accountParent.classList.remove('is-open');
-        if (accountToggle) accountToggle.setAttribute('aria-expanded', 'false');
       });
     }
 
-    /* ---- Account (John James) dropdown ---- */
-    var accountToggle = document.querySelector('.account-toggle');
-    var accountParent = document.querySelector('.account-parent');
-
-    if (accountParent) {
-      accountParent.addEventListener('click', function (e) {
-        // Don't trigger if clicking a link inside the open dropdown panel
-        if (e.target.closest('.child') && !e.target.closest('.account-toggle')) return;
-        e.preventDefault();
-        e.stopPropagation();
-        var isOpen = accountParent.classList.toggle('is-open');
-        if (accountToggle) accountToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-        // close services menu if open
-        if (serviceParent) serviceParent.classList.remove('is-open');
-        if (serviceToggle) serviceToggle.setAttribute('aria-expanded', 'false');
-      });
-    }
-
-    /* ---- Close both on outside click or Escape ---- */
+    /* ---- Close on outside click or Escape ---- */
     document.addEventListener('click', function (e) {
       if (serviceParent && !serviceParent.contains(e.target)) {
         serviceParent.classList.remove('is-open');
         if (serviceToggle) serviceToggle.setAttribute('aria-expanded', 'false');
-      }
-      if (accountParent && !accountParent.contains(e.target)) {
-        accountParent.classList.remove('is-open');
-        if (accountToggle) accountToggle.setAttribute('aria-expanded', 'false');
       }
     });
 
@@ -806,13 +502,13 @@ height:60px;
       if (e.key === 'Escape') {
         if (serviceParent) serviceParent.classList.remove('is-open');
         if (serviceToggle) serviceToggle.setAttribute('aria-expanded', 'false');
-        if (accountParent) accountParent.classList.remove('is-open');
-        if (accountToggle) accountToggle.setAttribute('aria-expanded', 'false');
       }
     });
 
   })();
 
+  // Behaviour for the second-level "flyout" submenus inside the Services
+  // dropdown (e.g. Information services, Land charges Services).
   (function () {
     var submenuParents = document.querySelectorAll('.service-has-submenu');
 
@@ -855,22 +551,9 @@ height:60px;
       }
     });
   })();
-
-if (!isOpen) {
-  document.querySelectorAll('.service-has-submenu.is-open').forEach(function (p) {
-    p.classList.remove('is-open');
-  });
-}
-
-// in the existing outside-click handler, alongside the serviceParent check:
-if (serviceParent && !serviceParent.contains(e.target)) {
-  document.querySelectorAll('.service-has-submenu.is-open').forEach(function (p) {
-    p.classList.remove('is-open');
-  });
-}
-
 </script>
 
+<!-- "Beta" banner shown above the main content -->
 <div class="govuk-body govuk-width-container">
 <div class="govuk-phase-banner">
   <p class="govuk-phase-banner__content">
@@ -887,317 +570,236 @@ if (serviceParent && !serviceParent.contains(e.target)) {
 
 {% block content %}
 
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-
 <style>
-  #SectionHeroImage {
-    background-image: url(/public/images/Hero_heather.png);
-    height: 322px;
-    width: 100%;
-    position: relative;
-    background-size: cover;
-    background-position-y: bottom;
+  /* =============================================================
+     PAGE-SPECIFIC STYLES: "View applications"
+     Consolidated into one block, grouped by the UI region they
+     style: the left-hand search/filter panel, and the sortable
+     results table with its expandable detail rows.
+     ============================================================= */
+
+  /* -------------------------------------------------------------
+     1. Left-hand "Search by" / "Filter by" panel
+     ------------------------------------------------------------- */
+  .left__panel {
+    width: 365px;
+    float: left;
+    max-height: fit-content;
   }
 
-  #SectionHeroContent {
-    max-width: 1200px;
-    margin: auto;
+  .filter {
+    box-shadow: inset 0 0 0 1px #b1b4b6;
   }
 
-  .heroTextBackground {
-    background-color: #006637;
-    padding: 25px;
-    bottom: -48px;
-    margin-bottom: 0;
-    max-width: 35em;
-    padding: 32px 40px;
-    position: absolute;
-    top: auto;
+  .filter__header {
+    background-color: #f3f2f1;
+    box-shadow: inset 0 0 0 1px #b1b4b6;
+    padding: 10px 20px 10px 20px;
   }
 
-  .whiteCTA {
-    background-color: #ffffff;
-    color: #006637;
-    width: 250px;
+  .filter__header-2 {
+    border-top: solid 1px #b1b4b6;
+  }
+
+  .filter__options {
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 0px;
+  }
+
+  .filter__heading-title {
+    display: inline-block;
+    font-family: GDS Transport, arial, sans-serif;
+    text-align: left;
+    vertical-align: middle;
+  }
+
+  .filter__heading-title h2 {
     margin-bottom: 0px;
   }
 
-  .govuk-notification-banner__content>* {
-    box-sizing: border-box;
-    max-width: 1200px;
+  /* -------------------------------------------------------------
+     2. Disclosure ("Progress" / "Type") panels within the filter
+     ------------------------------------------------------------- */
+  .govuk-details {
+    margin-bottom: 20px;
   }
 
-  .dividerLine11 {
-    max-width: 1200px;
-    margin-top: 161px;
-    margin-right: 75px;
-    margin-left: 295px;
-    margin-bottom: 75px;
-    height:10px;
-    background-color: #006637;
-    
-  }
- 
- 
-
-
-
-
-  .notificationContent {
-    padding: 20px;
-    width: 290px;
+  .govuk-details__text {
+    border-left: 0px;
+    padding-left: 0px;
     margin-bottom: 0px;
-    background: #fff;
-  }
-  
-  .notificationTopRow {
-    width:100%;
-  display:flex;
-  padding-bottom: 3px;
-  }
-  
-  .notificationTitle {
-    font-size:16px;
-    font-weight:700;
-  width:50%;
-  }
-  
-  .myAccountTitle {
-    font-size:16px;
-    font-weight:700;
-  padding-bottom: 3px;
-  }
-  
-  .notificationTime {
-    font-size:12px;
-    font-weight:400;
-    text-align: right;
-    width:50%;
-  }
-  
-  .notification2ndLine {
-    font-size:14px;
-    font-weight:400;
-    width: 100%;
-    padding-bottom:15px;
-  }
-  
-  .myAccount2ndLine {
-    font-size:14px;
-    font-weight:400;
-    width: 100%;
-    padding-bottom:0px;
-  }
-  
-  
-  .NotificationSingle {
-      display: grid;
-      padding-bottom: 20px;
-      border-bottom: 1px solid #dedede;
-      margin-bottom: 20px;
-  }
-  
-  .NotificationSingleLast {
-      display: grid;
+    padding-bottom: 0px;
+    padding-top: 5px;
   }
 
-  
-  .myAccountContent {
-    width:200px;
-    padding: 25px 25px 25px 25px;
-    background: #ffffff;
+  .govuk-details__summary-text {
+    color: #0b0c0c;
+    font-weight: bold;
+    text-decoration: none;
   }
-  
-  .myAccountContent a {
+
+  .govuk-details__summary-text:hover {
+    text-decoration: underline;
+  }
+
+  .govuk-details__summary::before {
+    color: black;
+  }
+
+  /* -------------------------------------------------------------
+     3. Results table area
+     ------------------------------------------------------------- */
+  .table-area {
+    float: left;
+    overflow-x: auto;
+    padding: 0px 0px 30px 20px;
+  }
+
+  .container {
+    width: calc(100% - 20px);
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
     padding: 0px;
   }
 
-  .servicesContent {
-    width:265px;
-    background: #ffffff;
-    padding-bottom: 0px;
-    margin-bottom: 0px;
+  .govuk-table {
+    width: 100%;
+    border-collapse: collapse;
   }
 
-  .infoservicesContent {
-    width:300px;
-    background: #ffffff;
-    padding-bottom: 0px;
-    margin-bottom: 5px;
-    margin-top:5px;
-
+  .govuk-table__head {
+    background-color: #f8f8f8;
   }
 
-  .nav-list {
-    max-width:280px;
-    padding:3px 0px 8px 20px;
+  .govuk-table__header {
+    padding: 12px 10px;
+    text-align: left;
+    font-weight: bold;
+    background-color: #ffffff;
+    vertical-align: top;
   }
 
-  .nav-list-2 {
-    max-width:280px;
-    padding:3px 5px 8px 20px;
+  .govuk-table__header button {
+    background: none;
+    border: none;
+    font: inherit;
+    text-align: left;
+    font-weight: bold;
+    color: #1d70b8;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 0;
+    position: relative;
+    padding-right: 20px;
   }
 
-  .nav-list:hover {
+  .govuk-table__header button:hover {
+    color: #0b0c0c;
+  }
+
+  .govuk-table__header button:focus {
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+    background-color: #ffdd00;
+    color: #0b0c0c;
+  }
+
+  .govuk-table__cell {
+    padding: 12px 10px;
+    vertical-align: top;
+    text-align: left;
+  }
+
+  .govuk-table__row {
+    background-color: #fff;
+  }
+
+  .govuk-table__row:hover {
     background-color: #f3f2f1;
   }
 
-  .nav-list-2:hover {
-    background-color: #f3f2f1;
-  }
-  
-  
-  #logOut {
-    margin-bottom: 0px;
-      margin-top: 25px;
-      width: 100%;
-  }
-  
-  #inputs {
-    margin: auto;
-      margin-top: 27px;
-      max-width: 1200px;
-      min-height: 180px;
+  /* Highlight state applied to a row while its detail row is expanded */
+  .govuk-table__row.expanded {
+    background-color: #1d70b8;
+    border-top: 1px solid #1d70b8;
+    border-left: 5px solid #1d70b8;
+    border-right: 5px solid #1d70b8;
+    font-weight: bold;
+    color: #f3f2f1;
   }
 
+  /* "!" warning icon shown in the first cell of some rows */
+  .alert-icon {
+    width: 30px;
+    height: 30px;
+    background-color: #0b0c0c;
+    border-radius: 50%;
+  }
 
-        .container {
-            width: calc(100% - 20px);
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            padding: 0px;
-        }
+  .alert-icon-text {
+    color: #fff;
+    font-weight: bold;
+    margin-left: 12px;
+    font-size: 22px;
+  }
 
-        .govuk-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
+  .govuk-table__row.expanded .alert-icon {
+    background-color: #fff;
+  }
 
-        .govuk-table__head {
-            background-color: #f8f8f8;
-        }
+  .govuk-table__row.expanded .alert-icon-text {
+    color: #1d70b8;
+  }
 
-        .govuk-table__header {
-            padding: 12px 10px;
-            text-align: left;
-            font-weight: bold;
- 
-            background-color: #ffffff;
-            vertical-align: top;
-        }
+  /* Visually hides text while keeping it available to screen readers */
+  .govuk-visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    -webkit-clip-path: inset(50%) !important;
+    clip-path: inset(50%) !important;
+    border: 0 !important;
+    white-space: nowrap !important;
+  }
 
-        .govuk-table__header button {
-            background: none;
-            border: none;
-            font: inherit;
-            text-align: left;
-            font-weight: bold;
-            color: #1d70b8;
-            cursor: pointer;
-            text-decoration: none;
-            padding: 0;
-            position: relative;
-            padding-right: 20px;
-        }
+  /* -------------------------------------------------------------
+     4. Expandable ("Show"/"Hide") detail rows
+     ------------------------------------------------------------- */
+  .expandy-row-trigger2 {
+    background: none;
+    border: none;
+    color: #1d70b8;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: underline;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
 
-        .govuk-table__header button:hover {
-            color: #0b0c0c;
-        }
+  .expandy-row-trigger2:hover {
+    color: #003078;
+  }
 
-        .govuk-table__header button:focus {
-            text-decoration: underline;
-            text-decoration-thickness: 3px;
-            background-color: #ffdd00;
-            color: #0b0c0c;
-        }
+  .expandy-row-trigger2:focus {
+    outline: 3px solid #ffdd00;
+    outline-offset: 0;
+    background-color: #ffdd00;
+    color: #0b0c0c;
+  }
 
-
-        .govuk-table__cell {
-            padding: 12px 10px;
-            vertical-align: top;
-            text-align: left;
-        }
-
-        .govuk-table__row {
-            background-color: #fff;
-        }
-
-        .govuk-table__row:hover {
-            background-color: #f3f2f1;
-        }
-
-.govuk-table__row.expanded {
-  background-color: #1d70b8;
-  border-top: 1px solid #1d70b8;
-  border-left: 5px solid #1d70b8;
-  border-right: 5px solid #1d70b8;
-  font-weight: bold;
-  color: #f3f2f1;
-}
-
-        .alert-icon {
-            width: 30px;
-            height: 30px;
-          background-color: #0b0c0c;
-         border-radius: 50%;
-        }
-
-        .alert-icon-text {
-          color: #fff;
-          font-weight: bold;
-          margin-left: 12px;
-          font-size: 22px;
-        }
-
-        .govuk-table__row.expanded .alert-icon {
-          background-color: #fff;
-        }
-
-        .govuk-table__row.expanded .alert-icon-text {
-          color: #1d70b8;
-        }
-        .govuk-visually-hidden {
-            position: absolute !important;
-            width: 1px !important;
-            height: 1px !important;
-            margin: 0 !important;
-            padding: 0 !important;
-            overflow: hidden !important;
-            clip: rect(0 0 0 0) !important;
-            -webkit-clip-path: inset(50%) !important;
-            clip-path: inset(50%) !important;
-            border: 0 !important;
-            white-space: nowrap !important;
-        }
-
-        .expandy-row-trigger2 {
-            background: none;
-            border: none;
-            color: #1d70b8;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            text-decoration: underline;
-            padding: 0;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .expandy-row-trigger2:hover {
-            color: #003078;
-        }
-
-        .expandy-row-trigger2:focus {
-            outline: 3px solid #ffdd00;
-            outline-offset: 0;
-            background-color: #ffdd00;
-            color: #0b0c0c;
-        }
-
-        .accordion-icon {
-          box-sizing: border-box;
+  /* Circular chevron icon that flips when a row is expanded */
+  .accordion-icon {
+    box-sizing: border-box;
     display: inline-block;
     position: relative;
     width: 1.25rem;
@@ -1206,9 +808,10 @@ if (serviceParent && !serviceParent.contains(e.target)) {
     border-radius: 50%;
     vertical-align: middle;
     transform: rotate(180deg);
-        }
+  }
 
-        .accordion-icon:after   {content: "";
+  .accordion-icon:after {
+    content: "";
     box-sizing: border-box;
     display: block;
     position: absolute;
@@ -1221,18 +824,18 @@ if (serviceParent && !serviceParent.contains(e.target)) {
     border-right: 0.125rem solid;
   }
 
-.accordion-icon.expanded {
+  .accordion-icon.expanded {
     transform: rotate(0deg);
     color: #fff;
     border-width: 2px;
-}
+  }
 
-.accordion-icon.expanded::after {
-    bottom: 0.25rem;  /* Fine-tune this value */
+  .accordion-icon.expanded::after {
+    bottom: 0.25rem;
     left: 0.33rem;
-}
+  }
 
-          .govuk-accordion__section-toggle {
+  .govuk-accordion__section-toggle {
     text-decoration: none;
   }
 
@@ -1245,293 +848,96 @@ if (serviceParent && !serviceParent.contains(e.target)) {
     color: #ffffff;
   }
 
-  .govuk-accordion__section-toggle {
-    text-decoration: none;
+  .hide-row {
+    display: none;
   }
 
-        .hide-row {
-            display: none;
-        }
+  .expandy-row td {
+    background-color: #fff;
+  }
 
-        .expandy-row td {
-            background-color: #fff;
-        }
-
-.expandy-row {
+  .expandy-row {
     border-left: 5px solid #1d70b8;
     border-right: 5px solid #1d70b8;
     border-bottom: 5px solid #1d70b8;
-}
-
-        .rowContentSection {
-            margin-bottom: 20px;
-            display: flex;
-            gap: 10px;
-        }
-
-        .rowContentSectionLast {
-            margin-bottom: 0;
-        }
-
-        .expandedTitles {
-            font-weight: bold;
-            min-width: 150px;
-            color: #0b0c0c;
-        }
-
-        .expandedText {
-            flex: 1;
-            line-height: 1.5;
-        }
-
-        .expandedText a {
-            text-decoration: underline;
-        }
-
-        .correspondence-section {
-            display: flex;
-            gap: 50px;
-            margin-top: 10px;
-        }
-
-        .correspondence-column {
-            min-width: 200px;
-        }
-
-        .correspondence-column b {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .correspondence-column a {
-            display: block;
-            line-height: 1.8;
-        }
-
-  .govuk-main-wrapper {
-    padding-top: 10px;
   }
 
-
-
-  .govuk-width-container {
-    margin-left: 30px;
-    margin-right: 30px;
-    min-width: calc(100% - 60px);
-  }
-
-  .govuk-width-container-footer{
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 960px
-  }
-
-  .left__panel {
-    width: 365px;
-    float: left;
-    max-height:fit-content;
-  }
-  .filter {
-
-    box-shadow: inset 0 0 0 1px #b1b4b6;
-
-  }
-
-  .filter__header{
-    background-color: #f3f2f1;
-    box-shadow: inset 0 0 0 1px #b1b4b6;
-    padding: 10px 20px 10px 20px;
-  }
-
-  .filter__header-2{
-    border-top: solid 1px #b1b4b6;
-  }
-
-  .filter__header-title h2{
-    margin-bottom: 0px;
-  }
-
-  .filter__selected-heading{
-    text-align: justify;
-  }
-  .filter__options {
-
-    padding-top: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 0px;
-  }
-  .filter__heading-title, .filter__heading-action {
-    display: inline-block;
-    font-family: GDS Transport, arial, sans-serif;
-    text-align: left;
-    vertical-align: middle;
-  }
-
-  .filter__heading-title h2 {
-    margin-bottom: 0px;
-}
-
-  .filter__heading-action {
-    float: right;
-    margin-top: 3px;
-  }
-  .filter-tags li {
-    display: inline-block;
-    margin-right: 10px;
-    }
-  .filter__tag {
-  background-color: #fff;
-  border: 1px solid #0b0c0c;
-  color: #0b0c0c;
-  display: inline-block;
-  font-family: GDS Transport, arial, sans-serif;
-  margin-top: 5px;
-  padding: 5px;
-  text-decoration: none;
-  }
-  .filter__tag:link, .filter__tag:visited {
-    color: #0b0c0c;
-  }
-  .govuk-visually-hidden {
-    height: 1px !important;
-    margin: 0 !important;
-    overflow: hidden !important;
-    padding: 0 !important;
-    position: absolute !important;
-    width: 1px !important;
-    clip: rect(0 0 0 0) !important;
-    border: 0 !important;
-  }
-  .filter-tags {
-    margin-bottom: 20px;
-    padding-left: 0;
-  }
-  .filter__tag:after {
-    background-image: url(../assets/images/icon-tag-remove-cross.svg);
-    content: "";
-    display: inline-block;
-    font-weight: 700;
-    height: 10px;
-    margin-left: 5px;
-    vertical-align: middle;
-    width: 10px;
-  }
-  .filter__selected ul:last-of-type {
-    margin-bottom: 0;
-  }
-  .table-area {
-    float: left;
-    overflow-x: auto;
-    padding: 0px 0px 30px 20px;
-  }
-
-  /* Clean sorting arrow CSS - no conflicts */
+  /* -------------------------------------------------------------
+     5. Sortable column header arrows
+     ------------------------------------------------------------- */
   .govuk-table__header[aria-sort] button {
     color: #0b0c0c;
     position: relative;
     padding-right: 25px;
   }
 
-  /* Remove any existing pseudo-elements first */
   .govuk-table__header button::before,
   .govuk-table__header button::after {
     display: none;
   }
 
-  /* Default state - both arrows visible */
+  /* Default (unsorted) state: both up and down arrows visible */
   .govuk-table__header[aria-sort="none"] button::before,
   .govuk-table__header[aria-sort="none"] button::after {
-      border-left: 6px solid transparent;
-      border-right: 6px solid transparent;
-      content: "";
-      display: block;
-      height: 0;
-      right: 4px;
-      top: 50%;
-      position: absolute;
-      width: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    content: "";
+    display: block;
+    height: 0;
+    right: 4px;
+    top: 50%;
+    position: absolute;
+    width: 0;
   }
 
   .govuk-table__header[aria-sort="none"] button::before {
-      border-bottom: 9px solid #0b0c0c;
-      margin-top: -11px;
+    border-bottom: 9px solid #0b0c0c;
+    margin-top: -11px;
   }
 
   .govuk-table__header[aria-sort="none"] button::after {
-      border-top: 9px solid #0b0c0c;
-      margin-top:2px;
+    border-top: 9px solid #0b0c0c;
+    margin-top: 2px;
   }
 
-  /* Ascending state - up arrow only */
+  /* Ascending state: up arrow only */
   .govuk-table__header[aria-sort="ascending"] button::before {
-      border-left: 8px solid transparent;
-      border-right: 8px solid transparent;
-      border-bottom: 12px solid #0b0c0c;
-      content: "";
-      display: block;
-      height: 0;
-      right: 3px;
-      top: 50%;
-      position: absolute;
-      width: 0;
-      margin-top: -6px;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 12px solid #0b0c0c;
+    content: "";
+    display: block;
+    height: 0;
+    right: 3px;
+    top: 50%;
+    position: absolute;
+    width: 0;
+    margin-top: -6px;
   }
 
-  /* Descending state - down arrow only */
+  /* Descending state: down arrow only */
   .govuk-table__header[aria-sort="descending"] button::after {
-      border-left: 8px solid transparent;
-      border-right: 8px solid transparent;
-      border-top: 12px solid #0b0c0c;
-      content: "";
-      display: block;
-      height: 0;
-      right: 3px;
-      top: 50%;
-      position: absolute;
-      width: 0;
-      margin-top: -6px;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 12px solid #0b0c0c;
+    content: "";
+    display: block;
+    height: 0;
+    right: 3px;
+    top: 50%;
+    position: absolute;
+    width: 0;
+    margin-top: -6px;
   }
-
-.govuk-details {
-margin-bottom: 20px;
-}
-
-.govuk-details__text {
-border-left: 0px;
-padding-left: 0px;
-margin-bottom: 0px;
-padding-bottom: 0px;
-padding-top: 5px;
-}
-
-.govuk-details__summary-text {
-  color: #0b0c0c;
-  font-weight: bold;
-  text-decoration: none;
-}
-
-.govuk-details__summary-text:hover {
-  text-decoration: underline;
-}
-
-.govuk-details__summary::before {
-  color: black;
-}
-
 </style>
 
-
-
-  
-
-
 <div style="margin: auto; display: flex;">
-  <!-- left hand filter -->
+  <!-- Left-hand filter panel: search by reference/customer/colleague,
+       plus checkbox/disclosure filters for progress and type -->
 
   <div class="left__panel" data-module="filter">
-    
-    <h1 class="govuk-heading-l govuk-!-margin-bottom-3 govuk-!-margin-top-0">View applications</h1> 
+
+    <h1 class="govuk-heading-l govuk-!-margin-bottom-3 govuk-!-margin-top-0">View applications</h1>
     <p class="govuk-body" style="margin-bottom: 40px;">
       <a class="govuk-link" href="#"><b>Guidance on this service</b></a>
     </p>
@@ -1544,7 +950,7 @@ padding-top: 5px;
     </div>
     <div class="filter__content">
 
-    
+
 
       <div class="filter__options">
 
@@ -1595,7 +1001,7 @@ padding-top: 5px;
         <div class="filter__heading-title">
           <h2 class="govuk-heading-m">Filter by</h2>
         </div>
-  
+
       </div>
 
       <div class="filter__options">
@@ -1647,14 +1053,14 @@ padding-top: 5px;
                       Cancelled
                     </label>
                   </div>
-    
+
                   <div class="govuk-checkboxes__item">
                     <input class="govuk-checkboxes__input" id="status-2" name="status" type="checkbox" value="incomplete">
                     <label class="govuk-label govuk-checkboxes__label" for="status-2">
                       Completed
                     </label>
                   </div>
-    
+
                   <div class="govuk-checkboxes__item">
                     <input class="govuk-checkboxes__input" id="status-3" name="status" type="checkbox" value="inprogress">
                     <label class="govuk-label govuk-checkboxes__label" for="status-3">
@@ -1675,7 +1081,7 @@ padding-top: 5px;
                       Saved
                     </label>
                   </div>
-    
+
                 </div>
               </div>
             </details>
@@ -1695,21 +1101,21 @@ padding-top: 5px;
                       Register create
                     </label>
                   </div>
-    
+
                   <div class="govuk-checkboxes__item">
                     <input class="govuk-checkboxes__input" id="status-2" name="status" type="checkbox" value="incomplete">
                     <label class="govuk-label govuk-checkboxes__label" for="status-2">
                       Register query
                     </label>
                   </div>
-    
+
                   <div class="govuk-checkboxes__item">
                     <input class="govuk-checkboxes__input" id="status-3" name="status" type="checkbox" value="inprogress">
                     <label class="govuk-label govuk-checkboxes__label" for="status-3">
                       Register update
                     </label>
                   </div>
-    
+
                 </div>
               </div>
             </details>
@@ -1719,7 +1125,7 @@ padding-top: 5px;
       </div>
 
       <div class="filter__header-2">
-  
+
       </div>
 
       <div class="filter__options">
@@ -1740,11 +1146,12 @@ padding-top: 5px;
 </div>
   </div>
 
-  
 
 
 
-  <!-- table -->
+  <!-- Results table: 10 applications per page, sortable by title number,
+       customer reference, and date received; each row expands to show
+       progress details, correspondence, and available actions -->
   <div class="table-area">
 
     <div class="container">
@@ -2722,146 +2129,116 @@ padding-top: 5px;
 
 </div>
 
-  <script>
-      let currentSort = { column: -1, direction: 'none' };
+<script>
+  // Sorting state for the results table: which column is sorted and
+  // in which direction.
+  let currentSort = { column: -1, direction: 'none' };
 
-      function sortTable(columnIndex, dataType) {
-          const table = document.querySelector('.govuk-table');
-          const tbody = table.querySelector('tbody');
-          const rows = Array.from(tbody.querySelectorAll('tr')).filter(row => !row.classList.contains('expandy-row'));
-          const expandedRows = Array.from(tbody.querySelectorAll('tr.expandy-row'));
-          
-          // Determine sort direction
-          let direction;
-          if (currentSort.column === columnIndex) {
-              direction = currentSort.direction === 'ascending' ? 'descending' : 'ascending';
-          } else {
-              direction = 'ascending';
-          }
-          
-          // Update ARIA attributes
-          const headers = table.querySelectorAll('th[aria-sort]');
-          headers.forEach(header => header.setAttribute('aria-sort', 'none'));
-          headers[columnIndex - 1].setAttribute('aria-sort', direction);
-          
-          // Sort rows
-          rows.sort((a, b) => {
-              let aValue, bValue;
-              const aCells = a.querySelectorAll('td');
-              const bCells = b.querySelectorAll('td');
-              
-              if (dataType === 'date') {
-                  aValue = aCells[columnIndex].getAttribute('data-sort-value') || aCells[columnIndex].textContent;
-                  bValue = bCells[columnIndex].getAttribute('data-sort-value') || bCells[columnIndex].textContent;
-              } else {
-                  aValue = aCells[columnIndex].textContent.trim();
-                  bValue = bCells[columnIndex].textContent.trim();
-              }
-              
-              let comparison = 0;
-              if (dataType === 'date') {
-                  comparison = new Date(aValue) - new Date(bValue);
-              } else {
-                  comparison = aValue.localeCompare(bValue, undefined, { numeric: true });
-              }
-              
-              return direction === 'ascending' ? comparison : -comparison;
-          });
-          
-          // Clear tbody and re-add sorted rows
-          tbody.innerHTML = '';
-          
-          // Add rows back with their corresponding expanded rows
-          rows.forEach((row, index) => {
-              tbody.appendChild(row);
-              
-              // Find and add the corresponding expanded row
-              const rowId = row.querySelector('.expandy-row-trigger2').getAttribute('onclick').match(/'([^']+)'/)[1];
-              const expandedRow = expandedRows.find(expRow => expRow.id === rowId);
-              if (expandedRow) {
-                  tbody.appendChild(expandedRow);
-              }
-          });
-          
-          // Update current sort state
-          currentSort = { column: columnIndex, direction: direction };
+  // Sorts the table body by the given column index and data type
+  // ('string' or 'date'), toggling ascending/descending on repeat
+  // clicks, and keeps each expandable detail row attached to its
+  // parent row after the reorder.
+  function sortTable(columnIndex, dataType) {
+      const table = document.querySelector('.govuk-table');
+      const tbody = table.querySelector('tbody');
+      const rows = Array.from(tbody.querySelectorAll('tr')).filter(row => !row.classList.contains('expandy-row'));
+      const expandedRows = Array.from(tbody.querySelectorAll('tr.expandy-row'));
+
+      // Determine sort direction
+      let direction;
+      if (currentSort.column === columnIndex) {
+          direction = currentSort.direction === 'ascending' ? 'descending' : 'ascending';
+      } else {
+          direction = 'ascending';
       }
 
-      function toggleRow(rowId) {
-          const row = document.getElementById(rowId);
-          const trigger = document.querySelector(`[onclick="toggleRow('${rowId}')"]`);
-          const accordionText = trigger.querySelector('.accordion-text');
-          const accordionIcon = trigger.querySelector('.accordion-icon');
-          const mainTableRow = trigger.closest('tr');
-          
-          if (row.classList.contains('hide-row')) {
-              row.classList.remove('hide-row');
-              accordionText.textContent = 'Hide';
-              accordionIcon.classList.add('expanded');
-              mainTableRow.classList.add('expanded');
-              trigger.setAttribute('aria-expanded', 'true');
-          } else {
-              row.classList.add('hide-row');
-              accordionText.textContent = 'Show';
-              accordionIcon.classList.remove('expanded');
-              mainTableRow.classList.remove('expanded');
-              trigger.setAttribute('aria-expanded', 'false');
-          }
-      }
+      // Update ARIA attributes
+      const headers = table.querySelectorAll('th[aria-sort]');
+      headers.forEach(header => header.setAttribute('aria-sort', 'none'));
+      headers[columnIndex - 1].setAttribute('aria-sort', direction);
 
-      // Initialize all expand buttons with proper ARIA attributes
-      document.addEventListener('DOMContentLoaded', function() {
-          const triggers = document.querySelectorAll('.expandy-row-trigger2');
-          triggers.forEach(trigger => {
-              trigger.setAttribute('aria-expanded', 'false');
-              trigger.setAttribute('role', 'button');
-          });
+      // Sort rows
+      rows.sort((a, b) => {
+          let aValue, bValue;
+          const aCells = a.querySelectorAll('td');
+          const bCells = b.querySelectorAll('td');
+
+          if (dataType === 'date') {
+              aValue = aCells[columnIndex].getAttribute('data-sort-value') || aCells[columnIndex].textContent;
+              bValue = bCells[columnIndex].getAttribute('data-sort-value') || bCells[columnIndex].textContent;
+          } else {
+              aValue = aCells[columnIndex].textContent.trim();
+              bValue = bCells[columnIndex].textContent.trim();
+          }
+
+          let comparison = 0;
+          if (dataType === 'date') {
+              comparison = new Date(aValue) - new Date(bValue);
+          } else {
+              comparison = aValue.localeCompare(bValue, undefined, { numeric: true });
+          }
+
+          return direction === 'ascending' ? comparison : -comparison;
       });
 
-      document.addEventListener('DOMContentLoaded', function() {
-    // Find the close link in the notification banner
-    const closeLink = document.querySelector('.govuk-notification-banner a[href="#"]');
-    
-    if (closeLink) {
-        closeLink.addEventListener('click', function(e) {
-            e.preventDefault(); // Prevent default link behavior
-            
-            // Find the notification banner element
-            const notificationBanner = document.querySelector('.govuk-notification-banner');
-            
-            if (notificationBanner) {
-                // Hide the notification banner
-                notificationBanner.style.display = 'none';
-                
-                // Optional: Add a smooth fade-out effect
-                // notificationBanner.style.transition = 'opacity 0.3s ease';
-                // notificationBanner.style.opacity = '0';
-                // setTimeout(() => {
-                //     notificationBanner.style.display = 'none';
-                // }, 300);
-            }
-        });
-    }
-});
-  </script>
+      // Clear tbody and re-add sorted rows
+      tbody.innerHTML = '';
 
+      // Add rows back with their corresponding expanded rows
+      rows.forEach((row, index) => {
+          tbody.appendChild(row);
 
+          // Find and add the corresponding expanded row
+          const rowId = row.querySelector('.expandy-row-trigger2').getAttribute('onclick').match(/'([^']+)'/)[1];
+          const expandedRow = expandedRows.find(expRow => expRow.id === rowId);
+          if (expandedRow) {
+              tbody.appendChild(expandedRow);
+          }
+      });
 
+      // Update current sort state
+      currentSort = { column: columnIndex, direction: direction };
+  }
 
+  // Shows/hides a detail row and updates its trigger button's icon,
+  // label ("Show"/"Hide"), and aria-expanded state.
+  function toggleRow(rowId) {
+      const row = document.getElementById(rowId);
+      const trigger = document.querySelector(`[onclick="toggleRow('${rowId}')"]`);
+      const accordionText = trigger.querySelector('.accordion-text');
+      const accordionIcon = trigger.querySelector('.accordion-icon');
+      const mainTableRow = trigger.closest('tr');
 
+      if (row.classList.contains('hide-row')) {
+          row.classList.remove('hide-row');
+          accordionText.textContent = 'Hide';
+          accordionIcon.classList.add('expanded');
+          mainTableRow.classList.add('expanded');
+          trigger.setAttribute('aria-expanded', 'true');
+      } else {
+          row.classList.add('hide-row');
+          accordionText.textContent = 'Show';
+          accordionIcon.classList.remove('expanded');
+          mainTableRow.classList.remove('expanded');
+          trigger.setAttribute('aria-expanded', 'false');
+      }
+  }
 
-
-
-
-
+  // Initialise all expand buttons with proper ARIA attributes
+  document.addEventListener('DOMContentLoaded', function() {
+      const triggers = document.querySelectorAll('.expandy-row-trigger2');
+      triggers.forEach(trigger => {
+          trigger.setAttribute('aria-expanded', 'false');
+          trigger.setAttribute('role', 'button');
+      });
+  });
+</script>
 
 {% endblock %}
 
 {% block footer %}
 <div class="govuk-footer" style="background-color: #f3f2f1;border-top-color: #0b0c0c">
   <div class="govuk-width-container">
-    <div class="govuk-footer__meta">
-      <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
     <div class="govuk-footer__meta">
       <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
         <h2 class="govuk-visually-hidden">Support links</h2>
