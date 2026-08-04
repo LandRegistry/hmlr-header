@@ -7,11 +7,29 @@
 {% block header %}
 
 <style>
+  .govuk-generic-header__homepage-link,
+  .govuk-footer__link,
+  .govuk-footer__licence-description,
+  .govuk-body,
+  .govuk-list,
+  .govuk-heading-xl,
+  .govuk-heading-l,
+  .govuk-heading-m,
+  .govuk-heading-s,
+  .govuk-body-m,
+  .govuk-body-s,
+  .govuk-body-xl,
+  .govuk-body-l,
+  p {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+
   .hmlr-logo {
     height: 30px;
     margin-right: 3px;
   }
-.govuk-generic-header {
+
+  .govuk-generic-header {
     border-bottom: none
   }
 
@@ -32,7 +50,8 @@
     display: flex;
     align-items: center;
   }
-      .navbar-menu--right {
+
+  .navbar-menu--right {
     display: flex;
     align-items: center;
     list-style: none;
@@ -40,7 +59,7 @@
     padding: 0;
   }
 
-    .parent {
+  .parent {
     display: block;
     position: relative;
     float: left;
@@ -79,7 +98,6 @@
     box-shadow: none;
   }
 
-  /* Blue/white/dark underline states shown under nav links on hover & focus */
   .parent a:hover::after {
     content: "";
     position: absolute;
@@ -99,114 +117,8 @@
     height: 4px;
     background-color: #0b0c0c;
   }
-
-  .parent.account-parent a:hover::after {
-    content: "";
-    position: absolute;
-    left: 20px;
-    right: 20px;
-    bottom: 1px;
-    height: 4px;
-    background-color: #fff;
-  }
-
-  .parent.account-parent > a.account-toggle:focus::after {
-    content: "";
-    position: absolute;
-    left: 20px;
-    right: 20px;
-    bottom: 1px;
-    height: 4px;
-    background-color: #0b0c0c;
-  }
-
-  .parent.account-parent.is-open > a.account-toggle:focus::after {
-    content: "";
-    position: absolute;
-    left: 20px;
-    right: 20px;
-    bottom: 1px;
-    height: 4px;
-    background-color: #0b0c0c;
-  }
-
-  .parent.account-parent.is-open > a.account-toggle::after {
-    content: "";
-    position: absolute;
-    left: 20px;
-    right: 20px;
-    bottom: 0px;
-    height: 4px;
-    background-color: #1d70b8;
-  }
-
-  /* -------------------------------------------------------------
-     2. "My account" dropdown panel (John James / sign-in details)
-     ------------------------------------------------------------- */
-  .parent.account-parent {
-    cursor: pointer;
-  }
-
-  .parent.account-parent.is-open > a.account-toggle {
-    color: #1d70b8;
-  }
-
-  .parent.account-parent.is-open {
-    background-color: #ffffff;
-    color: #1d70b8;
-  }
-
-  /* Make the whole toggle area (text + chevron) clickable */
-  .parent.account-parent > a.account-toggle {
-    display: inline-flex;
-    align-items: center;
-    width: auto;
-    position: relative;
-    padding-left: 20px;
-    padding-right: 15px;
-    margin-right: 0px;
-    height: 60px;
-    border-bottom-style: none;
-  }
-
-  .account-name {
-    display: inline-block;
-  }
-
-  .account-chevron-icon {
-    width: 25px;
-    height: 25px;
-    margin-left: 8px;
-    flex-shrink: 0;
-  }
-
-  .parent.account-parent.is-open > a.account-toggle .account-chevron-icon {
-    transform: rotate(180deg);
-    /* turns the chevron #1d70b8 blue, matching the Services open-state blue */
-    filter: brightness(0) saturate(100%) invert(29%) sepia(60%) saturate(1583%) hue-rotate(180deg);
-  }
-
-  .parent.account-parent > a.account-toggle:focus .account-chevron-icon {
-    filter: brightness(0) saturate(100%);
-  }
-
-  .parent.account-parent > a.account-toggle:focus .account-name {
-    background-color: #ffdd00;
-    color: #0b0c0c;
-    text-decoration: none;
-  }
-
-  .parent.account-parent > .child {
-    display: none;
-    position: absolute;
-    right: 0;
-  }
-
-  .parent.account-parent.is-open > .child {
-    display: block;
-    border-bottom-style: inset;
-  }
 </style>
+
 <div class="govuk-generic-header">
   <div class="govuk-generic-header__container govuk-width-container">
     <div class="govuk-generic-header__logo">
@@ -215,11 +127,13 @@
          HM Land Registry portal
       </a>
     </div>
-            <ul class="navbar-menu--right">
- 
+    <nav aria-label="Account">
+    <ul class="navbar-menu--right">
+
       <li class="parent sign-out"><a href="#">Sign out</a></li>
- 
+
     </ul>
+    </nav>
   </div>
 </div>
 
@@ -232,28 +146,6 @@
         Record contractual control rights for land
         </a>
       </span>
-      <nav aria-label="Menu" class="govuk-service-navigation__wrapper">
-        <button type="button" class="govuk-service-navigation__toggle govuk-js-service-navigation-toggle" aria-controls="navigation" hidden aria-hidden="true">
-          Menu
-        </button>
-        <ul class="govuk-service-navigation__list" id="navigation">
-          <li class="govuk-service-navigation__item">
-            <a class="govuk-service-navigation__link" href="#">
-        
-            </a>
-          </li>
-          <li class="govuk-service-navigation__item govuk-service-navigation__item--active">
-            <a class="govuk-service-navigation__link" href="#" aria-current="true">
-              <strong class="govuk-service-navigation__active-fallback"></strong>
-            </a>
-          </li>
-          <li class="govuk-service-navigation__item">
-            <a class="govuk-service-navigation__link" href="#">
-           
-            </a>
-          </li>
-        </ul>
-      </nav>
     </div>
   </div>
 </section>
@@ -282,9 +174,9 @@
   href: "#",
   isStartButton: true
 }) }} <br>
-<button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+<a href="#" role="button" draggable="false" class="govuk-button govuk-button--secondary" data-module="govuk-button">
   Manage contractual control records
-</button>
+</a>
 
 <h2 class="govuk-heading-m">Before you start</h2>
 <p>You will need the signed contract to record the rights.</p>
@@ -298,8 +190,6 @@
 {% block footer %}
 <div class="govuk-footer" style="background-color: #f3f2f1;border-top-color: #0b0c0c">
   <div class="govuk-width-container">
-    <div class="govuk-footer__meta">
-      <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
     <div class="govuk-footer__meta">
       <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
         <h2 class="govuk-visually-hidden">Support links</h2>

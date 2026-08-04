@@ -7,9 +7,23 @@
 {% block header %}
 
 <style>
-  /* -------------------------------------------------------------
-     1. Generic header bar (HMLR logo + top-right account/sign out nav)
-     ------------------------------------------------------------- */
+  .govuk-generic-header__homepage-link,
+  .govuk-footer__link,
+  .govuk-footer__licence-description,
+  .govuk-body,
+  .govuk-list,
+  .govuk-heading-xl,
+  .govuk-heading-l,
+  .govuk-heading-m,
+  .govuk-heading-s,
+  .govuk-body-m,
+  .govuk-body-s,
+  .govuk-body-xl,
+  .govuk-body-l,
+  p {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+
   .hmlr-logo {
     height: 30px;
     margin-right: 3px;
@@ -84,7 +98,6 @@
     box-shadow: none;
   }
 
-  /* Blue/white/dark underline states shown under nav links on hover & focus */
   .parent a:hover::after {
     content: "";
     position: absolute;
@@ -514,16 +527,22 @@
       </a>
     </div>
 
+    <nav aria-label="Account">
     <ul class="navbar-menu--right">
 
       <!-- "My account" dropdown: shows who is signed in, their user ID,
-           last login time, and their primary Business Unit Administrator -->
+           last login time, and their primary Business Unit Administrator.
+           The toggle is a real <a> (so existing colour/hover/focus link
+           styling still applies) but doesn't navigate anywhere, so it's
+           marked role="button" for screen readers; JS below wires up
+           Space to activate it the same way Enter already does. -->
       <li class="parent account-parent">
-        <a href="#" class="account-toggle" aria-haspopup="true" aria-expanded="false">
+        <a href="#" class="account-toggle" role="button" aria-haspopup="true" aria-expanded="false">
           <span class="account-name">John James</span>
           <img src="/public/images/icon_govuk_chevrondownWhite.svg" class="account-chevron-icon" alt="">
         </a>
         <ul class="child">
+          <li>
           <div class="govuk-body myAccountContent">
             <div>
               <div class="myAccountTitle">Signed in as:</div>
@@ -538,12 +557,14 @@
             <div class="myAccountTitle" style="padding-top:15px;"><b>Primary Business Unit Administrator (BUA):</b></div>
             <div class="myAccount2ndLine">John Taylor</div>
           </div>
+          </li>
         </ul>
       </li>
 
       <li class="parent sign-out"><a href="#">Sign out</a></li>
 
     </ul>
+    </nav>
 
   </div>
 </div>
@@ -560,7 +581,7 @@
         <ul class="govuk-service-navigation__list" id="navigation">
 
           <li class="govuk-service-navigation__item service-nav-parent">
-            <a class="govuk-service-navigation__link service-nav-toggle" href="#" aria-haspopup="true" aria-expanded="false">
+            <a class="govuk-service-navigation__link service-nav-toggle" href="#" role="button" aria-haspopup="true" aria-expanded="false">
               Services
               <span class="service-nav-chevron-icon" aria-hidden="true"></span>
             </a>
@@ -572,7 +593,7 @@
               <!-- Each ".service-has-submenu" item below opens a second-level
                    flyout list of related services when clicked -->
               <li class="service-has-submenu">
-                <a href="#">
+                <a href="#" role="button" aria-haspopup="true" aria-expanded="false">
                   Information services
                   <span class="service-submenu-chevron" aria-hidden="true"></span>
                 </a>
@@ -598,7 +619,7 @@
               </li>
 
               <li class="service-has-submenu">
-                <a href="#">
+                <a href="#" role="button" aria-haspopup="true" aria-expanded="false">
                   Land charges Services
                   <span class="service-submenu-chevron" aria-hidden="true"></span>
                 </a>
@@ -614,7 +635,7 @@
               <li><a href="#">Reply to Requisition</a></li>
 
               <li class="service-has-submenu">
-                <a href="#">
+                <a href="#" role="button" aria-haspopup="true" aria-expanded="false">
                   Network Services
                   <span class="service-submenu-chevron" aria-hidden="true"></span>
                 </a>
@@ -642,7 +663,7 @@
               <li><a href="#">Reply to Requisition</a></li>
 
               <li class="service-has-submenu">
-                <a href="#">
+                <a href="#" role="button" aria-haspopup="true" aria-expanded="false">
                   General Facilities
                   <span class="service-submenu-chevron" aria-hidden="true"></span>
                 </a>
@@ -655,7 +676,7 @@
               </li>
 
               <li class="service-has-submenu">
-                <a href="#">
+                <a href="#" role="button" aria-haspopup="true" aria-expanded="false">
                   Administrative Services
                   <span class="service-submenu-chevron" aria-hidden="true"></span>
                 </a>
@@ -670,7 +691,7 @@
           </li>
 
           <li class="govuk-service-navigation__item">
-            <a class="govuk-service-navigation__link" href="#" aria-current="true">
+            <a class="govuk-service-navigation__link" href="#" aria-current="page">
               Reply to requisition
             </a>
           </li>
@@ -681,7 +702,7 @@
           </li>
           <li class="govuk-service-navigation__item">
             <a class="govuk-service-navigation__link" href="#">
-              Guides and Links
+              HM Land Registry GOV.UK
             </a>
           </li>
         </ul>
@@ -710,6 +731,16 @@
         if (accountParent) accountParent.classList.remove('is-open');
         if (accountToggle) accountToggle.setAttribute('aria-expanded', 'false');
       });
+
+      // role="button" on an <a> doesn't get native Space-key activation
+      // the way a real <button> would, so wire it up here (Enter already
+      // works natively via the link's own click behaviour).
+      serviceToggle.addEventListener('keydown', function (e) {
+        if (e.key === ' ' || e.key === 'Spacebar') {
+          e.preventDefault();
+          serviceToggle.click();
+        }
+      });
     }
 
     /* ---- Account (John James) dropdown ---- */
@@ -727,6 +758,15 @@
         // close services menu if open
         if (serviceParent) serviceParent.classList.remove('is-open');
         if (serviceToggle) serviceToggle.setAttribute('aria-expanded', 'false');
+      });
+    }
+
+    if (accountToggle) {
+      accountToggle.addEventListener('keydown', function (e) {
+        if (e.key === ' ' || e.key === 'Spacebar') {
+          e.preventDefault();
+          accountToggle.click();
+        }
       });
     }
 
@@ -770,10 +810,22 @@
         // close any other open submenus first
         submenuParents.forEach(function (p) {
           p.classList.remove('is-open');
+          var t = p.querySelector(':scope > a');
+          if (t) t.setAttribute('aria-expanded', 'false');
         });
 
         if (!isOpen) {
           parent.classList.add('is-open');
+          trigger.setAttribute('aria-expanded', 'true');
+        }
+      });
+
+      // role="button" on an <a> doesn't get native Space-key activation,
+      // so wire it up here (Enter already works via the link's click).
+      trigger.addEventListener('keydown', function (e) {
+        if (e.key === ' ' || e.key === 'Spacebar') {
+          e.preventDefault();
+          trigger.click();
         }
       });
     });
@@ -784,6 +836,8 @@
       if (!clickedInsideSubmenu) {
         submenuParents.forEach(function (p) {
           p.classList.remove('is-open');
+          var t = p.querySelector(':scope > a');
+          if (t) t.setAttribute('aria-expanded', 'false');
         });
       }
     });
@@ -793,6 +847,8 @@
       if (e.key === 'Escape') {
         submenuParents.forEach(function (p) {
           p.classList.remove('is-open');
+          var t = p.querySelector(':scope > a');
+          if (t) t.setAttribute('aria-expanded', 'false');
         });
       }
     });
@@ -816,12 +872,6 @@
 
 {% block content %}
 
-<!-- =============================================================
-     "My services" shortcut cards
-     Shows up to 6 user-configurable shortcut links. "Edit shortcuts"
-     reveals a row of <select> inputs (Position 1-6) that let the
-     user choose which service each shortcut card should point to.
-     ============================================================= -->
 <div>
   <div id="linksPanel" class="govuk-body">
 
@@ -1325,7 +1375,6 @@
 
 </div>
 
-<!-- Divider line -->
 <div class="dividerLine10"></div>
 
 
@@ -1333,7 +1382,6 @@
 <!-- Left hand panel -->
   <div class="govuk-grid-column-two-thirds">
 
-    <!-- Notifications: unresolved requisitions, unread messages, PDF downloads -->
     <h2 class="govuk-heading-m">Notifications</h2>
 
     <ul id="row1Links" class="govuk-grid-row" >
@@ -1373,11 +1421,8 @@
     </li>
     </ul>
 
-<!-- Divider line -->
 <div class="dividerLine10"></div>
 
-<!-- "Services and information" links: training, requisition benchmarking,
-     expedite requests, specialist support, and policy/service-status links -->
 <ul id="row1Links" class="govuk-grid-row" >
   <li class="hmlr-card-group__item" id="value0" >
       <div class="linkTextSection" style="border-top: none;">
@@ -1449,7 +1494,7 @@
     </ul>
 </div>
 
-<!-- Right hand news panel: promotional/informational tiles with thumbnail images -->
+<!-- Right hand news panel -->
   <div class="govuk-grid-column-one-third">
 
     <h2 class="govuk-heading-m govuk-!-margin-bottom-6">News and updates</h2>
@@ -1484,7 +1529,6 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
 
-    <!-- Divider line -->
     <div class="dividerLine10"></div>
 
       <h2 class="govuk-heading-m">Your despatch address</h2>

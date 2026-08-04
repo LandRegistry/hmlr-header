@@ -7,13 +7,22 @@
 {% block header %}
 
 <style>
-  /* =============================================================
-     ALL PAGE STYLES
-     Consolidated into a single block so they only need to be
-     looked up in one place. Grouped by the UI region they style.
-     Note: this page's header has no "My account" dropdown (just a
-     Sign out link), so account-menu styling isn't included here.
-     ============================================================= */
+  .govuk-generic-header__homepage-link,
+  .govuk-footer__link,
+  .govuk-footer__licence-description,
+  .govuk-body,
+  .govuk-list,
+  .govuk-heading-xl,
+  .govuk-heading-l,
+  .govuk-heading-m,
+  .govuk-heading-s,
+  .govuk-body-m,
+  .govuk-body-s,
+  .govuk-body-xl,
+  .govuk-body-l,
+  p {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
 
   /* -------------------------------------------------------------
      1. Page layout & width overrides (base GOV.UK template)
@@ -107,7 +116,6 @@
     box-shadow: none;
   }
 
-  /* White/dark underline shown under nav links (e.g. Sign out) on hover & focus */
   .parent a:hover::after {
     content: "";
     position: absolute;
@@ -322,9 +330,11 @@
       </a>
     </div>
 
+    <nav aria-label="Account">
     <ul class="navbar-menu--right">
       <li class="parent sign-out"><a href="#">Sign out</a></li>
     </ul>
+    </nav>
 
   </div>
 </div>
@@ -341,7 +351,7 @@
         <ul class="govuk-service-navigation__list" id="navigation">
 
           <li class="govuk-service-navigation__item service-nav-parent">
-            <a class="govuk-service-navigation__link service-nav-toggle" href="#" aria-haspopup="true" aria-expanded="false">
+            <a class="govuk-service-navigation__link service-nav-toggle" href="#" role="button" aria-haspopup="true" aria-expanded="false">
               Services
               <span class="service-nav-chevron-icon" aria-hidden="true"></span>
             </a>
@@ -353,7 +363,7 @@
               <!-- Each ".service-has-submenu" item below opens a second-level
                    flyout list of related services when clicked -->
               <li class="service-has-submenu">
-                <a href="#">
+                <a href="#" role="button" aria-haspopup="true" aria-expanded="false">
                   Information services
                   <span class="service-submenu-chevron" aria-hidden="true"></span>
                 </a>
@@ -379,7 +389,7 @@
               </li>
 
               <li class="service-has-submenu">
-                <a href="#">
+                <a href="#" role="button" aria-haspopup="true" aria-expanded="false">
                   Land charges Services
                   <span class="service-submenu-chevron" aria-hidden="true"></span>
                 </a>
@@ -395,7 +405,7 @@
               <li><a href="#">Reply to Requisition</a></li>
 
               <li class="service-has-submenu">
-                <a href="#">
+                <a href="#" role="button" aria-haspopup="true" aria-expanded="false">
                   Network Services
                   <span class="service-submenu-chevron" aria-hidden="true"></span>
                 </a>
@@ -423,7 +433,7 @@
               <li><a href="#">Reply to Requisition</a></li>
 
               <li class="service-has-submenu">
-                <a href="#">
+                <a href="#" role="button" aria-haspopup="true" aria-expanded="false">
                   General Facilities
                   <span class="service-submenu-chevron" aria-hidden="true"></span>
                 </a>
@@ -436,7 +446,7 @@
               </li>
 
               <li class="service-has-submenu">
-                <a href="#">
+                <a href="#" role="button" aria-haspopup="true" aria-expanded="false">
                   Administrative Services
                   <span class="service-submenu-chevron" aria-hidden="true"></span>
                 </a>
@@ -451,7 +461,7 @@
           </li>
 
           <li class="govuk-service-navigation__item">
-            <a class="govuk-service-navigation__link" href="#" aria-current="true">
+            <a class="govuk-service-navigation__link" href="#" aria-current="page">
               Reply to requisition
             </a>
           </li>
@@ -487,6 +497,16 @@
         e.stopPropagation();
         var isOpen = serviceParent.classList.toggle('is-open');
         serviceToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+
+      // role="button" on an <a> doesn't get native Space-key activation
+      // the way a real <button> would, so wire it up here (Enter already
+      // works natively via the link's own click behaviour).
+      serviceToggle.addEventListener('keydown', function (e) {
+        if (e.key === ' ' || e.key === 'Spacebar') {
+          e.preventDefault();
+          serviceToggle.click();
+        }
       });
     }
 
@@ -524,10 +544,22 @@
         // close any other open submenus first
         submenuParents.forEach(function (p) {
           p.classList.remove('is-open');
+          var t = p.querySelector(':scope > a');
+          if (t) t.setAttribute('aria-expanded', 'false');
         });
 
         if (!isOpen) {
           parent.classList.add('is-open');
+          trigger.setAttribute('aria-expanded', 'true');
+        }
+      });
+
+      // role="button" on an <a> doesn't get native Space-key activation,
+      // so wire it up here (Enter already works via the link's click).
+      trigger.addEventListener('keydown', function (e) {
+        if (e.key === ' ' || e.key === 'Spacebar') {
+          e.preventDefault();
+          trigger.click();
         }
       });
     });
@@ -538,6 +570,8 @@
       if (!clickedInsideSubmenu) {
         submenuParents.forEach(function (p) {
           p.classList.remove('is-open');
+          var t = p.querySelector(':scope > a');
+          if (t) t.setAttribute('aria-expanded', 'false');
         });
       }
     });
@@ -547,6 +581,8 @@
       if (e.key === 'Escape') {
         submenuParents.forEach(function (p) {
           p.classList.remove('is-open');
+          var t = p.querySelector(':scope > a');
+          if (t) t.setAttribute('aria-expanded', 'false');
         });
       }
     });

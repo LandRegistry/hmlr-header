@@ -7,27 +7,27 @@
 {% block header %}
 
 <style>
-.hmlr-logo {
-  height: 30px;
-  margin-right: 3px;
-}
+  .hmlr-logo {
+    height: 30px;
+    margin-right: 3px;
+  }
 
-.govuk-generic-header__homepage-link,
-.govuk-footer__link,
-.govuk-footer__licence-description,
-.govuk-body,
-.govuk-list,
-.govuk-heading-xl,
-.govuk-heading-l,
-.govuk-heading-m,
-.govuk-heading-s,
-.govuk-body-m,
-.govuk-body-s,
-.govuk-body-xl,
-.govuk-body-l,
-p {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
+  .govuk-generic-header__homepage-link,
+  .govuk-footer__link,
+  .govuk-footer__licence-description,
+  .govuk-body,
+  .govuk-list,
+  .govuk-heading-xl,
+  .govuk-heading-l,
+  .govuk-heading-m,
+  .govuk-heading-s,
+  .govuk-body-m,
+  .govuk-body-s,
+  .govuk-body-xl,
+  .govuk-body-l,
+  p {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
 </style>
 <div class="govuk-generic-header">
   <div class="govuk-generic-header__container govuk-width-container">
@@ -70,35 +70,37 @@ p {
 </p>
 <p>In what capacity are you contacting HM Land Registry?</p>
 
-<div class="govuk-form-group">
-  <fieldset class="govuk-fieldset">
-    <div class="govuk-radios" data-module="govuk-radios">
-      <div class="govuk-radios__item">
-        <input class="govuk-radios__input" id="whereDoYouLive" name="whereDoYouLive" type="radio" value="england">
-        <label class="govuk-label govuk-radios__label" for="whereDoYouLive">
-          Business Customer
-        </label>
+
+<form method="post" novalidate>
+  <div class="govuk-form-group">
+    <fieldset class="govuk-fieldset">
+      <legend class="govuk-visually-hidden">In what capacity are you contacting HM Land Registry?</legend>
+      <div class="govuk-radios" data-module="govuk-radios">
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="whereDoYouLive" name="whereDoYouLive" type="radio" value="england">
+          <label class="govuk-label govuk-radios__label" for="whereDoYouLive">
+            Business Customer
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="whereDoYouLive-2" name="whereDoYouLive" type="radio" value="scotland">
+          <label class="govuk-label govuk-radios__label" for="whereDoYouLive-2">
+            Member of Public
+          </label>
+        </div>
       </div>
-      <div class="govuk-radios__item">
-        <input class="govuk-radios__input" id="whereDoYouLive-2" name="whereDoYouLive" type="radio" value="scotland">
-        <label class="govuk-label govuk-radios__label" for="whereDoYouLive-2">
-          Member of Public
-        </label>
-      </div>
-    </div>
-  </fieldset>
-</div>
-<button type="submit" class="govuk-button" data-module="govuk-button">
-  Next
-</button>
+    </fieldset>
+  </div>
+  <button type="submit" class="govuk-button" data-module="govuk-button">
+    Next
+  </button>
+</form>
 
 {% endblock %}
 
 {% block footer %}
 <div class="govuk-footer" style="background-color: #f3f2f1;border-top-color: #0b0c0c">
   <div class="govuk-width-container">
-    <div class="govuk-footer__meta">
-      <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
     <div class="govuk-footer__meta">
       <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
         <h2 class="govuk-visually-hidden">Support links</h2>
