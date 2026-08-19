@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 150 142">
+  <defs>
+    <!-- One exact regular flat-top hexagon. Every tile below is an exact translation
+         of this same geometry, so neighbouring edges are mathematically identical. -->
+    <polygon id="hex" points="13.5,0 6.75,11.6913429511 -6.75,11.6913429511 -13.5,0 -6.75,-11.6913429511 6.75,-11.6913429511"/>
+  </defs>
+  <g>
+    <use href="#hex" transform="translate(35.100000000000 71.200000000000)" fill="#f2e500"/>
+    <use href="#hex" transform="translate(75.600000000000 71.200000000000)" fill="#fff"/>
+    <use href="#hex" transform="translate(95.850000000000 59.508657048910)" fill="#bccf00"/>
+    <use href="#hex" transform="translate(75.600000000000 24.434628195640)" fill="#76b82a"/>
+    <use href="#hex" transform="translate(75.600000000000 47.817314097820)" fill="#b2b2b2"/>
+    <use href="#hex" transform="translate(75.600000000000 94.582685902180)" fill="#bccf00"/>
+    <use href="#hex" transform="translate(95.850000000000 82.891342951090)" fill="#b2b2b2"/>
+    <use href="#hex" transform="translate(55.350000000000 82.891342951090)" fill="#b2b2b2"/>
+    <use href="#hex" transform="translate(55.350000000000 59.508657048910)" fill="#bccf00"/>
+    <use href="#hex" transform="translate(95.850000000000 36.125971146730)" fill="#f2e500"/>
+    <use href="#hex" transform="translate(116.100000000000 71.200000000000)" fill="#f2e500"/>
+    <use href="#hex" transform="translate(95.850000000000 106.274028853270)" fill="#f2e500"/>
+    <use href="#hex" transform="translate(55.350000000000 106.274028853270)" fill="#f2e500"/>
+    <use href="#hex" transform="translate(55.350000000000 36.125971146730)" fill="#f2e500"/>
+    <use href="#hex" transform="translate(116.100000000000 47.817314097820)" fill="#76b82a"/>
+    <use href="#hex" transform="translate(116.100000000000 94.582685902180)" fill="#76b82a"/>
+    <use href="#hex" transform="translate(75.600000000000 117.965371804360)" fill="#76b82a"/>
+    <use href="#hex" transform="translate(35.100000000000 94.582685902180)" fill="#76b82a"/>
+    <use href="#hex" transform="translate(35.100000000000 47.817314097820)" fill="#76b82a"/>
+    <use href="#hex" transform="translate(95.850000000000 12.743285244550)" fill="#bccf00"/>
+    <use href="#hex" transform="translate(116.100000000000 24.434628195640)" fill="#b2b2b2"/>
+    <use href="#hex" transform="translate(136.350000000000 59.508657048910)" fill="#b2b2b2"/>
+    <use href="#hex" transform="translate(35.100000000000 24.434628195640)" fill="#b2b2b2"/>
+    <use href="#hex" transform="translate(14.850000000000 59.508657048910)" fill="#b2b2b2"/>
+    <use href="#hex" transform="translate(55.350000000000 12.743285244550)" fill="#bccf00"/>
+    <use href="#hex" transform="translate(136.350000000000 82.891342951090)" fill="#bccf00"/>
+    <use href="#hex" transform="translate(14.850000000000 82.891342951090)" fill="#bccf00"/>
+    <use href="#hex" transform="translate(35.100000000000 117.965371804360)" fill="#bccf00"/>
+    <use href="#hex" transform="translate(116.100000000000 117.965371804360)" fill="#bccf00"/>
+    <use href="#hex" transform="translate(55.350000000000 129.656714755450)" fill="#b2b2b2"/>
+    <use href="#hex" transform="translate(95.850000000000 129.656714755450)" fill="#b2b2b2"/>
+  </g>
+</svg>
