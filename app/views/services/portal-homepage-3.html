@@ -260,7 +260,7 @@
 
   .myAccountContent {
     width: 200px;
-    padding: 20px 20px 10px 25px;
+    padding: 20px 20px 0px 25px;
     background: #ffffff;
   }
 
@@ -269,6 +269,13 @@
   }
 
   .myAccountTitle {
+    font-size: 16px;
+    font-weight: 700;
+    padding-bottom: 3px;
+  }
+
+  .myAccountTitle-last {
+    padding-top:15px;
     font-size: 16px;
     font-weight: 700;
     padding-bottom: 3px;
@@ -562,17 +569,127 @@
   .account-links {
     float:right;
   }
-  @media (max-width: 965px) {
+@media (max-width: 965px) {
   .service-nav-parent {
-      padding-left: 0px;
-      padding-right: 0px;
-    }
+    padding-left: 0px;
+    padding-right: 0px;
+  }
 
   .account-links {
-    float:none;
-  }
+    float: none;
   }
 
+  /* Make dropdowns push content down instead of overlaying it */
+  .service-dropdown {
+    position: static;
+    width: 100%;
+    box-sizing: border-box;
+    border-left: none;
+    border-right: none;
+    background-color: #f3f2f1;
+  }
+
+  .service-submenu {
+    position: static;
+    width: 100%;
+    box-sizing: border-box;
+    left: 0;
+    background-color: #f3f2f1;
+  }
+
+  .myAccountContent {
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #f3f2f1;
+  }
+}
+
+.service-nav-parent {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .account-links {
+    float: none;
+  }
+
+  /* Make dropdowns push content down instead of overlaying it */
+  .service-dropdown {
+    position: static;
+    width: 100%;
+    box-sizing: border-box;
+    border-left: none;
+    border-right: none;
+  }
+
+  .service-submenu {
+    position: static;
+    width: 100%;
+    box-sizing: border-box;
+    left: 0;
+  }
+
+  .myAccountContent {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* --- New: mobile-only dropdown styling --- */
+
+  /* Background colour for both dropdown panels */
+  .service-dropdown,
+  .service-submenu {
+    background-color: #f3f2f1;
+    border-bottom: none;
+    padding-bottom: 0px;
+  }
+
+  .service-nav-parent.is-open {
+    background-color: #f3f2f1;
+}
+
+  /* Remove the ::after underline styling entirely */
+  .parent a:hover::after,
+  .parent a:focus::after,
+  .parent.account-parent a:hover::after,
+  .parent.account-parent > a.account-toggle:focus::after,
+  .parent.account-parent.is-open > a.account-toggle:focus::after,
+  .parent.account-parent.is-open > a.account-toggle::after,
+  .service-nav-parent.is-open::after {
+    content: none;
+  }
+
+  /* Match dropdown font size to the rest of the navigation */
+  .service-dropdown li > a,
+  .service-submenu li > a{
+    font-size: inherit;
+  }
+
+  .service-submenu-chevron {
+    transform: rotate(90deg);
+    margin-top:3px;
+    height:35px;
+  }
+
+  .myAccountContent,
+  .myAccountTitle,
+  .myAccountTitle-last,
+  .myAccount2ndLine {
+    font-size: 18px;
+  }
+
+  .myAccountContent {
+    padding: 5px 15px 0px 15px;
+    margin:0px
+  }
+
+  .account-line {
+    display: none;
+  }
+
+  .myAccountTitle-last {
+    padding-top: 0px;
+  }
 
 </style>
 
@@ -743,8 +860,8 @@
                   <div class="myAccount2ndLine" style="padding-bottom:15px;">15 July 2022 10:19:23 BST</div>
                   <div class="myAccount2ndLine" style="padding-bottom:15px;">If these details are incorrect, please log out and contact us.</div>
                 </div>
-                <hr>
-                <div class="myAccountTitle" style="padding-top:15px;"><b>Primary Business Unit Administrator (BUA):</b></div>
+                <hr class="account-line">
+                <div class="myAccountTitle-last"><b>Primary Business Unit Administrator (BUA):</b></div>
                 <div class="myAccount2ndLine">John Taylor</div>
               </div>
               </li>
@@ -764,142 +881,60 @@
 </section>
 
 <script>
-  // Behaviour for the two top-level dropdowns: the "Services" mega menu
-  // and the "My account" panel. Opening one closes the other, and both
-  // close on an outside click or the Escape key.
+  // Generic behaviour for ALL top-level dropdowns that share the
+  // .service-nav-parent / .service-nav-toggle classes (Services, John James, etc.)
   (function () {
+    var parents = document.querySelectorAll('.service-nav-parent');
 
-    /* ---- Services dropdown ---- */
-    var serviceToggle = document.querySelector('.service-nav-toggle');
-    var serviceParent = document.querySelector('.service-nav-parent');
+    parents.forEach(function (parent) {
+      var toggle = parent.querySelector(':scope > .service-nav-toggle');
+      if (!toggle) return;
 
-    if (serviceToggle && serviceParent) {
-      serviceToggle.addEventListener('click', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        var isOpen = serviceParent.classList.toggle('is-open');
-        serviceToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-        // close account menu if open
-        if (accountParent) accountParent.classList.remove('is-open');
-        if (accountToggle) accountToggle.setAttribute('aria-expanded', 'false');
-      });
-
-      // role="button" on an <a> doesn't get native Space-key activation
-      // the way a real <button> would, so wire it up here (Enter already
-      // works natively via the link's own click behaviour).
-      serviceToggle.addEventListener('keydown', function (e) {
-        if (e.key === ' ' || e.key === 'Spacebar') {
-          e.preventDefault();
-          serviceToggle.click();
-        }
-      });
-    }
-
-    /* ---- Account (John James) dropdown ---- */
-    var accountToggle = document.querySelector('.account-toggle');
-    var accountParent = document.querySelector('.account-parent');
-
-    if (accountParent) {
-      accountParent.addEventListener('click', function (e) {
-        // Don't trigger if clicking a link inside the open dropdown panel
-        if (e.target.closest('.child') && !e.target.closest('.account-toggle')) return;
-        e.preventDefault();
-        e.stopPropagation();
-        var isOpen = accountParent.classList.toggle('is-open');
-        if (accountToggle) accountToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-        // close services menu if open
-        if (serviceParent) serviceParent.classList.remove('is-open');
-        if (serviceToggle) serviceToggle.setAttribute('aria-expanded', 'false');
-      });
-    }
-
-    if (accountToggle) {
-      accountToggle.addEventListener('keydown', function (e) {
-        if (e.key === ' ' || e.key === 'Spacebar') {
-          e.preventDefault();
-          accountToggle.click();
-        }
-      });
-    }
-
-    /* ---- Close both on outside click or Escape ---- */
-    document.addEventListener('click', function (e) {
-      if (serviceParent && !serviceParent.contains(e.target)) {
-        serviceParent.classList.remove('is-open');
-        if (serviceToggle) serviceToggle.setAttribute('aria-expanded', 'false');
-      }
-      if (accountParent && !accountParent.contains(e.target)) {
-        accountParent.classList.remove('is-open');
-        if (accountToggle) accountToggle.setAttribute('aria-expanded', 'false');
-      }
-    });
-
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') {
-        if (serviceParent) serviceParent.classList.remove('is-open');
-        if (serviceToggle) serviceToggle.setAttribute('aria-expanded', 'false');
-        if (accountParent) accountParent.classList.remove('is-open');
-        if (accountToggle) accountToggle.setAttribute('aria-expanded', 'false');
-      }
-    });
-
-  })();
-
-  // Behaviour for the second-level "flyout" submenus inside the Services
-  // dropdown (e.g. Information services, Land charges Services).
-  (function () {
-    var submenuParents = document.querySelectorAll('.service-has-submenu');
-
-    submenuParents.forEach(function (parent) {
-      var trigger = parent.querySelector(':scope > a');
-
-      trigger.addEventListener('click', function (e) {
+      toggle.addEventListener('click', function (e) {
         e.preventDefault();
         e.stopPropagation();
 
         var isOpen = parent.classList.contains('is-open');
 
-        // close any other open submenus first
-        submenuParents.forEach(function (p) {
+        // close every dropdown first
+        parents.forEach(function (p) {
           p.classList.remove('is-open');
-          var t = p.querySelector(':scope > a');
+          var t = p.querySelector(':scope > .service-nav-toggle');
           if (t) t.setAttribute('aria-expanded', 'false');
         });
 
+        // then open this one, unless it was already open (toggle behaviour)
         if (!isOpen) {
           parent.classList.add('is-open');
-          trigger.setAttribute('aria-expanded', 'true');
+          toggle.setAttribute('aria-expanded', 'true');
         }
       });
 
-      // role="button" on an <a> doesn't get native Space-key activation,
-      // so wire it up here (Enter already works via the link's click).
-      trigger.addEventListener('keydown', function (e) {
+      // role="button" on an <a> doesn't get native Space-key activation
+      toggle.addEventListener('keydown', function (e) {
         if (e.key === ' ' || e.key === 'Spacebar') {
           e.preventDefault();
-          trigger.click();
+          toggle.click();
         }
       });
     });
 
-    // close submenus when clicking anywhere else
+    /* ---- Close all on outside click or Escape ---- */
     document.addEventListener('click', function (e) {
-      var clickedInsideSubmenu = e.target.closest('.service-has-submenu');
-      if (!clickedInsideSubmenu) {
-        submenuParents.forEach(function (p) {
+      parents.forEach(function (p) {
+        if (!p.contains(e.target)) {
           p.classList.remove('is-open');
-          var t = p.querySelector(':scope > a');
+          var t = p.querySelector(':scope > .service-nav-toggle');
           if (t) t.setAttribute('aria-expanded', 'false');
-        });
-      }
+        }
+      });
     });
 
-    // close on Escape
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') {
-        submenuParents.forEach(function (p) {
+        parents.forEach(function (p) {
           p.classList.remove('is-open');
-          var t = p.querySelector(':scope > a');
+          var t = p.querySelector(':scope > .service-nav-toggle');
           if (t) t.setAttribute('aria-expanded', 'false');
         });
       }
