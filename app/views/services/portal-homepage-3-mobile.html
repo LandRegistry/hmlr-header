@@ -260,7 +260,7 @@
 
   .myAccountContent {
     width: 200px;
-    padding: 20px 20px 10px 25px;
+    padding: 20px 20px 0px 25px;
     background: #ffffff;
   }
 
@@ -269,6 +269,13 @@
   }
 
   .myAccountTitle {
+    font-size: 16px;
+    font-weight: 700;
+    padding-bottom: 3px;
+  }
+
+  .myAccountTitle-last {
+    padding-top:15px;
     font-size: 16px;
     font-weight: 700;
     padding-bottom: 3px;
@@ -562,17 +569,129 @@
   .account-links {
     float:right;
   }
-  @media (max-width: 965px) {
+@media (max-width: 965px) {
   .service-nav-parent {
-      padding-left: 0px;
-      padding-right: 0px;
-    }
+    padding-left: 0px;
+    padding-right: 0px;
+  }
 
   .account-links {
-    float:none;
-  }
+    float: none;
   }
 
+  /* Make dropdowns push content down instead of overlaying it */
+  .service-dropdown {
+    position: static;
+    width: 100%;
+    box-sizing: border-box;
+    border-left: none;
+    border-right: none;
+    background-color: #f3f2f1;
+  }
+
+  .service-submenu {
+    position: static;
+    width: 100%;
+    box-sizing: border-box;
+    left: 0;
+    background-color: #f3f2f1;
+  }
+
+  .myAccountContent {
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #f3f2f1;
+  }
+}
+
+.service-nav-parent {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .account-links {
+    float: none;
+  }
+
+  /* Make dropdowns push content down instead of overlaying it */
+  .service-dropdown {
+    position: static;
+    width: 100%;
+    box-sizing: border-box;
+    border-left: none;
+    border-right: none;
+  }
+
+  .service-submenu {
+    position: static;
+    width: 100%;
+    box-sizing: border-box;
+    left: 0;
+  }
+
+  .myAccountContent {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* --- New: mobile-only dropdown styling --- */
+
+  /* Background colour for both dropdown panels */
+  .service-dropdown,
+  .service-submenu {
+    background-color: #f3f2f1;
+    border-bottom: none;
+    padding-bottom: 0px;
+  }
+
+  .service-nav-parent.is-open {
+    background-color: #f3f2f1;
+}
+
+  /* Remove the ::after underline styling entirely */
+  .parent a:hover::after,
+  .parent a:focus::after,
+  .parent.account-parent a:hover::after,
+  .parent.account-parent > a.account-toggle:focus::after,
+  .parent.account-parent.is-open > a.account-toggle:focus::after,
+  .parent.account-parent.is-open > a.account-toggle::after,
+  .service-nav-parent.is-open::after {
+    content: none;
+  }
+
+  /* Match dropdown font size to the rest of the navigation */
+  .service-dropdown li > a,
+  .service-submenu li > a{
+    font-size: inherit;
+  }
+
+  .service-submenu-chevron {
+    transform: rotate(90deg);
+    top: 9px;
+    width: 29px;
+    height: 29px;
+    position:relative;
+  }
+
+  .myAccountContent,
+  .myAccountTitle,
+  .myAccountTitle-last,
+  .myAccount2ndLine {
+    font-size: 18px;
+  }
+
+  .myAccountContent {
+    padding: 5px 15px 0px 15px;
+    margin:0px
+  }
+
+  .account-line {
+    display: none;
+  }
+
+  .myAccountTitle-last {
+    padding-top: 0px;
+  }
 
 </style>
 
@@ -743,8 +862,8 @@
                   <div class="myAccount2ndLine" style="padding-bottom:15px;">15 July 2022 10:19:23 BST</div>
                   <div class="myAccount2ndLine" style="padding-bottom:15px;">If these details are incorrect, please log out and contact us.</div>
                 </div>
-                <hr>
-                <div class="myAccountTitle" style="padding-top:15px;"><b>Primary Business Unit Administrator (BUA):</b></div>
+                <hr class="account-line">
+                <div class="myAccountTitle-last"><b>Primary Business Unit Administrator (BUA):</b></div>
                 <div class="myAccount2ndLine">John Taylor</div>
               </div>
               </li>
