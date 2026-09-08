@@ -632,12 +632,75 @@
       font-size: inherit;
     }
 
+    /* Focus state: yellow highlight + black underline hug just the
+       visible content (text, and the chevron too where present) —
+       never the padding, and never the full row. inline-block shrinks
+       the box to its content instead of stretching to the li's width.
+       Two background layers, both content-box clipped: a yellow fill
+       and a black underline. Padding itself is left untouched so the
+       text never shifts position. */
+    .service-dropdown li > a:focus {
+      display: inline-block;
+      color: #0b0c0c;
+      text-decoration: none;
+      background-image:
+        linear-gradient(#0b0c0c, #0b0c0c),
+        linear-gradient(#ffdd00, #ffdd00);
+      background-repeat: no-repeat, no-repeat;
+      background-position: left bottom, left center;
+      background-size: 100% 3px, 100% 100%;
+      background-clip: content-box, content-box;
+      background-origin: content-box, content-box;
+    }
+
+    .service-submenu li > a:focus {
+      display: inline-block;
+      color: #0b0c0c;
+      text-decoration: none;
+      background-image:
+        linear-gradient(#0b0c0c, #0b0c0c),
+        linear-gradient(#ffdd00, #ffdd00);
+      background-repeat: no-repeat, no-repeat;
+      background-position: left bottom, left center;
+      background-size: 100px 3px, 100px 100%;
+      background-clip: content-box, content-box;
+      background-origin: content-box, content-box;
+    }
+
+    /* Hover state: for links that have a chevron (first-level items
+       that open a second-level flyout), stretch the underline under
+       the chevron too — same content-box technique as the focus
+       state above, so hover and focus look consistent. inline-block
+       collapses the flex gap so the chevron sits right after the
+       text instead of being pushed to the far right. */
+    .service-dropdown .service-has-submenu > a:hover {
+      display: inline-block;
+      color: #0f385c;
+      text-decoration: none;
+      background-color: #f3f2f1;
+      background-image: linear-gradient(#0f385c, #0f385c);
+      background-repeat: no-repeat;
+      background-position: left bottom;
+      background-size: 97% 2px;
+      background-clip: content-box;
+      background-origin: content-box;
+    }
+
     .service-submenu-chevron {
-      transform: rotate(90deg);
-      top: 9px;
-      width: 29px;
-      height: 29px;
       position: relative;
+      display: inline-block;
+      width: 15px;
+      margin-left: 8px;
+      flex-shrink: 0;
+      background-color: #1d70b8;
+      -webkit-mask-image: url("/public/images/icon_govuk_chevrondownBlue-2.svg");
+      mask-image: url("/public/images/icon_govuk_chevrondownBlue-2.svg");
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      mask-position: center;
+      -webkit-mask-size: contain;
+      mask-size: contain;
     }
 
     .myAccountContent,
